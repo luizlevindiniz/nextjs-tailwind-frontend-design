@@ -1,0 +1,55 @@
+name: Code Check
+on:
+  push:
+    branches:
+      - main
+  pull_request: {}
+
+concurrency:
+  group: ${{ github.job }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  lint:
+    name: Lint, typecheck, format, test and build
+    runs-on: ubuntu-latest
+    steps:
+      - name: ⬇️ Checkout repo
+        uses: actions/checkout@v7
+        with:
+          fetch-depth: 2
+
+      - name: 🤌 Setup pnpm
+        uses: pnpm/action-setup@v6
+
+      - name: ⎔ Setup node
+        uses: actions/setup-node@v7
+        with:
+          node-version-file: .nvmrc
+          cache: 'pnpm'
+
+      - name: 📥 Download deps
+        run: pnpm install --frozen-lockfile
+
+      - name: 🔬 Lint
+        run: pnpm run lint:strict
+
+      - name: 🔎 Type check
+        run: pnpm run typecheck
+
+      - name: 💅 Prettier check
+        run: pnpm run format:check
+
+      - name: 📜 ADR check
+        run: |
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            bash scripts/adr.sh --base HEAD^1
+          else
+            bash scripts/adr.sh
+          fi
+
+      - name: 🃏 Run jest
+        run: pnpm run test
+
+      - name: 🏗️ Production build
+        run: pnpm run build

@@ -1,6 +1,6 @@
 # Commands
 
-Requires Node 24 and pnpm 12 (pinned in `.tool-versions`).
+Requires Node 24.15 and pnpm 12.18. `.tool-versions` is the source of truth; `.nvmrc`, `packageManager` and `engines` must match it.
 
 ## Scripts
 

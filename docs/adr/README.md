@@ -22,7 +22,7 @@ An ADR is not a changelog and not a feature spec.
 1. Copy `template.md` to `YYYYMMDDHHMM-<decision-slug>.md` (`date +%Y%m%d%H%M`).
 2. Name the decision, not the topic: `use-postgresql-as-primary-database`, not `database`. If the name needs "and", split it into two ADRs.
 3. Fill in Context, Decision, and Consequences. Start with status Proposed.
-4. Add a row to the index below.
+4. Run `pnpm adr:index` to add it to the index below (`pnpm adr:new "<decision title>"` does steps 1 and 4 for you).
 
 ## Statuses
 

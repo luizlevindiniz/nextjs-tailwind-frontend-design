@@ -3,7 +3,6 @@ import type { ReactNode } from 'react';
 
 import '@/styles/globals.css';
 
-// Placeholder metadata — full SEO (OG, icons, sitemap) is a roadmap task.
 export const metadata: Metadata = {
   title: 'Luma — Practical courses to build real skills',
   description:

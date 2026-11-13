@@ -64,8 +64,8 @@
       "prettier -w"
     ]
   },
-  "packageManager": "pnpm@12.0.0",
+  "packageManager": "pnpm@12.18.0",
   "engines": {
-    "node": ">=22.22.1"
+    "node": ">=24.15.0"
   }
 }

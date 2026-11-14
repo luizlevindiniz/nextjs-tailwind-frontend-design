@@ -2,7 +2,7 @@
 
 ## Status
 
-Accepted
+Superseded by [Self-host the variable fonts with next/font without a weight list](./202611141650-self-host-the-variable-fonts-with-next-font-without-a-weight-list.md)
 
 ## Context
 

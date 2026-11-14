@@ -4,16 +4,16 @@ Luma is a single, statically rendered landing page. There is no backend, databas
 
 ## Tech stack
 
-| Layer           | Choice                                               | Version | Decision                                                                     |
-| --------------- | ---------------------------------------------------- | ------- | ---------------------------------------------------------------------------- |
-| Framework       | Next.js, App Router                                  | 16.4    | [ADR](adr/202611131621-use-nextjs-app-router-with-typescript.md)             |
-| UI library      | React (Server Components by default)                 | 19.3    | same                                                                         |
-| Language        | TypeScript, `strict`                                 | 6.0     | same                                                                         |
-| Styling         | Tailwind CSS v4 (PostCSS plugin), tokens in `@theme` | 4.3     | [ADR](adr/202611131621-use-tailwind-css-v4-with-figma-tokens-in-theme.md)    |
-| Icons           | Figma-exported SVGs through SVGR                     | 8.1     | [ADR](adr/202611131621-use-figma-exported-svgs-instead-of-icon-libraries.md) |
-| Fonts           | `next/font` (Plus Jakarta Sans, Inter; self-hosted)  |         | [ADR](adr/202611131621-self-host-fonts-with-next-font.md)                    |
-| Tests           | Jest + React Testing Library                         | 30 / 16 | [ADR](adr/202611131621-use-jest-and-testing-library-for-tdd.md)              |
-| Package manager | pnpm, Node 24                                        | 12      | [ADR](adr/202611131621-use-pnpm-as-package-manager.md)                       |
+| Layer           | Choice                                               | Version | Decision                                                                                     |
+| --------------- | ---------------------------------------------------- | ------- | -------------------------------------------------------------------------------------------- |
+| Framework       | Next.js, App Router                                  | 16.4    | [ADR](adr/202611131621-use-nextjs-app-router-with-typescript.md)                             |
+| UI library      | React (Server Components by default)                 | 19.3    | same                                                                                         |
+| Language        | TypeScript, `strict`                                 | 6.0     | same                                                                                         |
+| Styling         | Tailwind CSS v4 (PostCSS plugin), tokens in `@theme` | 4.3     | [ADR](adr/202611131621-use-tailwind-css-v4-with-figma-tokens-in-theme.md)                    |
+| Icons           | Figma-exported SVGs through SVGR                     | 8.1     | [ADR](adr/202611131621-use-figma-exported-svgs-instead-of-icon-libraries.md)                 |
+| Fonts           | `next/font` (Plus Jakarta Sans, Inter; self-hosted)  |         | [ADR](adr/202611141650-self-host-the-variable-fonts-with-next-font-without-a-weight-list.md) |
+| Tests           | Jest + React Testing Library                         | 30 / 16 | [ADR](adr/202611131621-use-jest-and-testing-library-for-tdd.md)                              |
+| Package manager | pnpm, Node 24                                        | 12      | [ADR](adr/202611131621-use-pnpm-as-package-manager.md)                                       |
 
 ## Directory structure
 

@@ -28,7 +28,7 @@ Every raster image uses `next/image` with a static import from `src/assets/image
 
 ## Imports
 
-- Use the aliases `@/` for `src/` and `~/` for `public/`; no deep relative paths.
+- Use the `@/` alias for `src/`; no deep relative paths.
 - ESLint (`simple-import-sort`) enforces import order: packages, CSS, `@/lib` and `@/hooks`, `@/data`, `@/components`, other `@/`, relative, types. `pnpm lint:fix` sorts them.
 - Unused imports and variables are lint warnings, and CI fails on any warning. Prefix intentionally unused arguments with `_`.
 - `console` calls are warnings; don't commit them.

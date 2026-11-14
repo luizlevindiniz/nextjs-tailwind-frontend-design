@@ -149,7 +149,7 @@ Icons are listed in [styling.md](styling.md#icons).
 - **Skip link:** the first link on the page, hidden until focused, then shown top-left as a primary button. It moves focus to `<main>`.
 - **Header:** `background-light-yellow` with a `line-1` bottom border. The logo links home (`aria-label="Luma home"`).
 - **Footer:** `background-darkblue`. Logo in `text-white-primary`, tagline in `text-white-tertiary` body 1 (240 px wide on desktop), then a `text-secondary` top border and the copyright in `text-caption` `text-white-secondary`, centered on mobile and left on desktop. Mobile Figma draws the copyright in white; it's unified to `text-white-secondary`.
-- **Favicon and share image:** `src/app/icon.svg` is an "l." monogram (the wordmark's own "l" and dot) in white on `primary-blue`; `apple-icon.tsx` renders it full-bleed at 180 px. `opengraph-image.tsx` renders the 1200 × 630 share image at build time, reading colors from `globals.css` (`src/lib/theme.ts`) and fonts from `src/assets/fonts/`.
+- **Favicon and share image:** `src/app/icon.svg` is an "l." monogram (the wordmark's own "l" and dot) in white on `primary-blue`; `favicon.ico` holds it at 16, 32 and 48 px for clients that request `/favicon.ico` directly, and `apple-icon.tsx` renders it full-bleed at 180 px. `opengraph-image.tsx` renders the 1200 × 630 share image at build time, reading colors from `globals.css` (`src/lib/theme.ts`) and fonts from `src/assets/fonts/`.
 
 ## Accessibility deviations
 

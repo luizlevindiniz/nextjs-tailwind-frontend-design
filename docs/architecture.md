@@ -20,7 +20,7 @@ Luma is a single, statically rendered landing page. There is no backend, databas
 ```text
 src/
 ├── app/                 # App Router: layout, page, error and not-found boundaries,
-│   │                    # metadata files (icon, apple-icon, opengraph-image, sitemap, robots)
+│   │                    # metadata files (favicon, icon, apple-icon, opengraph-image, sitemap, robots)
 │   └── __tests__/       # tests for the route and its metadata
 ├── assets/icons/        # Figma SVGs (SVGR components), typed and exported from index.ts
 ├── assets/images/       # JPEG masters for next/image (hero, course, people/, avatars/)

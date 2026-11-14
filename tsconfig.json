@@ -15,8 +15,7 @@
     "types": ["node", "jest", "@testing-library/jest-dom"],
     "jsx": "react-jsx",
     "paths": {
-      "@/*": ["./src/*"],
-      "~/*": ["./public/*"]
+      "@/*": ["./src/*"]
     },
     "incremental": true,
     "plugins": [

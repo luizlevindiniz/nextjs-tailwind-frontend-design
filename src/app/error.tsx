@@ -4,10 +4,11 @@ import { useEffect } from 'react';
 
 export default function Error({
   error,
-  reset,
+  retry,
 }: {
-  error: Error & { digest?: string };
-  reset: () => void;
+  // A Client Component can throw any value, not only an Error.
+  error: unknown;
+  retry: () => void;
 }) {
   useEffect(() => {
     // eslint-disable-next-line no-console
@@ -19,7 +20,7 @@ export default function Error({
       <h1 className='font-heading text-mobile-h3 lg:text-desktop-h3'>
         Something went wrong
       </h1>
-      <button type='button' onClick={reset} className='underline'>
+      <button type='button' onClick={() => retry()} className='underline'>
         Try again
       </button>
     </div>

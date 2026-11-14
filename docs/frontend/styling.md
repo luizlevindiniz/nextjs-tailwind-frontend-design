@@ -60,6 +60,42 @@ import { ArrowRightIcon } from '@/assets/icons';
 - The `Deco*` icons are the FinalCTA's decorative shapes; they are always `aria-hidden`.
 - To add an icon: export the SVG from Figma, clean it with svgo (`preset-default` with `removeViewBox` off, `convertColors` with `currentColor`, `prefixIds`), keep mask fills white, then add a typed export to `index.ts`.
 
+## Images
+
+Raster images are JPEG masters in `src/assets/images/`, imported statically and rendered with `next/image`. The optimizer serves AVIF, falling back to WebP, at quality 75 (`images` in `next.config.js`). See the [images ADR](../adr/202611141627-size-image-masters-to-rendered-size-times-density-and-serve-them-through-next-image.md).
+
+```tsx
+import Image from 'next/image';
+
+import heroLearner from '@/assets/images/hero-learner.jpg';
+
+<Image
+  src={heroLearner}
+  alt='…'
+  loading='eager'
+  fetchPriority='high'
+  sizes='(min-width: 1024px) 500px, calc(100vw - 56px)'
+  className='object-cover'
+/>;
+```
+
+- **`sizes` is mandatory on every responsive image** and must match its CSS width at each breakpoint. Without it the browser assumes `100vw` and fetches a viewport-wide file.
+- Below the first paint, keep the default `loading="lazy"` and start `sizes` with `auto, ` (`sizes='auto, (min-width: 1024px) 138px, 94px'`). Browsers that support it use the element's laid-out width, and the others use the fallback.
+- Only the LCP image (the hero photo) loads early, with `loading='eager'` and `fetchPriority='high'`. Don't use `preload`: it adds a head preload but no fetch priority, and the image is already in the server HTML. `priority` is deprecated in Next 16.
+- Fixed-size images (avatars) pass `width` and `height` and no `sizes`. `next/image` then generates 1x and 2x.
+- A master is the Figma source, resized only when it's bigger than needed: max(desktop drawn width × 2, mobile drawn width × 3). Fixed-size images stop at 2×. Resized masters are re-encoded with sharp at JPEG quality 90.
+- **`sizes` counts the frame, not the drawn photo.** With `object-cover`, a photo wider than its frame is drawn wider than the frame, and the browser under-fetches. So the collage masters are pre-cropped, centered, to the shape their frames show: the source's aspect ratio clamped between the narrowest and widest of its frames (desktop and mobile). If the width `next/image` serves for a frame would still fall short of the frame's target density, crop to the narrowest frame instead (`student-campus`). Re-crop a master when its frame's shape changes.
+
+| Master                       | Size                        | Where                      | Rendered (desktop / mobile) |
+| ---------------------------- | --------------------------- | -------------------------- | --------------------------- |
+| `hero-learner.jpg`           | 900×1100                    | Hero, LCP                  | 500×520 / 346×380           |
+| `featured-course.jpg`        | 700×500                     | FeaturedCourse             | 538×408 / 362×280           |
+| `people/*.jpg` (10)          | 216–302 w, cropped to frame | People collage             | ≤ 138×207 / ≤ 94×129        |
+| `avatars/learner-{1..4}.jpg` | 80×80                       | Hero (1–3), FinalCTA (all) | 32 / 40 px                  |
+| `avatars/alex-morgan.jpg`    | 96×96                       | Testimonial                | 48 px                       |
+
+The hero and course sources are smaller than 2× their desktop frames, so they're slightly soft on retina desktops. That's a known gap, because the design ships no larger originals.
+
 ## Fonts
 
 Plus Jakarta Sans (headings) and Inter (body) load through `next/font/google` in `src/app/fonts.ts`. Each one exposes a CSS variable (`--font-jakarta`, `--font-inter`), set on `<html>` in the root layout. The `font-heading` and `font-body` tokens read those variables. See the [fonts ADR](../adr/202611131621-self-host-fonts-with-next-font.md).

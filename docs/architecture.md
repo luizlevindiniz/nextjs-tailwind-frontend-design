@@ -23,6 +23,7 @@ src/
 │   │                    # metadata files (icon, apple-icon, opengraph-image, sitemap, robots)
 │   └── __tests__/       # tests for the route and its metadata
 ├── assets/icons/        # Figma SVGs (SVGR components), typed and exported from index.ts
+├── assets/images/       # JPEG masters for next/image (hero, course, people/, avatars/)
 ├── assets/fonts/        # static TTFs read only by the generated share image
 ├── components/layout/   # SiteShell: skip link, header, main, footer
 ├── components/header/   # Header
@@ -35,7 +36,6 @@ src/
 └── __mocks__/svg.tsx    # Jest stand-in for SVGR imports
 docs/                    # this folder; ADRs in docs/adr/
 scripts/adr.sh           # ADR check (pnpm adr:check)
-public/                  # static assets (images exported from Figma, planned)
 ```
 
 _Planned_ (added by the tasks that need them):

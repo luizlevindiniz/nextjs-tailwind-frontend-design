@@ -24,7 +24,7 @@ Repeated content (navigation, cards, steps, stats, footer columns) is a typed ar
 
 ## Images
 
-_Planned (image pipeline task):_ every raster image uses `next/image` with an accurate `sizes` attribute, and is exported at most 2× its largest rendered size. Only the hero image (the LCP element) gets `priority`.
+Every raster image uses `next/image` with a static import from `src/assets/images/`. Responsive images need an accurate `sizes` value, and lazy ones prefix it with `auto, `. Only the hero image (the LCP element) gets `loading='eager'` and `fetchPriority='high'`. The rules and the master list are in [styling.md](styling.md#images).
 
 ## Imports
 

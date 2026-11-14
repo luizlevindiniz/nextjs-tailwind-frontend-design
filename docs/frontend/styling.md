@@ -8,13 +8,15 @@
 
 ## Design tokens
 
-_Planned (styleguide task):_ every color, font family, type style, radius, shadow and container width from Figma is declared in `@theme`, and the full reference goes in `frontend/styleguide.md`.
+Every color, font family, type style, shadow and the content width from Figma is declared in `@theme`. Tailwind's default colors, families, font sizes and shadows are removed, so only design tokens generate utilities. The full reference, with the type pairings and recurring patterns, is the [styleguide](styleguide.md).
 
 Rules:
 
 - Use the generated utilities (`bg-*`, `text-*`, `font-*`). Don't write a raw hex value or an arbitrary value (`text-[37px]`) for anything that exists as a token.
 - A value the design needs but Figma doesn't define becomes a new token, named for its role, not its value.
 - Token names follow Figma's variable names with typos corrected (`backgrounnd-*` becomes `background-*`).
+- Type is mobile first and paired explicitly: `text-mobile-h1 lg:text-desktop-h1`. Each `text-*` token sets size, line height, weight and letter spacing; add `font-heading` for Plus Jakarta Sans.
+- `docs/` is excluded from Tailwind's source scanning, so class examples in the docs don't generate CSS.
 
 ## Responsive strategy: mobile first
 
@@ -33,7 +35,7 @@ The design has a 402 px mobile frame and a 1280 px desktop frame, with no tablet
 <a
   className={cn(
     'rounded-full px-6 py-3',
-    variant === 'primary' && 'bg-primary-blue text-white',
+    variant === 'primary' && 'bg-primary-blue text-text-white-primary',
     className,
   )}
 />

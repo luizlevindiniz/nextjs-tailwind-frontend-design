@@ -1,14 +1,30 @@
-// Icons exported from Figma, cleaned with svgo; they draw in `currentColor`.
-// Size them with `size-*` and hide decorative ones with `aria-hidden`.
-export { default as ArrowRightIcon } from './arrow-right.svg';
-export { default as ClockIcon } from './clock.svg';
-export { default as DecoChatIcon } from './deco-chat.svg';
-export { default as DecoCubeIcon } from './deco-cube.svg';
-export { default as DecoDropIcon } from './deco-drop.svg';
-export { default as DecoLetterBIcon } from './deco-letter-b.svg';
-export { default as DecoPanelsIcon } from './deco-panels.svg';
-export { default as LogoIcon } from './logo.svg';
-export { default as MenuIcon } from './menu.svg';
-export { default as MessageIcon } from './message.svg';
-export { default as QuoteIcon } from './quote.svg';
-export { default as StarIcon } from './star.svg';
+import type { FC, SVGProps } from 'react';
+
+import ArrowRight from './arrow-right.svg';
+import Clock from './clock.svg';
+import DecoChat from './deco-chat.svg';
+import DecoCube from './deco-cube.svg';
+import DecoDrop from './deco-drop.svg';
+import DecoLetterB from './deco-letter-b.svg';
+import DecoPanels from './deco-panels.svg';
+import Logo from './logo.svg';
+import Menu from './menu.svg';
+import Message from './message.svg';
+import Quote from './quote.svg';
+import Star from './star.svg';
+
+// Next types `*.svg` imports as `any`; typing the exports restores checking.
+type SvgIcon = FC<SVGProps<SVGSVGElement> & { title?: string }>;
+
+export const ArrowRightIcon: SvgIcon = ArrowRight;
+export const ClockIcon: SvgIcon = Clock;
+export const DecoChatIcon: SvgIcon = DecoChat;
+export const DecoCubeIcon: SvgIcon = DecoCube;
+export const DecoDropIcon: SvgIcon = DecoDrop;
+export const DecoLetterBIcon: SvgIcon = DecoLetterB;
+export const DecoPanelsIcon: SvgIcon = DecoPanels;
+export const LogoIcon: SvgIcon = Logo;
+export const MenuIcon: SvgIcon = Menu;
+export const MessageIcon: SvgIcon = Message;
+export const QuoteIcon: SvgIcon = Quote;
+export const StarIcon: SvgIcon = Star;

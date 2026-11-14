@@ -47,7 +47,7 @@ Class order is not a style choice: `prettier-plugin-tailwindcss` sorts classes o
 
 ## Icons
 
-SVGs exported from Figma live in `src/assets/icons/` and are imported as React components through SVGR (configured for Turbopack in `next.config.js`; typed in `src/types/svg.d.ts`). `src/assets/icons/index.ts` exports each one by name. See the [icons ADR](../adr/202611131621-use-figma-exported-svgs-instead-of-icon-libraries.md).
+SVGs exported from Figma live in `src/assets/icons/` and are imported as React components through SVGR (configured for Turbopack in `next.config.js`). `src/assets/icons/index.ts` exports each one by name with an explicit type: Next declares `*.svg` imports as `any`, so import icons from there, never from the `.svg` file. See the [icons ADR](../adr/202611131621-use-figma-exported-svgs-instead-of-icon-libraries.md).
 
 ```tsx
 import { ArrowRightIcon } from '@/assets/icons';
@@ -58,7 +58,7 @@ import { ArrowRightIcon } from '@/assets/icons';
 - Every icon draws in `currentColor`, so color it with a `text-*` utility on the icon or its parent.
 - SVGR drops `width`/`height`; size the icon with `size-*` (or `h-*`/`w-*` for the logo) at its Figma size.
 - The `Deco*` icons are the FinalCTA's decorative shapes; they are always `aria-hidden`.
-- To add an icon: export the SVG from Figma, clean it with svgo (`preset-default` with `removeViewBox` off, `convertColors` with `currentColor`, `prefixIds`), keep mask fills white, then add it to `index.ts`.
+- To add an icon: export the SVG from Figma, clean it with svgo (`preset-default` with `removeViewBox` off, `convertColors` with `currentColor`, `prefixIds`), keep mask fills white, then add a typed export to `index.ts`.
 
 ## Fonts
 

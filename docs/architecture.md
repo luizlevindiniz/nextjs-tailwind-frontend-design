@@ -21,11 +21,10 @@ Luma is a single, statically rendered landing page. There is no backend, databas
 src/
 ├── app/                 # App Router: layout, page, error and not-found boundaries
 │   └── __tests__/       # tests for the route
-├── assets/icons/        # Figma SVGs (SVGR components), exported from index.ts
+├── assets/icons/        # Figma SVGs (SVGR components), typed and exported from index.ts
 ├── components/ui/       # primitives: Container, Button, ButtonLink, ArrowLink, SectionHeader
 ├── lib/utils.ts         # cn(): clsx + tailwind-merge that knows the type tokens
 ├── styles/globals.css   # Tailwind entry + @theme design tokens
-├── types/svg.d.ts       # types for SVGR imports
 └── __mocks__/svg.tsx    # Jest stand-in for SVGR imports
 docs/                    # this folder; ADRs in docs/adr/
 scripts/adr.sh           # ADR check (pnpm adr:check)

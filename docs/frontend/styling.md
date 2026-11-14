@@ -57,7 +57,12 @@ Use `currentColor` in the SVG so the icon follows the text color.
 
 ## Fonts
 
-_Planned:_ Plus Jakarta Sans (headings) and Inter (body) through `next/font/google`, exposed as CSS variables that the `@theme` font tokens use. See the [fonts ADR](../adr/202611131621-self-host-fonts-with-next-font.md).
+Plus Jakarta Sans (headings) and Inter (body) load through `next/font/google` in `src/app/fonts.ts`. Each one exposes a CSS variable (`--font-jakarta`, `--font-inter`), set on `<html>` in the root layout. The `font-heading` and `font-body` tokens read those variables. See the [fonts ADR](../adr/202611131621-self-host-fonts-with-next-font.md).
+
+- The weights listed are the ones the design uses: Jakarta 600/700/800, Inter 400/600/700. Both are variable fonts, so Google serves one file per family and subset. Each listed weight points to it, so adding a weight costs no bytes, but list it anyway to record what the design uses.
+- Only the Latin files are preloaded (about 48 KB Inter and 27 KB Jakarta). The other subsets load only if a page uses their characters.
+- The font tokens are declared with `@theme inline`, so they resolve on the element, and the stack falls back to `ui-sans-serif` before the fonts load.
+- Body text gets Inter from the `body` base style. Headings, quotes and stats need `font-heading`.
 
 ## Motion
 

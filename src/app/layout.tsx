@@ -3,6 +3,10 @@ import type { ReactNode } from 'react';
 
 import '@/styles/globals.css';
 
+import { cn } from '@/lib/utils';
+
+import { inter, jakarta } from '@/app/fonts';
+
 export const metadata: Metadata = {
   title: 'Luma — Practical courses to build real skills',
   description:
@@ -11,7 +15,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang='en'>
+    <html lang='en' className={cn(jakarta.variable, inter.variable)}>
       <body>{children}</body>
     </html>
   );

@@ -32,7 +32,7 @@ Utilities take the token name after the property: `bg-primary-blue`, `text-text-
 
 ## Typography
 
-Two families, loaded with `next/font`:
+Two families, loaded with `next/font` (`src/app/fonts.ts`):
 
 | Token          | Family            | Used for                             |
 | -------------- | ----------------- | ------------------------------------ |
@@ -105,7 +105,7 @@ These are the values to build the primitives and sections from.
   - **Primary:** `bg-primary-blue` with white text.
   - **Secondary:** `bg-background-white`, `border border-line-1`, `text-text-primary`.
   - **On blue:** `bg-secondary-yellow`, `text-text-primary`.
-  - **Text link with arrow:** `px-4 py-3.5`, 8 px gap, 20 px arrow.
+  - **Text link with arrow:** `px-4 py-3.5`, 8 px gap, 20 px arrow. On `primary-blue`, use `text-text-white-primary`. Figma's `text-white-secondary` there is 4.46:1, below the 4.5:1 AA minimum.
   - Mobile Hero buttons are full width.
 - **Card:** `bg-background-white border border-line-1 rounded-2xl p-7`, minimum height 260 px on desktop.
 - **Number badge:** `bg-primary-blue-light rounded-md px-2 py-1`, overline in `primary-blue`.
@@ -115,6 +115,11 @@ These are the values to build the primitives and sections from.
   - Label: body 1 bold.
   - Gap between label and control: 8 px.
   - Control: `bg-background-light-yellow border border-line-1 rounded-lg px-4 py-3`.
-  - Placeholder: `text-text-tertiary`.
+  - Placeholder: `text-text-tertiary` (4.45:1 on the field background; kept as designed because WCAG's text minimum applies to entered text).
+  - Border: kept as designed (`line-1`, about 1.3:1). The field is identified by its visible label and background, and focus shows a ring in `primary-blue`.
   - Textarea height: 120 px.
 - **Form container:** `bg-background-white border border-line-1 rounded-2xl shadow-card`, padding 40 px on desktop and 24 px vertical / 20 px horizontal on mobile.
+
+## Accessibility deviations
+
+Where a Figma pairing misses WCAG AA, the build deviates from the frame and the pattern above says so. Today that's one change: the text link on `primary-blue` uses `text-white-primary` instead of `text-white-secondary`.

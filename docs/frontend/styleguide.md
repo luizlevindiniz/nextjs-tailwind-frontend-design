@@ -101,13 +101,15 @@ Breakpoints are Tailwind's defaults. The layout is fluid up to `md` (768 px) and
 
 These are the values to build the primitives and sections from.
 
-- **Section header:** overline in `primary-blue`, then the title 16 px below, then the lead 16–24 px below in `text-secondary` subtitle 1.
+- **Section header:** overline in `primary-blue`, then the title (H3) 16 px below, then the lead 16 px below in `text-secondary` subtitle 1. On `primary-blue` (FeaturedCourse) every line is `text-white-primary` and the lead is subtitle 2, 20 px below.
 - **Button:** `px-7 py-3.5 rounded-lg`, body 1 bold, centered.
   - **Primary:** `bg-primary-blue` with white text.
-  - **Secondary:** `bg-background-white`, `border border-line-1`, `text-text-primary`.
+  - **Secondary:** `bg-background-white`, `inset-ring inset-ring-line-1`, `text-text-primary`. Figma draws the stroke inside the box, so an inset ring (not a border) keeps it the same 52 px height as the other buttons.
   - **On blue:** `bg-secondary-yellow`, `text-text-primary`.
   - **Text link with arrow:** `px-4 py-3.5`, 8 px gap, 20 px arrow. On `primary-blue`, use `text-text-white-primary`. Figma's `text-white-secondary` there is 4.46:1, below the 4.5:1 AA minimum.
   - Mobile Hero buttons are full width.
+  - **Hover** (not in Figma): filled buttons tint their own token to 90% (`hover:bg-primary-blue/90`, 4.58:1 or more for the white label), the secondary button's ring darkens to `text-tertiary`, and the text link underlines. Colors animate only under `motion-safe:`.
+  - **Focus:** a 2 px outline 2 px out, `primary-blue` on light backgrounds and `text-white-primary` on blue.
 - **Card:** `bg-background-white border border-line-1 rounded-2xl p-7`, minimum height 260 px on desktop.
 - **Number badge:** `bg-primary-blue-light rounded-md px-2 py-1`, overline in `primary-blue`.
 - **Meta chip:** `border border-line-1 rounded-lg px-3.5 py-1.5`, body 1.
@@ -120,6 +122,22 @@ These are the values to build the primitives and sections from.
   - Focus: a ring in `primary-blue`.
   - Textarea height: 120 px.
 - **Form container:** `bg-background-white border border-line-1 rounded-2xl shadow-card`, padding 40 px on desktop and 24 px vertical / 20 px horizontal on mobile.
+
+## Primitives
+
+The patterns above are built once in `src/components/ui/`. Sections compose them instead of repeating the classes.
+
+| Component       | Renders                   | Props (besides the native element's)                                                                                             |
+| --------------- | ------------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
+| `Container`     | `<div>`                   | — (1120 px column with 20 / 80 px gutters, outside the 1120 px)                                                                  |
+| `Button`        | `<button type='button'>`  | `variant`: `primary` (default), `secondary`, `onBlue`                                                                            |
+| `ButtonLink`    | `<a>`                     | `href`, `variant` (same as `Button`)                                                                                             |
+| `ArrowLink`     | `<a>` + hidden arrow icon | `href`, `tone`: `light` (default), `onBlue`                                                                                      |
+| `SectionHeader` | overline, `<h2>`, lead    | `id` (for the section's `aria-labelledby`), `overline`, `title`, `lead`, `align`: `start` / `center`, `tone`: `light` / `onBlue` |
+
+Every primitive takes a `className`, merged last with `cn()`, for section-specific spacing or width (`w-full` on the mobile Hero buttons). The Hero builds its own `<h1>` block: its type and layout differ from a section header.
+
+Icons are listed in [styling.md](styling.md#icons).
 
 ## Accessibility deviations
 

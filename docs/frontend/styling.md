@@ -43,17 +43,22 @@ The design has a 402 px mobile frame and a 1280 px desktop frame, with no tablet
 
 Class order is not a style choice: `prettier-plugin-tailwindcss` sorts classes on format.
 
+`cn()` uses a tailwind-merge instance that knows the type tokens. Out of the box, tailwind-merge reads `text-mobile-h3` as a text color and drops it when a color such as `text-text-primary` follows. A new `--text-*` token must be added to the list in `src/lib/utils.ts`; `src/lib/__tests__/utils.test.ts` reads `globals.css` and fails if one is missing.
+
 ## Icons
 
-SVGs exported from Figma, imported as React components through SVGR (configured for Turbopack in `next.config.js`). See the [icons ADR](../adr/202611131621-use-figma-exported-svgs-instead-of-icon-libraries.md).
+SVGs exported from Figma live in `src/assets/icons/` and are imported as React components through SVGR (configured for Turbopack in `next.config.js`; typed in `src/types/svg.d.ts`). `src/assets/icons/index.ts` exports each one by name. See the [icons ADR](../adr/202611131621-use-figma-exported-svgs-instead-of-icon-libraries.md).
 
 ```tsx
-import ArrowIcon from '@/assets/icons/arrow-right.svg';
+import { ArrowRightIcon } from '@/assets/icons';
 
-<ArrowIcon aria-hidden className='size-4' />;
+<ArrowRightIcon aria-hidden className='size-5' />;
 ```
 
-Use `currentColor` in the SVG so the icon follows the text color.
+- Every icon draws in `currentColor`, so color it with a `text-*` utility on the icon or its parent.
+- SVGR drops `width`/`height`; size the icon with `size-*` (or `h-*`/`w-*` for the logo) at its Figma size.
+- The `Deco*` icons are the FinalCTA's decorative shapes; they are always `aria-hidden`.
+- To add an icon: export the SVG from Figma, clean it with svgo (`preset-default` with `removeViewBox` off, `convertColors` with `currentColor`, `prefixIds`), keep mask fills white, then add it to `index.ts`.
 
 ## Fonts
 

@@ -11,8 +11,6 @@
 @theme {
   /* Only Figma colors exist: Tailwind's default palette is removed. */
   --color-*: initial;
-  --color-transparent: transparent;
-  --color-current: currentColor;
 
   --color-primary-blue: #3157f6;
   --color-primary-blue-light: #e2e8ff;
@@ -35,11 +33,6 @@
   --color-text-white-tertiary: #9e9faa;
 
   --color-line-1: #dbdfeb;
-
-  /* Families. The --font-jakarta / --font-inter variables come from next/font. */
-  --font-*: initial;
-  --font-heading: var(--font-jakarta), ui-sans-serif, system-ui, sans-serif;
-  --font-body: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
 
   /*
    * Type scale: one token per Figma text style. Size, line height, weight and
@@ -115,6 +108,17 @@
   --shadow-floating: 0 4px 12px rgb(0 0 0 / 0.1);
   --shadow-card: 0 12px 16px rgb(23 27 44 / 0.04);
   --shadow-dark-m: 0 0 4px 0 rgb(0 0 0 / 0.07), 0 4px 6px -1px rgb(0 0 0 / 0.1);
+}
+
+/*
+ * Families. --font-jakarta / --font-inter come from next/font. `inline` puts the
+ * var() in each utility so it resolves on the element, wherever next/font sets
+ * the variable; the fallback inside var() keeps the stack valid without it.
+ */
+@theme inline {
+  --font-*: initial;
+  --font-heading: var(--font-jakarta, ui-sans-serif), system-ui, sans-serif;
+  --font-body: var(--font-inter, ui-sans-serif), system-ui, sans-serif;
 }
 
 @layer base {

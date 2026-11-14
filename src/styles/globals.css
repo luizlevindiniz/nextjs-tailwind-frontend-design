@@ -1,22 +1,15 @@
 @import 'tailwindcss';
 
-/* Class examples in the docs must not generate CSS. */
+/* Keeps class examples in the docs out of the CSS. */
 @source not '../../docs';
 
-/*
- * Design tokens from the Figma file's variables and styles.
- * Full reference with usage: docs/frontend/styleguide.md.
- * Figma names are kept, with typos fixed (backgrounnd-* -> background-*).
- */
 @theme {
-  /* Only Figma colors exist: Tailwind's default palette is removed. */
   --color-*: initial;
 
   --color-primary-blue: #3157f6;
   --color-primary-blue-light: #e2e8ff;
   --color-primary-orange: #ff704d;
   --color-secondary-yellow: #ffee7e;
-  /* Not a Figma variable: HowItWorks step 3 icon dot. */
   --color-accent-yellow-dark: #e9d659;
 
   --color-background-orange: #ffcb9f;
@@ -33,93 +26,79 @@
   --color-text-white-tertiary: #9e9faa;
 
   --color-line-1: #dbdfeb;
-  /*
-   * Not a Figma variable: form field border. line-1's hue, darkened to reach
-   * 3:1 against the card (3.40) and the field background (3.20), per WCAG 1.4.11.
-   */
+  /* line-1 darkened to 3:1 against the card and the field (WCAG 1.4.11). */
   --color-line-input: #7c8ab6;
 
-  /*
-   * Type scale: one token per Figma text style. Size, line height, weight and
-   * letter spacing travel together; the family is set with font-heading/font-body.
-   * Mobile first: `text-mobile-h1 lg:text-desktop-h1`.
-   */
   --text-*: initial;
 
-  --text-mobile-h1: 2.5rem; /* 40 / 44 */
+  --text-mobile-h1: 2.5rem;
   --text-mobile-h1--line-height: 2.75rem;
   --text-mobile-h1--font-weight: 800;
   --text-mobile-h1--letter-spacing: -0.025em;
-  --text-mobile-h2: 2.25rem; /* 36 / 40 */
+  --text-mobile-h2: 2.25rem;
   --text-mobile-h2--line-height: 2.5rem;
   --text-mobile-h2--font-weight: 800;
   --text-mobile-h2--letter-spacing: -0.025em;
-  --text-mobile-h3: 2rem; /* 32 / 36 */
+  --text-mobile-h3: 2rem;
   --text-mobile-h3--line-height: 2.25rem;
   --text-mobile-h3--font-weight: 800;
   --text-mobile-h3--letter-spacing: -0.025em;
-  --text-mobile-h5: 1.25rem; /* 20 / 28 */
+  --text-mobile-h5: 1.25rem;
   --text-mobile-h5--line-height: 1.75rem;
   --text-mobile-h5--font-weight: 700;
-  --text-mobile-quote: 1.25rem; /* 20 / 32 */
+  --text-mobile-quote: 1.25rem;
   --text-mobile-quote--line-height: 2rem;
   --text-mobile-quote--font-weight: 600;
-  --text-mobile-subtitle-1: 1rem; /* 16 / 26 */
+  --text-mobile-subtitle-1: 1rem;
   --text-mobile-subtitle-1--line-height: 1.625rem;
-  --text-mobile-subtitle-2: 0.875rem; /* 14 / 24 */
+  --text-mobile-subtitle-2: 0.875rem;
   --text-mobile-subtitle-2--line-height: 1.5rem;
-  --text-mobile-body-1: 0.875rem; /* 14 / 24 */
+  --text-mobile-body-1: 0.875rem;
   --text-mobile-body-1--line-height: 1.5rem;
-  --text-mobile-overline: 0.75rem; /* 12 / 16, uppercase */
+  --text-mobile-overline: 0.75rem;
   --text-mobile-overline--line-height: 1rem;
   --text-mobile-overline--font-weight: 600;
   --text-mobile-overline--letter-spacing: 0.12em;
 
-  --text-desktop-h1: 4rem; /* 64 / 70 */
+  --text-desktop-h1: 4rem;
   --text-desktop-h1--line-height: 4.375rem;
   --text-desktop-h1--font-weight: 800;
   --text-desktop-h1--letter-spacing: -0.025em;
-  --text-desktop-h2: 3.5rem; /* 56 / 64 */
+  --text-desktop-h2: 3.5rem;
   --text-desktop-h2--line-height: 4rem;
   --text-desktop-h2--font-weight: 800;
   --text-desktop-h2--letter-spacing: -0.025em;
-  --text-desktop-h3: 3rem; /* 48 / 56 */
+  --text-desktop-h3: 3rem;
   --text-desktop-h3--line-height: 3.5rem;
   --text-desktop-h3--font-weight: 800;
   --text-desktop-h3--letter-spacing: -0.025em;
-  --text-desktop-h5: 1.25rem; /* 20 / 32 */
+  --text-desktop-h5: 1.25rem;
   --text-desktop-h5--line-height: 2rem;
   --text-desktop-h5--font-weight: 700;
-  --text-desktop-quote: 1.875rem; /* 30 / 44 */
+  --text-desktop-quote: 1.875rem;
   --text-desktop-quote--line-height: 2.75rem;
   --text-desktop-quote--font-weight: 600;
   --text-desktop-quote--letter-spacing: -0.025em;
-  --text-desktop-subtitle-1: 1.125rem; /* 18 / 28 */
+  --text-desktop-subtitle-1: 1.125rem;
   --text-desktop-subtitle-1--line-height: 1.75rem;
-  --text-desktop-subtitle-2: 1rem; /* 16 / 28 */
+  --text-desktop-subtitle-2: 1rem;
   --text-desktop-subtitle-2--line-height: 1.75rem;
-  --text-desktop-body-1: 0.875rem; /* 14 / 24 */
+  --text-desktop-body-1: 0.875rem;
   --text-desktop-body-1--line-height: 1.5rem;
-  --text-desktop-overline: 0.75rem; /* 12 / 16, uppercase */
+  --text-desktop-overline: 0.75rem;
   --text-desktop-overline--line-height: 1rem;
   --text-desktop-overline--font-weight: 600;
   --text-desktop-overline--letter-spacing: 0.12em;
 
-  /* Layout: 1120 px content column inside 20 px (mobile) / 80 px (desktop) gutters. */
   --container-content: 70rem;
 
-  /* Shadows. Only shadow-dark-m is a Figma variable; the others are drawn effects. */
   --shadow-*: initial;
   --shadow-floating: 0 4px 12px rgb(0 0 0 / 0.1);
   --shadow-card: 0 12px 16px rgb(23 27 44 / 0.04);
   --shadow-dark-m: 0 0 4px 0 rgb(0 0 0 / 0.07), 0 4px 6px -1px rgb(0 0 0 / 0.1);
 }
 
-/*
- * Families. --font-jakarta / --font-inter come from next/font. `inline` puts the
- * var() in each utility so it resolves on the element, wherever next/font sets
- * the variable; the fallback inside var() keeps the stack valid without it.
- */
+/* `inline` resolves the next/font variables on each element, not on :root. */
 @theme inline {
   --font-*: initial;
   --font-heading: var(--font-jakarta, ui-sans-serif), system-ui, sans-serif;

@@ -7,7 +7,6 @@ interface ButtonLinkProps extends ComponentPropsWithoutRef<'a'> {
   variant?: ButtonVariant;
 }
 
-/** A link styled as a button. Targets are in-page anchors, so it's a plain `<a>`. */
 export function ButtonLink({
   variant = 'primary',
   className,

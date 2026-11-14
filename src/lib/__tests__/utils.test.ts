@@ -3,7 +3,6 @@ import { join } from 'node:path';
 
 import { cn } from '@/lib/utils';
 
-// Every token the theme declares, read from the CSS so this test can't drift.
 const css = readFileSync(join(process.cwd(), 'src/styles/globals.css'), 'utf8');
 const tokens = (prefix: string) =>
   [...css.matchAll(new RegExp(`^\\s*--${prefix}-([a-z0-9-]+):`, 'gm'))]

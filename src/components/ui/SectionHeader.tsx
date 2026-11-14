@@ -3,18 +3,14 @@ import type { ReactNode } from 'react';
 import { cn } from '@/lib/utils';
 
 interface SectionHeaderProps {
-  /** Id of the `<h2>`; the section points `aria-labelledby` at it. */
   id: string;
   overline: string;
   title: ReactNode;
   lead?: ReactNode;
   align?: 'start' | 'center';
-  /** `onBlue` is the FeaturedCourse treatment: all white, a subtitle-2 lead. */
   tone?: 'light' | 'onBlue';
   className?: string;
 }
-
-/** Overline, section title (`<h2>`) and an optional lead. */
 export function SectionHeader({
   id,
   overline,

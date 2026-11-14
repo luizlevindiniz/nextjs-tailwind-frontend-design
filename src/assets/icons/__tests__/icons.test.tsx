@@ -13,8 +13,7 @@ describe('icons', () => {
   });
 
   it('reject props an SVG does not take', () => {
-    // `pnpm typecheck` fails if the icons lose their types and this line compiles.
-    // @ts-expect-error `titel` is not an SVG prop
+    // @ts-expect-error checked by `pnpm typecheck`, not Jest
     const icon = <ArrowRightIcon titel='Next' />;
 
     expect(icon).toBeTruthy();

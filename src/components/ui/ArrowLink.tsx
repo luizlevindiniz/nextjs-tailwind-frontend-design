@@ -6,11 +6,8 @@ import { ArrowRightIcon } from '@/assets/icons';
 
 interface ArrowLinkProps extends ComponentPropsWithoutRef<'a'> {
   href: string;
-  /** `onBlue` uses white text: Figma's white-secondary misses AA on blue. */
   tone?: 'light' | 'onBlue';
 }
-
-/** A text link followed by an arrow ("Explore →", "Browse all courses →"). */
 export function ArrowLink({
   tone = 'light',
   className,

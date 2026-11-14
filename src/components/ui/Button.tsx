@@ -6,7 +6,6 @@ interface ButtonProps extends ComponentPropsWithoutRef<'button'> {
   variant?: ButtonVariant;
 }
 
-/** An action. For navigation that looks like a button, use `ButtonLink`. */
 export function Button({
   variant = 'primary',
   type = 'button',

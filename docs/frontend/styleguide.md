@@ -54,6 +54,8 @@ Figma defines a mobile and a desktop version of each text style. Each one is a `
 | body 1      | `text-mobile-body-1`     | 14 / 24            | `text-desktop-body-1`     | 14 / 24             | 400    | 0                   |
 | Overline    | `text-mobile-overline`   | 12 / 16            | `text-desktop-overline`   | 12 / 16             | 600    | 0.12em, `uppercase` |
 
+One more token isn't a Figma style: `text-caption` (13 / 19.5, 400) is the footer copyright, the same at both sizes, so it isn't paired.
+
 Sizes are in px for comparison with Figma; the tokens are in rem. Pair the two explicitly, mobile first:
 
 ```tsx
@@ -88,12 +90,13 @@ Tailwind's default radius scale matches the design:
 
 ## Layout
 
-| What            | Mobile (402 frame)  | Desktop (1280 frame) | Classes                 |
-| --------------- | ------------------- | -------------------- | ----------------------- |
-| Content column  | fluid               | 1120 px max          | `max-w-content mx-auto` |
-| Side gutters    | 20 px               | 80 px                | `px-5 lg:px-20`         |
-| Section padding | 60 px               | 100 px               | `py-15 lg:py-25`        |
-| Header height   | 68 px + 1 px border | 70 px                |                         |
+| What            | Mobile (402 frame)  | Desktop (1280 frame) | Classes                        |
+| --------------- | ------------------- | -------------------- | ------------------------------ |
+| Content column  | fluid               | 1120 px max          | `max-w-content mx-auto`        |
+| Side gutters    | 20 px               | 80 px                | `px-5 lg:px-20`                |
+| Section padding | 60 px               | 100 px               | `py-15 lg:py-25`               |
+| Header height   | 68 px + 1 px border | 69 px + 1 px border  | `h-17 lg:h-17.25`              |
+| Footer padding  | 60 top / 20 bottom  | 80 top / 40 bottom   | `pt-15 pb-5 lg:pt-20 lg:pb-10` |
 
 Breakpoints are Tailwind's defaults. The layout is fluid up to `md` (768 px) and switches to desktop at `lg` (1024 px). Some Figma sections draw a 1136 px column. This is treated as a slip, and every section uses the 1120 px column.
 
@@ -138,6 +141,15 @@ The patterns above are built once in `src/components/ui/`. Sections compose them
 Every primitive takes a `className`, merged last with `cn()`, for section-specific spacing or width (`w-full` on the mobile Hero buttons). The Hero builds its own `<h1>` block: its type and layout differ from a section header.
 
 Icons are listed in [styling.md](styling.md#icons).
+
+## Page shell
+
+`SiteShell` (`src/components/layout/`) wraps every route from the root layout: a skip link, `Header`, `<main id="main">`, `Footer`. Pages render their content without their own `<main>`.
+
+- **Skip link:** the first link on the page, hidden until focused, then shown top-left as a primary button. It moves focus to `<main>`.
+- **Header:** `background-light-yellow` with a `line-1` bottom border. The logo links home (`aria-label="Luma home"`).
+- **Footer:** `background-darkblue`. Logo in `text-white-primary`, tagline in `text-white-tertiary` body 1 (240 px wide on desktop), then a `text-secondary` top border and the copyright in `text-caption` `text-white-secondary`, centered on mobile and left on desktop. Mobile Figma draws the copyright in white; it's unified to `text-white-secondary`.
+- **Favicon and share image:** `src/app/icon.svg` is an "l." monogram (the wordmark's own "l" and dot) in white on `primary-blue`; `apple-icon.tsx` renders it full-bleed at 180 px. `opengraph-image.tsx` renders the 1200 × 630 share image at build time, reading colors from `globals.css` (`src/lib/theme.ts`) and fonts from `src/assets/fonts/`.
 
 ## Accessibility deviations
 

@@ -19,10 +19,17 @@ Luma is a single, statically rendered landing page. There is no backend, databas
 
 ```text
 src/
-├── app/                 # App Router: layout, page, error and not-found boundaries
-│   └── __tests__/       # tests for the route
+├── app/                 # App Router: layout, page, error and not-found boundaries,
+│   │                    # metadata files (icon, apple-icon, opengraph-image, sitemap, robots)
+│   └── __tests__/       # tests for the route and its metadata
 ├── assets/icons/        # Figma SVGs (SVGR components), typed and exported from index.ts
+├── assets/fonts/        # static TTFs read only by the generated share image
+├── components/layout/   # SiteShell: skip link, header, main, footer
+├── components/header/   # Header
+├── components/footer/   # Footer
 ├── components/ui/       # primitives: Container, Button, ButtonLink, ArrowLink, SectionHeader
+├── lib/site.ts          # site name, title, description and URL (see below)
+├── lib/theme.ts         # reads color tokens from globals.css for generated images
 ├── lib/utils.ts         # cn(): clsx + tailwind-merge that knows the type tokens
 ├── styles/globals.css   # Tailwind entry + @theme design tokens
 └── __mocks__/svg.tsx    # Jest stand-in for SVGR imports
@@ -40,7 +47,8 @@ _Planned_ (added by the tasks that need them):
 
 - The only route, `/`, is prerendered at build time (`○ Static` in `next build`). Nothing uses request-time data.
 - Sections are Server Components and send no JavaScript. Only interactive leaves (the mobile menu toggle, the contact form) are Client Components, marked with `'use client'` at the smallest boundary possible.
-- Metadata comes from the App Router `metadata` export. The sitemap, robots, icons and Open Graph image will be App Router metadata files ([ADR](adr/202611131621-generate-sitemap-and-robots-with-app-router-metadata-files.md), _planned_).
+- Metadata comes from the root layout's `metadata` export (title template, description, canonical, Open Graph, Twitter card). The sitemap, robots, icons and Open Graph image are App Router metadata files, all prerendered ([ADR](adr/202611131621-generate-sitemap-and-robots-with-app-router-metadata-files.md)). Next.js reuses the Open Graph image for `twitter:image`.
+- The site URL is one constant, `siteConfig.url` in `src/lib/site.ts`: `NEXT_PUBLIC_SITE_URL` if set, else `https://` + Vercel's `VERCEL_PROJECT_PRODUCTION_URL`, else `http://localhost:3000`. See `.env.example`.
 
 ## What is mocked
 

@@ -90,6 +90,9 @@
   --text-desktop-overline--font-weight: 600;
   --text-desktop-overline--letter-spacing: 0.12em;
 
+  --text-caption: 0.8125rem;
+  --text-caption--line-height: 1.21875rem;
+
   --container-content: 70rem;
 
   --shadow-*: initial;

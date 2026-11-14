@@ -18,9 +18,12 @@ const typeStyles = [
 const twMerge = extendTailwindMerge({
   extend: {
     theme: {
-      text: ['mobile', 'desktop'].flatMap((size) =>
-        typeStyles.map((style) => `${size}-${style}`),
-      ),
+      text: [
+        ...['mobile', 'desktop'].flatMap((size) =>
+          typeStyles.map((style) => `${size}-${style}`),
+        ),
+        'caption',
+      ],
     },
   },
 });

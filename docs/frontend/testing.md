@@ -8,6 +8,7 @@
 | `jest-environment-jsdom`                                                               | Browser-like DOM                                                                  |
 | [React Testing Library](https://testing-library.com/docs/react-testing-library/intro/) | Render components and query them like a user would                                |
 | [`@testing-library/jest-dom`](https://github.com/testing-library/jest-dom)             | DOM matchers (`toBeInTheDocument`, `toHaveAttribute`…), loaded in `jest.setup.js` |
+| [`@testing-library/user-event`](https://testing-library.com/docs/user-event/intro)     | Keyboard and pointer interactions, as a user performs them                        |
 
 SVG imports resolve to `src/__mocks__/svg.tsx` (a plain `<svg>`) in tests. See the [testing ADR](../adr/202611131621-use-jest-and-testing-library-for-tdd.md).
 
@@ -39,7 +40,7 @@ Not tested in Jest: static markup with no logic (no snapshot tests), visual fide
 ## Rules
 
 - Query the way a user perceives the page, in this order: `getByRole` (with `name`), `getByLabelText`, `getByText`. Use `getByTestId` only as a last resort.
-- Drive interactions with `@testing-library/user-event` (to be added with the first interactive test) rather than `fireEvent`.
+- Drive interactions with `@testing-library/user-event` rather than `fireEvent`.
 - Assert on outcomes (text, roles, `aria-expanded`, focus), not implementation details (state, class names).
 - Keep each test focused on one behaviour, with a name that reads as a sentence.
 

@@ -15,13 +15,13 @@ export default function Error({
   }, [error]);
 
   return (
-    <main className='flex min-h-screen flex-col items-center justify-center gap-4 text-center'>
+    <div className='flex flex-col items-center gap-4 py-25 text-center'>
       <h1 className='font-heading text-mobile-h3 lg:text-desktop-h3'>
         Something went wrong
       </h1>
       <button type='button' onClick={reset} className='underline'>
         Try again
       </button>
-    </main>
+    </div>
   );
 }

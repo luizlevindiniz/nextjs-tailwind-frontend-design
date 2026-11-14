@@ -7,13 +7,13 @@ export const metadata: Metadata = {
 
 export default function NotFound() {
   return (
-    <main className='flex min-h-screen flex-col items-center justify-center gap-4 text-center'>
+    <div className='flex flex-col items-center gap-4 py-25 text-center'>
       <h1 className='font-heading text-mobile-h3 lg:text-desktop-h3'>
         Page not found
       </h1>
       <Link href='/' className='underline'>
         Back to home
       </Link>
-    </main>
+    </div>
   );
 }

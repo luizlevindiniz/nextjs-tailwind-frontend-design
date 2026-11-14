@@ -33,6 +33,11 @@
   --color-text-white-tertiary: #9e9faa;
 
   --color-line-1: #dbdfeb;
+  /*
+   * Not a Figma variable: form field border. line-1's hue, darkened to reach
+   * 3:1 against the card (3.40) and the field background (3.20), per WCAG 1.4.11.
+   */
+  --color-line-input: #7c8ab6;
 
   /*
    * Type scale: one token per Figma text style. Size, line height, weight and

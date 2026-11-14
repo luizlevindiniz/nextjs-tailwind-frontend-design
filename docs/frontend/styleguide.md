@@ -6,29 +6,30 @@ Token names follow the Figma variable names, with typos fixed (`backgrounnd-*` b
 
 ## Colors
 
-| Token                     | Value     | Used for                                                  |
-| ------------------------- | --------- | --------------------------------------------------------- |
-| `primary-blue`            | `#3157f6` | Primary buttons, overlines, stats, FeaturedCourse section |
-| `primary-blue-light`      | `#e2e8ff` | Number badges, icon tiles, image placeholders             |
-| `primary-orange`          | `#ff704d` | Decorative shapes                                         |
-| `secondary-yellow`        | `#ffee7e` | "Featured course" tag, CTA button on blue                 |
-| `accent-yellow-dark`      | `#e9d659` | HowItWorks step 3 icon (not a Figma variable, see below)  |
-| `background-orange`       | `#ffcb9f` | Decorative blocks behind images                           |
-| `background-yellow`       | `#fff1c2` | Icon tiles                                                |
-| `background-light-yellow` | `#f9f8f3` | Header, Hero, HowItWorks backgrounds; form inputs         |
-| `background-white`        | `#ffffff` | Page background, cards, secondary buttons                 |
-| `background-darkblue`     | `#171b2c` | Footer                                                    |
-| `text-primary`            | `#171b2c` | Headings and body text on light backgrounds               |
-| `text-secondary`          | `#656770` | Leads and supporting copy                                 |
-| `text-tertiary`           | `#6d7384` | Card descriptions, stat labels, placeholders              |
-| `text-white-primary`      | `#ffffff` | Text on blue and dark backgrounds                         |
-| `text-white-secondary`    | `#e7e7ec` | Secondary text on blue and dark backgrounds               |
-| `text-white-tertiary`     | `#9e9faa` | Footer muted text                                         |
-| `line-1`                  | `#dbdfeb` | Borders, dividers                                         |
+| Token                     | Value     | Used for                                                                |
+| ------------------------- | --------- | ----------------------------------------------------------------------- |
+| `primary-blue`            | `#3157f6` | Primary buttons, overlines, stats, FeaturedCourse section               |
+| `primary-blue-light`      | `#e2e8ff` | Number badges, icon tiles, image placeholders                           |
+| `primary-orange`          | `#ff704d` | Decorative shapes                                                       |
+| `secondary-yellow`        | `#ffee7e` | "Featured course" tag, CTA button on blue                               |
+| `accent-yellow-dark`      | `#e9d659` | HowItWorks step 3 icon (not a Figma variable, see below)                |
+| `background-orange`       | `#ffcb9f` | Decorative blocks behind images                                         |
+| `background-yellow`       | `#fff1c2` | Icon tiles                                                              |
+| `background-light-yellow` | `#f9f8f3` | Header, Hero, HowItWorks backgrounds; form inputs                       |
+| `background-white`        | `#ffffff` | Page background, cards, secondary buttons                               |
+| `background-darkblue`     | `#171b2c` | Footer                                                                  |
+| `text-primary`            | `#171b2c` | Headings and body text on light backgrounds                             |
+| `text-secondary`          | `#656770` | Leads and supporting copy                                               |
+| `text-tertiary`           | `#6d7384` | Card descriptions, stat labels, placeholders                            |
+| `text-white-primary`      | `#ffffff` | Text on blue and dark backgrounds                                       |
+| `text-white-secondary`    | `#e7e7ec` | Secondary text on blue and dark backgrounds                             |
+| `text-white-tertiary`     | `#9e9faa` | Footer muted text                                                       |
+| `line-1`                  | `#dbdfeb` | Borders, dividers                                                       |
+| `line-input`              | `#7c8ab6` | Form field borders (not a Figma variable, see accessibility deviations) |
 
 Utilities take the token name after the property: `bg-primary-blue`, `text-text-secondary`, `border-line-1`. The doubled `text-text-*` is the price of keeping Figma's names.
 
-`accent-yellow-dark` is the only color the design uses without a variable. It became a token, named for its role, instead of a raw hex value.
+Two tokens aren't Figma variables. `accent-yellow-dark` is a color the design uses without a variable. `line-input` is an accessibility deviation (see below). Each is named for its role instead of written as a raw hex value.
 
 ## Typography
 
@@ -114,12 +115,18 @@ These are the values to build the primitives and sections from.
 - **Form field:**
   - Label: body 1 bold.
   - Gap between label and control: 8 px.
-  - Control: `bg-background-light-yellow border border-line-1 rounded-lg px-4 py-3`.
-  - Placeholder: `text-text-tertiary` (4.45:1 on the field background; kept as designed because WCAG's text minimum applies to entered text).
-  - Border: kept as designed (`line-1`, about 1.3:1). The field is identified by its visible label and background, and focus shows a ring in `primary-blue`.
+  - Control: `bg-background-light-yellow border border-line-input rounded-lg px-4 py-3`.
+  - Placeholder: `placeholder:text-text-secondary` (5.30:1 on the field background).
+  - Focus: a ring in `primary-blue`.
   - Textarea height: 120 px.
 - **Form container:** `bg-background-white border border-line-1 rounded-2xl shadow-card`, padding 40 px on desktop and 24 px vertical / 20 px horizontal on mobile.
 
 ## Accessibility deviations
 
-Where a Figma pairing misses WCAG AA, the build deviates from the frame and the pattern above says so. Today that's one change: the text link on `primary-blue` uses `text-white-primary` instead of `text-white-secondary`.
+Where a Figma pairing misses WCAG AA, the build deviates from the frame and the pattern above says so.
+
+| Element                     | Figma                           | Built                                                            | Why                                                                                                                    |
+| --------------------------- | ------------------------------- | ---------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
+| Text link on `primary-blue` | `text-white-secondary` (4.46:1) | `text-white-primary` (5.49:1)                                    | SC 1.4.3 needs 4.5:1 for 14 px bold text                                                                               |
+| Form field placeholder      | `text-tertiary` (4.45:1)        | `text-secondary` (5.30:1)                                        | SC 1.4.3 covers placeholder text                                                                                       |
+| Form field border           | `line-1` (1.33:1 on the card)   | `line-input` `#7c8ab6` (3.40:1 on the card, 3.20:1 on the field) | SC 1.4.11: the border is what shows the input, so it needs 3:1. The field background alone is 1.06:1 against the card. |

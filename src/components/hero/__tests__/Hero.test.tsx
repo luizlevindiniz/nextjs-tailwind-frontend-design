@@ -41,6 +41,12 @@ describe('Hero', () => {
     render(<Hero />);
 
     expect(screen.getAllByRole('img')).toHaveLength(1);
+    // An unlabelled <svg> has no img role, so the count above can't see the stars.
+    const stars = screen.getByText('4.9 avg rating').querySelectorAll('svg');
+    expect(stars).toHaveLength(5);
+    stars.forEach((star) =>
+      expect(star).toHaveAttribute('aria-hidden', 'true'),
+    );
   });
 
   it('states the social proof as text', () => {

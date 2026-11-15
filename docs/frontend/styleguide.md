@@ -110,7 +110,7 @@ These are the values to build the primitives and sections from.
   - **Secondary:** `bg-background-white`, `inset-ring inset-ring-line-1`, `text-text-primary`. Figma draws the stroke inside the box, so an inset ring (not a border) keeps it the same 52 px height as the other buttons.
   - **On blue:** `bg-secondary-yellow`, `text-text-primary`.
   - **Text link with arrow:** `px-4 py-3.5`, 8 px gap, 20 px arrow. On `primary-blue`, use `text-text-white-primary`. Figma's `text-white-secondary` there is 4.46:1, below the 4.5:1 AA minimum.
-  - Mobile Hero buttons are full width.
+  - Mobile Hero buttons are full width (a stretched column, up to the mobile frame's 362 px).
   - **Hover** (not in Figma): filled buttons tint their own token to 90% (`hover:bg-primary-blue/90`, 4.58:1 or more for the white label), the secondary button's ring darkens to `text-tertiary`, and the text link underlines. Colors animate only under `motion-safe:`.
   - **Focus:** a 2 px outline 2 px out, `primary-blue` on light backgrounds and `text-white-primary` on blue.
 - **Card:** `bg-background-white border border-line-1 rounded-2xl p-7`, minimum height 260 px on desktop.
@@ -138,7 +138,7 @@ The patterns above are built once in `src/components/ui/`. Sections compose them
 | `ArrowLink`     | `<a>` + hidden arrow icon | `href`, `tone`: `light` (default), `onBlue`                                                                                      |
 | `SectionHeader` | overline, `<h2>`, lead    | `id` (for the section's `aria-labelledby`), `overline`, `title`, `lead`, `align`: `start` / `center`, `tone`: `light` / `onBlue` |
 
-Every primitive takes a `className`, merged last with `cn()`, for section-specific spacing or width (`w-full` on the mobile Hero buttons). The Hero builds its own `<h1>` block: its type and layout differ from a section header.
+Every primitive takes a `className`, merged last with `cn()`, for section-specific spacing or width. The Hero builds its own `<h1>` block: its type and layout differ from a section header.
 
 Icons are listed in [styling.md](styling.md#icons).
 
@@ -152,6 +152,17 @@ Icons are listed in [styling.md](styling.md#icons).
   - **Mobile menu (below `lg`):** a 36 px toggle (`p-1.5`, 24 px icon) labelled "Menu", with `aria-expanded` and `aria-controls`, inside the `<nav aria-label="Main">` landmark so the landmark exists while the menu is closed; its icon swaps from the hamburger to an X while open. Figma has no open state, so the panel is a design decision: it drops down over the page under the header border (`background-light-yellow`, `line-1` bottom border, `shadow-floating`), with the nav links as 44 px rows, a `line-1` divider, then full-width secondary "Log in" and primary "Start learning" buttons. It closes on Esc (focus returns to the toggle), on a link, on a tap outside, and when focus leaves it. It fades and slides in 8 px only under `motion-safe:`.
 - **Footer:** `background-darkblue`. Logo in `text-white-primary`, tagline in `text-white-tertiary` body 1 (240 px wide on desktop), then a `text-secondary` top border and the copyright in `text-caption` `text-white-secondary`, centered on mobile and left on desktop. Mobile Figma draws the copyright in white; it's unified to `text-white-secondary`.
 - **Favicon and share image:** `src/app/icon.svg` is an "l." monogram (the wordmark's own "l" and dot) in white on `primary-blue`; `favicon.ico` holds it at 16, 32 and 48 px for clients that request `/favicon.ico` directly, and `apple-icon.tsx` renders it full-bleed at 180 px. `opengraph-image.tsx` renders the 1200 × 630 share image at build time, reading colors from `globals.css` (`src/lib/theme.ts`) and fonts from `src/assets/fonts/`.
+
+## Sections
+
+### Hero
+
+`src/components/hero/Hero.tsx`, `background-light-yellow`, `py-15 lg:py-25`. It holds the page's only `<h1>`, and the section is named by it.
+
+- **Copy column:** overline (`primary-blue`), H1 16 px below, subtitle 1 lead in `text-secondary` 24 px below (480 px max), the two buttons 32 px below ("Explore courses" → `#categories`, "See how it works" → `#how-it-works`), then 32 px below the trust row: three overlapping 32 px learner avatars (`-space-x-2`, 2 px `background-light-yellow` ring, `alt=""`) and "**Trusted by 24,000+** learners" in body 1.
+- **Image block:** the photo (`rounded-2xl`, `rounded-3xl` on desktop, `object-cover`) sits on a `background-orange` block offset to the right and a `primary-blue-light` circle at the bottom left. Two floating badges overlap it: "120+ expert-led courses" (top left, the number in a `primary-blue-light` chip) and "4.9 avg rating" (bottom right, five `secondary-yellow` stars, `aria-hidden` because the text carries the rating).
+- **Mobile (below `lg`):** the image block comes first visually (`flex-col-reverse`, so the DOM and reading order still start with the heading). The image block, the buttons and the trust row keep the mobile frame's 362 px width at every width up to `lg` (the photo is 346 × 380), so the composition doesn't stretch on tablets. Buttons stack full width; the trust row is centered.
+- **Desktop (`lg` and up):** two columns, 60 px apart, top-aligned. The copy column keeps at least 448 px (`min-w-md`); the image takes 500 px and the 500:520 shape at 1280, and shrinks with the viewport below that (about 356 px at 1024), with the decorations and badges anchored to its edges. The decorations and the rating badge reach up to 58 px past the image into the 80 px gutter.
 
 ## Accessibility deviations
 

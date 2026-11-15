@@ -75,7 +75,7 @@ import heroLearner from '@/assets/images/hero-learner.jpg';
   alt='…'
   loading='eager'
   fetchPriority='high'
-  sizes='(min-width: 1024px) 500px, calc(100vw - 56px)'
+  sizes='(min-width: 1280px) 500px, (min-width: 1024px) calc(100vw - 668px), min(346px, calc(100vw - 56px))'
   className='object-cover'
 />;
 ```
@@ -89,7 +89,7 @@ import heroLearner from '@/assets/images/hero-learner.jpg';
 
 | Master                       | Size                        | Where                      | Rendered (desktop / mobile) |
 | ---------------------------- | --------------------------- | -------------------------- | --------------------------- |
-| `hero-learner.jpg`           | 900×1100                    | Hero, LCP                  | 500×520 / 346×380           |
+| `hero-learner.jpg`           | 900×1100                    | Hero, LCP                  | 356–500 wide / 346×380      |
 | `featured-course.jpg`        | 700×500                     | FeaturedCourse             | 538×408 / 362×280           |
 | `people/*.jpg` (10)          | 216–302 w, cropped to frame | People collage             | ≤ 138×207 / ≤ 94×129        |
 | `avatars/learner-{1..4}.jpg` | 80×80                       | Hero (1–3), FinalCTA (all) | 32 / 40 px                  |

@@ -28,6 +28,7 @@ src/
 ├── components/layout/   # SiteShell: skip link, header, main, footer
 ├── components/header/   # Header, MobileMenu (the client leaf), shared nav link classes
 ├── components/footer/   # Footer
+├── components/hero/     # Hero (the page's h1 and LCP image)
 ├── components/ui/       # primitives: Container, Button, ButtonLink, ArrowLink, SectionHeader
 ├── data/                # typed content modules (navigation.ts)
 ├── lib/site.ts          # site name, title, description and URL (see below)
@@ -41,7 +42,7 @@ scripts/adr.sh           # ADR check (pnpm adr:check)
 
 _Planned_ (added by the tasks that need them):
 
-- `src/components/<section>/`: one folder per page section.
+- `src/components/<section>/`: one folder per remaining page section.
 - More `src/data/` modules: categories, steps, stats, footer links.
 
 ## Rendering model
@@ -59,6 +60,7 @@ See the [mock data ADR](adr/202611131621-serve-content-from-typed-local-mock-dat
 | ----------------------------------------------------------- | --------------------------------------------------------------------------------------- | -------------------------------------------------------------------- |
 | Page content (categories, steps, stats, testimonial, links) | Typed TypeScript modules in `src/data/` (navigation today; the rest _planned_)          | A CMS or API returning the same types, fetched in a Server Component |
 | Contact form submission                                     | Client-side validation and a simulated success/error state; nothing is sent (_planned_) | A Server Action or API route posting to an email or CRM service      |
+| Hero figures (24,000+ learners, 120+ courses, 4.9 rating)   | Static copy in `Hero.tsx`                                                               | Counts and the average rating from the course catalogue's API        |
 | Auth ("Log in", "Start learning")                           | Links only                                                                              | An auth provider; out of scope                                       |
 | Navigation targets                                          | In-page anchors where a section exists, `#` otherwise                                   | Real routes                                                          |
 

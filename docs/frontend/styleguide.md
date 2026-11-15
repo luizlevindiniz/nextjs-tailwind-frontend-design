@@ -192,6 +192,15 @@ Icons are listed in [styling.md](styling.md#icons).
 - **Connector:** a 1 px `line-1` line drawn by each step but the last (`::after`). On mobile it's vertical, 50 px tall, under the icon's center, ending at the next icon (steps 76 px apart). From `lg` it's horizontal through the icons' centers, from the icon's edge to the next icon's center, which covers its end.
 - **Layout:** stacked until `lg` (no tablet frame; a 3-column row at 768 would leave about 190 px per step); three equal columns 80 px apart from `lg`. Copy is the desktop frame's (the mobile frame says "who actually use these skills").
 
+### Testimonial
+
+`src/components/testimonial/Testimonial.tsx`, `background-white`, `py-15 lg:py-25`, `id="testimonial"`. Figma gives the section no heading, so it's named by an `sr-only` `h2`, "What learners say", which keeps it in the heading outline. Stats come from `src/data/stats.ts`.
+
+- **Quote:** a `<figure>`, 600 px max: the quote mark (`QuoteIcon`, 24 × 22, `primary-blue`, `aria-hidden`), the quote in a `<blockquote>` 16 px below (quotes, `text-primary`), then the `<figcaption>` 32 px below: a 48 px round avatar (`primary-blue-light` behind it, `alt=""` because the caption names the person), 16 px gap, the name (Inter bold: subtitle 1 on mobile, subtitle 2 on desktop) over the role (body 1 `text-secondary`).
+- **Stats:** a `<ul>`; each item is the value (H1, `primary-blue`) over its label (body 1 `text-tertiary`) 4 px below.
+- **Mobile (below `lg`):** the quote, then the stats 60 px below as three equal columns (120.7 px each at 402). Each stat keeps at least its longest word plus a 16 px right padding (`min-w-min pr-4`) and the row wraps, so below about 370 px the third stat moves to its own line instead of the values overlapping.
+- **Desktop (`lg` and up):** the quote on the left, vertically centered against the stats column on the right: 401 px wide with a `line-1` left border, 48 px left padding and 20 px between stats. Figma clips each label into a 25 px box, so its column is about 325 px tall; the built one is 334.
+
 ## Accessibility deviations
 
 Where a Figma pairing misses WCAG AA, the build deviates from the frame and the pattern above says so.

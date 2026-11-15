@@ -174,12 +174,21 @@ Icons are listed in [styling.md](styling.md#icons).
 - **Hover** (not in Figma): the border darkens from `line-1` to `text-tertiary` and "Explore" underlines; the color animates only under `motion-safe:`.
 - **Grid:** one column with 16 px gaps; 2 × 2 from `md`; 4 in a row with 20 px gaps from `lg`. At 1024 px the cards are about 200 px wide and "Product Design" wraps to two lines; "Explore" still lines up.
 
+### FeaturedCourse
+
+`src/components/featured-course/FeaturedCourse.tsx`, `primary-blue`, `py-15 lg:py-25`, `id="featured-course"`. Copy that appears once stays in the component.
+
+- **Image column:** the course photo (`rounded-2xl`, `object-cover`, lazy) in a 13:10 frame at every width (Figma draws 362 × 280 on mobile and 530 × 408 on desktop, both about 13:10). The "Featured course" tag (`secondary-yellow`, `rounded-md`, overline in `text-primary`) overlaps its top-left corner by 12 px.
+- **Copy column:** `SectionHeader` with `tone='onBlue'`, then the instructor line (subtitle 2) 24 px below, the course details 24 px below as a list of chips (`line-1` border, `rounded-lg`, body 1 in `text-white-primary` at every width; the mobile frame's `text-white-secondary` fails AA), then the actions 32 px below: "View course" (`ButtonLink` `onBlue`, `#`: no course page exists) and "Browse all courses" (`ArrowLink` `onBlue`, `#categories`).
+- **Mobile:** image first, copy below, 40 px apart; the actions stack full width.
+- **`md` and up:** two columns, vertically centered, 40 px apart (60 px from `lg`); mobile type until `lg`. The actions sit in a row and wrap when the column is too narrow for both (at 768, "Browse all courses" drops to its own line).
+
 ## Accessibility deviations
 
 Where a Figma pairing misses WCAG AA, the build deviates from the frame and the pattern above says so.
 
-| Element                     | Figma                           | Built                                                            | Why                                                                                                                    |
-| --------------------------- | ------------------------------- | ---------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
-| Text link on `primary-blue` | `text-white-secondary` (4.46:1) | `text-white-primary` (5.49:1)                                    | SC 1.4.3 needs 4.5:1 for 14 px bold text                                                                               |
-| Form field placeholder      | `text-tertiary` (4.45:1)        | `text-secondary` (5.30:1)                                        | SC 1.4.3 covers placeholder text                                                                                       |
-| Form field border           | `line-1` (1.33:1 on the card)   | `line-input` `#7c8ab6` (3.40:1 on the card, 3.20:1 on the field) | SC 1.4.11: the border is what shows the input, so it needs 3:1. The field background alone is 1.06:1 against the card. |
+| Element                | Figma                           | Built                                                            | Why                                                                                                                    |
+| ---------------------- | ------------------------------- | ---------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
+| Text on `primary-blue` | `text-white-secondary` (4.46:1) | `text-white-primary` (5.49:1)                                    | SC 1.4.3 needs 4.5:1 for 14 px text (FeaturedCourse link and chips)                                                    |
+| Form field placeholder | `text-tertiary` (4.45:1)        | `text-secondary` (5.30:1)                                        | SC 1.4.3 covers placeholder text                                                                                       |
+| Form field border      | `line-1` (1.33:1 on the card)   | `line-input` `#7c8ab6` (3.40:1 on the card, 3.20:1 on the field) | SC 1.4.11: the border is what shows the input, so it needs 3:1. The field background alone is 1.06:1 against the card. |

@@ -85,12 +85,12 @@ import heroLearner from '@/assets/images/hero-learner.jpg';
 - Only the LCP image (the hero photo) loads early, with `loading='eager'` and `fetchPriority='high'`. Don't use `preload`: it adds a head preload but no fetch priority, and the image is already in the server HTML. `priority` is deprecated in Next 16.
 - Fixed-size images (avatars) pass `width` and `height` and no `sizes`. `next/image` then generates 1x and 2x.
 - A master is the Figma source, resized only when it's bigger than needed: max(desktop drawn width × 2, mobile drawn width × 3). Fixed-size images stop at 2×. Resized masters are re-encoded with sharp at JPEG quality 90.
-- **`sizes` counts the frame, not the drawn photo.** With `object-cover`, a photo wider than its frame is drawn wider than the frame, and the browser under-fetches. So the collage masters are pre-cropped, centered, to the shape their frames show: the source's aspect ratio clamped between the narrowest and widest of its frames (desktop and mobile). If the width `next/image` serves for a frame would still fall short of the frame's target density, crop to the narrowest frame instead (`student-campus`). Re-crop a master when its frame's shape changes.
+- **`sizes` counts the frame, not the drawn photo.** With `object-cover`, a photo wider than its frame is drawn wider than the frame, and the browser under-fetches. So the collage masters are pre-cropped, centered, to the shape their frames show: the source's aspect ratio clamped between the narrowest and widest of its frames (desktop and mobile). If the width `next/image` serves for a frame would still fall short of the frame's target density, crop to the narrowest frame instead (`student-campus`). The course photo is cropped the same way, to the 13:10 of its frames. Re-crop a master when its frame's shape changes.
 
 | Master                       | Size                        | Where                      | Rendered (desktop / mobile) |
 | ---------------------------- | --------------------------- | -------------------------- | --------------------------- |
 | `hero-learner.jpg`           | 900×1100                    | Hero, LCP                  | 356–500 wide / 346×380      |
-| `featured-course.jpg`        | 700×500                     | FeaturedCourse             | 538×408 / 362×280           |
+| `featured-course.jpg`        | 650×500, cropped to 13:10   | FeaturedCourse             | ≤ 530×408 / 362×278         |
 | `people/*.jpg` (10)          | 216–302 w, cropped to frame | People collage             | ≤ 138×207 / ≤ 94×129        |
 | `avatars/learner-{1..4}.jpg` | 80×80                       | Hero (1–3), FinalCTA (all) | 32 / 40 px                  |
 | `avatars/alex-morgan.jpg`    | 96×96                       | Testimonial                | 48 px                       |

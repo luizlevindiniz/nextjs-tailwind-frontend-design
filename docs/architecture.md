@@ -19,26 +19,27 @@ Luma is a single, statically rendered landing page. There is no backend, databas
 
 ```text
 src/
-├── app/                   # App Router: layout, page, error and not-found boundaries,
-│   │                      # metadata files (favicon, icon, apple-icon, opengraph-image, sitemap, robots)
-│   └── __tests__/         # tests for the route and its metadata
-├── assets/icons/          # Figma SVGs (SVGR components), typed and exported from index.ts
-├── assets/images/         # JPEG masters for next/image (hero, course, people/, avatars/)
-├── assets/fonts/          # static TTFs read only by the generated share image
-├── components/layout/     # SiteShell: skip link, header, main, footer
-├── components/header/     # Header, MobileMenu (the client leaf), shared nav link classes
-├── components/footer/     # Footer
-├── components/hero/       # Hero (the page's h1 and LCP image)
-├── components/categories/ # Categories (course category cards)
-├── components/ui/         # primitives: Container, Button, ButtonLink, ArrowLink, SectionHeader
-├── data/                  # typed content modules (navigation.ts, categories.ts)
-├── lib/site.ts            # site name, title, description and URL (see below)
-├── lib/theme.ts           # reads color tokens from globals.css for generated images
-├── lib/utils.ts           # cn(): clsx + tailwind-merge that knows the type tokens
-├── styles/globals.css     # Tailwind entry + @theme design tokens
-└── __mocks__/svg.tsx      # Jest stand-in for SVGR imports
-docs/                      # this folder; ADRs in docs/adr/
-scripts/adr.sh             # ADR check (pnpm adr:check)
+├── app/                        # App Router: layout, page, error and not-found boundaries,
+│   │                           # metadata files (favicon, icon, apple-icon, opengraph-image, sitemap, robots)
+│   └── __tests__/              # tests for the route and its metadata
+├── assets/icons/               # Figma SVGs (SVGR components), typed and exported from index.ts
+├── assets/images/              # JPEG masters for next/image (hero, course, people/, avatars/)
+├── assets/fonts/               # static TTFs read only by the generated share image
+├── components/layout/          # SiteShell: skip link, header, main, footer
+├── components/header/          # Header, MobileMenu (the client leaf), shared nav link classes
+├── components/footer/          # Footer
+├── components/hero/            # Hero (the page's h1 and LCP image)
+├── components/categories/      # Categories (course category cards)
+├── components/featured-course/ # FeaturedCourse (the highlighted course)
+├── components/ui/              # primitives: Container, Button, ButtonLink, ArrowLink, SectionHeader
+├── data/                       # typed content modules (navigation.ts, categories.ts)
+├── lib/site.ts                 # site name, title, description and URL (see below)
+├── lib/theme.ts                # reads color tokens from globals.css for generated images
+├── lib/utils.ts                # cn(): clsx + tailwind-merge that knows the type tokens
+├── styles/globals.css          # Tailwind entry + @theme design tokens
+└── __mocks__/svg.tsx           # Jest stand-in for SVGR imports
+docs/                           # this folder; ADRs in docs/adr/
+scripts/adr.sh                  # ADR check (pnpm adr:check)
 ```
 
 _Planned_ (added by the tasks that need them):
@@ -57,13 +58,14 @@ _Planned_ (added by the tasks that need them):
 
 See the [mock data ADR](adr/202611131621-serve-content-from-typed-local-mock-data.md).
 
-| Concern                                                     | Today                                                                                   | Real-world replacement                                               |
-| ----------------------------------------------------------- | --------------------------------------------------------------------------------------- | -------------------------------------------------------------------- |
-| Page content (categories, steps, stats, testimonial, links) | Typed TypeScript modules in `src/data/` (navigation, categories; the rest _planned_)    | A CMS or API returning the same types, fetched in a Server Component |
-| Contact form submission                                     | Client-side validation and a simulated success/error state; nothing is sent (_planned_) | A Server Action or API route posting to an email or CRM service      |
-| Hero figures (24,000+ learners, 120+ courses, 4.9 rating)   | Static copy in `Hero.tsx`                                                               | Counts and the average rating from the course catalogue's API        |
-| Auth ("Log in", "Start learning")                           | Links only                                                                              | An auth provider; out of scope                                       |
-| Navigation and category card targets                        | In-page anchors where a section exists, `#` otherwise                                   | Real routes                                                          |
+| Concern                                                       | Today                                                                                   | Real-world replacement                                               |
+| ------------------------------------------------------------- | --------------------------------------------------------------------------------------- | -------------------------------------------------------------------- |
+| Page content (categories, steps, stats, testimonial, links)   | Typed TypeScript modules in `src/data/` (navigation, categories; the rest _planned_)    | A CMS or API returning the same types, fetched in a Server Component |
+| Contact form submission                                       | Client-side validation and a simulated success/error state; nothing is sent (_planned_) | A Server Action or API route posting to an email or CRM service      |
+| Hero figures (24,000+ learners, 120+ courses, 4.9 rating)     | Static copy in `Hero.tsx`                                                               | Counts and the average rating from the course catalogue's API        |
+| Featured course (title, instructor, lessons, duration, level) | Static copy in `FeaturedCourse.tsx`                                                     | The catalogue's "most popular this month" course from its API        |
+| Auth ("Log in", "Start learning")                             | Links only                                                                              | An auth provider; out of scope                                       |
+| Navigation, category card and course link targets             | In-page anchors where a section exists, `#` otherwise                                   | Real routes                                                          |
 
 ## Quality gates
 

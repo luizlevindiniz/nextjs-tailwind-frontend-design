@@ -183,6 +183,15 @@ Icons are listed in [styling.md](styling.md#icons).
 - **Mobile:** image first, copy below, 40 px apart; the actions stack full width.
 - **`md` and up:** two columns, vertically centered, 40 px apart (60 px from `lg`); mobile type until `lg`. The actions sit in a row and wrap when the column is too narrow for both (at 768, "Browse all courses" drops to its own line).
 
+### HowItWorks
+
+`src/components/how-it-works/HowItWorks.tsx`, `background-light-yellow`, `py-15 lg:py-25`, `id="how-it-works"` (the hero's "See how it works" link). Content comes from `src/data/steps.ts`.
+
+- **Header:** `SectionHeader`, centered, no lead. The steps start 40 px below it on mobile and 108 px below on desktop.
+- **Steps:** an `<ol>`, numbered "Step 01" to "Step 03" (Figma labels all three "Step 01"). Each step: a 56 px icon drawn in CSS (`aria-hidden`), the label (overline in `text-secondary`) 24 px below, the title as an `h3` in H5 8 px below, and the description in subtitle 2 `text-secondary` 12 px below. The icons: a `primary-blue-light` circle with a `primary-blue` square (`rounded-md`); a `background-orange` tile (`rounded-lg`, rotated 12°) with a `primary-orange` dot; a `background-yellow` square (`rounded-xl`) with an `accent-yellow-dark` dot. The mobile frame tints the second tile `primary-orange` at 15%; the build uses `background-orange` everywhere.
+- **Connector:** a 1 px `line-1` line drawn by each step but the last (`::after`). On mobile it's vertical, 50 px tall, under the icon's center, ending at the next icon (steps 76 px apart). From `lg` it's horizontal through the icons' centers, from the icon's edge to the next icon's center, which covers its end.
+- **Layout:** stacked until `lg` (no tablet frame; a 3-column row at 768 would leave about 190 px per step); three equal columns 80 px apart from `lg`. Copy is the desktop frame's (the mobile frame says "who actually use these skills").
+
 ## Accessibility deviations
 
 Where a Figma pairing misses WCAG AA, the build deviates from the frame and the pattern above says so.
@@ -190,5 +199,6 @@ Where a Figma pairing misses WCAG AA, the build deviates from the frame and the 
 | Element                | Figma                           | Built                                                            | Why                                                                                                                    |
 | ---------------------- | ------------------------------- | ---------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
 | Text on `primary-blue` | `text-white-secondary` (4.46:1) | `text-white-primary` (5.49:1)                                    | SC 1.4.3 needs 4.5:1 for 14 px text (FeaturedCourse link and chips)                                                    |
+| Step labels            | `text-tertiary` (4.45:1)        | `text-secondary` (5.30:1)                                        | SC 1.4.3 needs 4.5:1 for 12 px text (HowItWorks "Step 0n" on `background-light-yellow`)                                |
 | Form field placeholder | `text-tertiary` (4.45:1)        | `text-secondary` (5.30:1)                                        | SC 1.4.3 covers placeholder text                                                                                       |
 | Form field border      | `line-1` (1.33:1 on the card)   | `line-input` `#7c8ab6` (3.40:1 on the card, 3.20:1 on the field) | SC 1.4.11: the border is what shows the input, so it needs 3:1. The field background alone is 1.06:1 against the card. |

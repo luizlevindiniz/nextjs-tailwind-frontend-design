@@ -100,9 +100,9 @@ export function ContactForm() {
       aria-labelledby={`${id}-title`}
       noValidate
       onSubmit={handleSubmit}
-      className='flex flex-col gap-6'
+      className='flex flex-col'
     >
-      <div className='flex flex-col gap-2'>
+      <div className='mb-6 flex flex-col gap-2'>
         <h3
           id={`${id}-title`}
           className='font-heading text-desktop-h5 text-text-primary'
@@ -114,7 +114,7 @@ export function ContactForm() {
         </p>
       </div>
 
-      <div className='flex flex-col gap-5'>
+      <div className='mb-6 flex flex-col gap-5'>
         {fields.map((field) => {
           const error = errors[field.name];
           const controlProps = {
@@ -164,22 +164,23 @@ export function ContactForm() {
         })}
       </div>
 
-      <p
-        role='status'
-        className='rounded-lg bg-primary-blue-light px-4 py-3 text-mobile-body-1 text-text-primary empty:hidden lg:text-desktop-body-1'
-      >
-        {status === 'sent' &&
-          'Thanks! Your message is on its way. We’ll reply within 24 hours on business days.'}
-      </p>
+      {/* Always rendered: a live region must already be in the accessibility tree to be announced. */}
+      <div role='status'>
+        {status === 'sent' && (
+          <p className='mb-6 rounded-lg bg-primary-blue-light px-4 py-3 text-mobile-body-1 text-text-primary lg:text-desktop-body-1'>
+            Thanks! Your message is on its way. We’ll reply within 24 hours on
+            business days.
+          </p>
+        )}
+      </div>
       {status === 'failed' && (
         <p
           role='alert'
-          className='rounded-lg border border-error px-4 py-3 text-mobile-body-1 text-error lg:text-desktop-body-1'
+          className='mb-6 rounded-lg border border-error px-4 py-3 text-mobile-body-1 text-error lg:text-desktop-body-1'
         >
           We couldn’t send your message. Please try again in a moment.
         </p>
       )}
-
       <Button
         type='submit'
         aria-disabled={sending || undefined}

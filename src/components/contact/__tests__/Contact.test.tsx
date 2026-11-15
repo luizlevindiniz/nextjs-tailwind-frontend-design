@@ -1,9 +1,14 @@
 import { act, render, screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-import { FAILING_EMAIL } from '@/lib/contact';
+import { FAILING_EMAIL, submitContact } from '@/lib/contact';
 
 import { Contact } from '@/components/contact/Contact';
+
+jest.mock('@/lib/contact', () => {
+  const actual = jest.requireActual('@/lib/contact');
+  return { ...actual, submitContact: jest.fn(actual.submitContact) };
+});
 
 const renderContact = () => {
   jest.useFakeTimers();
@@ -26,7 +31,10 @@ const fillValid = async (
   await user.type(field('Your question'), 'Do you have team plans?');
 };
 
-afterEach(() => jest.useRealTimers());
+afterEach(() => {
+  jest.useRealTimers();
+  jest.mocked(submitContact).mockClear();
+});
 
 describe('Contact', () => {
   it('is a section named by its heading, with the contact details', () => {
@@ -45,6 +53,17 @@ describe('Contact', () => {
     expect(
       screen.getByText('Up to 24 hours on business days'),
     ).toBeInTheDocument();
+  });
+
+  it('lists the contact details', () => {
+    render(<Contact />);
+
+    const items = within(screen.getByRole('list')).getAllByRole('listitem');
+    expect(items).toHaveLength(2);
+    expect(items[0]).toHaveTextContent('Emailcontact@luma.com');
+    expect(items[1]).toHaveTextContent(
+      'Response TimeUp to 24 hours on business days',
+    );
   });
 
   it('labels every field and names the form', () => {
@@ -120,13 +139,27 @@ describe('Contact', () => {
 
       finishRequest();
 
-      expect(await screen.findByText(/your message is on its way/i)).toBe(
-        screen.getByRole('status'),
+      expect(screen.getByRole('status')).toContainElement(
+        await screen.findByText(/your message is on its way/i),
       );
       expect(field('Full name')).toHaveValue('');
       expect(field('Email')).toHaveValue('');
       expect(field('Your question')).toHaveValue('');
       expect(submit()).not.toHaveAttribute('aria-disabled', 'true');
+    });
+
+    it('sends once when submitted again while sending', async () => {
+      const { user, field, submit, finishRequest } = renderContact();
+
+      await fillValid(user, field);
+      await user.click(submit());
+      await user.click(submit());
+      finishRequest();
+
+      expect(
+        await screen.findByText(/your message is on its way/i),
+      ).toBeInTheDocument();
+      expect(submitContact).toHaveBeenCalledTimes(1);
     });
 
     it('reports a failure and keeps the values for a retry', async () => {

@@ -178,7 +178,7 @@ Icons are listed in [styling.md](styling.md#icons).
 
 `src/components/featured-course/FeaturedCourse.tsx`, `primary-blue`, `py-15 lg:py-25`, `id="featured-course"`. Copy that appears once stays in the component.
 
-- **Image column:** the course photo (`rounded-2xl`, `object-cover`, lazy) in a 13:10 frame at every width (Figma draws 362 × 280 on mobile and 530 × 408 on desktop, both about 13:10). The "Featured course" tag (`secondary-yellow`, `rounded-md`, overline in `text-primary`) overlaps its top-left corner by 12 px.
+- **Image column:** the course photo (`rounded-2xl`, `object-cover`, lazy) in a 13:10 frame at every width (Figma draws 362 × 280 on mobile and 538 × 408 on desktop, in its 1136 px column; 530 × 408 in the 1120 px column; all about 13:10). The "Featured course" tag (`secondary-yellow`, `rounded-md`, overline in `text-primary`) overlaps its top-left corner by 12 px.
 - **Copy column:** `SectionHeader` with `tone='onBlue'`, then the instructor line (subtitle 2) 24 px below, the course details 24 px below as a list of chips (`line-1` border, `rounded-lg`, body 1 in `text-white-primary` at every width; the mobile frame's `text-white-secondary` fails AA), then the actions 32 px below: "View course" (`ButtonLink` `onBlue`, `#`: no course page exists) and "Browse all courses" (`ArrowLink` `onBlue`, `#categories`).
 - **Mobile:** image first, copy below, 40 px apart; the actions stack full width.
 - **`md` and up:** two columns, vertically centered, 40 px apart (60 px from `lg`); mobile type until `lg`. The actions sit in a row and wrap when the column is too narrow for both (at 768, "Browse all courses" drops to its own line).

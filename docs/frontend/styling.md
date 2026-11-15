@@ -58,6 +58,7 @@ import { ArrowRightIcon } from '@/assets/icons';
 - Every icon draws in `currentColor`, so color it with a `text-*` utility on the icon or its parent.
 - SVGR drops `width`/`height`; size the icon with `size-*` (or `h-*`/`w-*` for the logo) at its Figma size.
 - The `Deco*` icons are the FinalCTA's decorative shapes; they are always `aria-hidden`.
+- `CloseIcon` is the one icon not exported from Figma (the design has no menu open state): it's drawn to match `MenuIcon`, 24 px with a 1.5 px round-capped stroke.
 - To add an icon: export the SVG from Figma, clean it with svgo (`preset-default` with `removeViewBox` off, `convertColors` with `currentColor`, `prefixIds`), keep mask fills white, then add a typed export to `index.ts`.
 
 ## Images

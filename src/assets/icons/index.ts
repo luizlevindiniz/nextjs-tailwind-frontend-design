@@ -2,6 +2,7 @@ import type { FC, SVGProps } from 'react';
 
 import ArrowRight from './arrow-right.svg';
 import Clock from './clock.svg';
+import Close from './close.svg';
 import DecoChat from './deco-chat.svg';
 import DecoCube from './deco-cube.svg';
 import DecoDrop from './deco-drop.svg';
@@ -18,6 +19,7 @@ type SvgIcon = FC<SVGProps<SVGSVGElement> & { title?: string }>;
 
 export const ArrowRightIcon: SvgIcon = ArrowRight;
 export const ClockIcon: SvgIcon = Clock;
+export const CloseIcon: SvgIcon = Close;
 export const DecoChatIcon: SvgIcon = DecoChat;
 export const DecoCubeIcon: SvgIcon = DecoCube;
 export const DecoDropIcon: SvgIcon = DecoDrop;

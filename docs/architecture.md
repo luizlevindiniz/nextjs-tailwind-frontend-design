@@ -63,16 +63,16 @@ _Planned_ (added by the tasks that need them):
 
 See the [mock data ADR](adr/202611131621-serve-content-from-typed-local-mock-data.md).
 
-| Concern                                                       | Today                                                                                              | Real-world replacement                                               |
-| ------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------- |
-| Page content (categories, steps, stats, testimonial, links)   | Typed TypeScript modules in `src/data/` (navigation, categories, steps, stats; the rest _planned_) | A CMS or API returning the same types, fetched in a Server Component |
-| Contact form submission                                       | `submitContact` in `src/lib/contact.ts` waits 1 s and resolves; `fail@example.com` rejects         | A Server Action or API route posting to an email or CRM service      |
-| Hero figures (24,000+ learners, 120+ courses, 4.9 rating)     | Static copy in `Hero.tsx`                                                                          | Counts and the average rating from the course catalogue's API        |
-| Featured course (title, instructor, lessons, duration, level) | Static copy in `FeaturedCourse.tsx`                                                                | The catalogue's "most popular this month" course from its API        |
-| Testimonial (quote, learner, role)                            | Static copy in `Testimonial.tsx`                                                                   | Reviews from the platform's API                                      |
-| People collage (10 learner and teacher photos)                | Static images in `src/assets/images/people/`, laid out in `People.tsx`                             | Member photos from the community's API                               |
-| Auth ("Log in", "Start learning")                             | Links only                                                                                         | An auth provider; out of scope                                       |
-| Navigation, category card and course link targets             | In-page anchors where a section exists, `#` otherwise                                              | Real routes                                                          |
+| Concern                                                           | Today                                                                                      | Real-world replacement                                               |
+| ----------------------------------------------------------------- | ------------------------------------------------------------------------------------------ | -------------------------------------------------------------------- |
+| Page content (navigation, categories, steps, stats, footer links) | Typed TypeScript modules in `src/data/` (footer links _planned_)                           | A CMS or API returning the same types, fetched in a Server Component |
+| Contact form submission                                           | `submitContact` in `src/lib/contact.ts` waits 1 s and resolves; `fail@example.com` rejects | A Server Action or API route posting to an email or CRM service      |
+| Hero figures (24,000+ learners, 120+ courses, 4.9 rating)         | Static copy in `Hero.tsx`                                                                  | Counts and the average rating from the course catalogue's API        |
+| Featured course (title, instructor, lessons, duration, level)     | Static copy in `FeaturedCourse.tsx`                                                        | The catalogue's "most popular this month" course from its API        |
+| Testimonial (quote, learner, role)                                | Static copy in `Testimonial.tsx`                                                           | Reviews from the platform's API                                      |
+| People collage (10 learner and teacher photos)                    | Static images in `src/assets/images/people/`, laid out in `People.tsx`                     | Member photos from the community's API                               |
+| Auth ("Log in", "Start learning")                                 | Links only                                                                                 | An auth provider; out of scope                                       |
+| Navigation, category card and course link targets                 | In-page anchors where a section exists, `#` otherwise                                      | Real routes                                                          |
 
 ## Quality gates
 

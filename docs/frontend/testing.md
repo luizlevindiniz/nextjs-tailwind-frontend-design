@@ -70,6 +70,6 @@ describe('HomePage', () => {
 
 ```bash
 pnpm test                 # once
-pnpm test -- menu         # files matching "menu"
+pnpm test -- header       # files matching "header"
 pnpm test:watch           # TDD loop
 ```

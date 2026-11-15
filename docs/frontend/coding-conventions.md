@@ -24,7 +24,7 @@ Repeated content (navigation, cards, steps, stats, footer columns) is a typed ar
 
 ## Images
 
-Every raster image uses `next/image` with a static import from `src/assets/images/`. Responsive images need an accurate `sizes` value, and lazy ones prefix it with `auto, `. Only the hero image (the LCP element) gets `loading='eager'` and `fetchPriority='high'`. The rules and the master list are in [styling.md](styling.md#images).
+Every raster image uses `next/image` with a static import from `src/assets/images/`. Responsive images need an accurate `sizes` value, and lazy ones prefix it with `auto, ` (except the People collage photos). Only the hero image (the LCP element) gets `loading='eager'` and `fetchPriority='high'`. The rules and the master list are in [styling.md](styling.md#images).
 
 ## Imports
 

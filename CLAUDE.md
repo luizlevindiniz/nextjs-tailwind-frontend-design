@@ -4,20 +4,6 @@ A one-page responsive landing page ("luma.") built from Figma with Next.js App R
 
 `docs/README.md` maps every document to the question it answers; read the one that matches the work before changing it. Keep docs true: update them in the same change as the code.
 
-# Start of every session
-
-Context is cleared between sessions. Before doing anything, read these local, gitignored working notes:
-
-1. `tmp/README.md`: the handoff and the user's rules.
-2. `tmp/state.md`: where we are, what's next, open findings.
-3. `tmp/roadmap.md`: every task and the definition of done.
-4. `tmp/figma.md`: **how to load the design** (file key, node IDs per section, tokens, MCP workflow). The original Figma link in `tmp/task.md` is view-only and fails; use the copy named in `tmp/figma.md`.
-5. `tmp/design-issues.md`: design problems and the decisions taken on them.
-
-`tmp/README.md` is the handoff for a clean session, including the user's working rules; `tmp/task.md` holds the original requirements. When something is ambiguous, follow them strictly and ask; don't assume.
-
-At the end of a task, update `tmp/state.md` and tick `tmp/roadmap.md`.
-
 # Commands
 
 - `pnpm dev`, `pnpm build`, `pnpm test` (`pnpm test -- <pattern>` for one file)
@@ -27,7 +13,7 @@ At the end of a task, update `tmp/state.md` and tick `tmp/roadmap.md`.
 # Rules
 
 - **Mobile first.** Build at the 402 px mobile frame, then layer up to the 1280 px desktop frame. There's no tablet frame: the mobile layout stays fluid up to `md` (768 px), and sections switch to the desktop layout at `lg` (1024 px), earlier only where a 2-column layout clearly fits.
-- **Figma is the source of truth.** Use only tokens declared in `@theme` (`src/styles/globals.css`); no arbitrary values that duplicate a token. If the design is unclear, ask the user and log it in `tmp/design-issues.md`.
+- **Figma is the source of truth.** Use only tokens declared in `@theme` (`src/styles/globals.css`); no arbitrary values that duplicate a token. If the design is unclear, ask the user.
 - **Tests are mandatory, TDD preferred.** Unit tests for main components, integration tests for crucial flows (menu, contact form). Query by role/label/text.
 - **Semantic HTML and accessibility:** landmarks, one `h1`, ordered headings, keyboard-operable controls, visible focus, alt text (`alt=""` for decorative images), `aria-hidden` decorative SVGs, `motion-safe:` for animation.
 - **Performance and SEO:** Server Components by default, `'use client'` only on the smallest interactive leaf, `next/image` with correct `sizes`, `next/font`, App Router `metadata`.
@@ -38,11 +24,9 @@ At the end of a task, update `tmp/state.md` and tick `tmp/roadmap.md`.
 
 # Gotchas
 
-- `tmp/` is gitignored. Never link to it from committed docs or ADRs; readers of the repo won't have it.
-- Keep committed files project-agnostic: never mention the company or context the requirements in `tmp/` came from, or the starter template the repo was created from.
+- Keep committed files project-agnostic: never mention where the requirements came from, or the starter template the repo was created from.
 - Deleting files with `rm` is denied by the permission settings; move them out of the repo instead.
-- The Figma page metadata is ~77 KB. Use the offline dump and parse script in `tmp/figma.md` instead of requesting it again.
-- Figma isn't always right: decided deviations (copy language, step numbering, placeholder text, link targets, interaction states) are in `tmp/design-issues.md`. Follow those decisions over the literal frame, and log every new deviation there.
+- Figma isn't always right: where the build deviates from a frame (copy language, step numbering, contrast, interaction states), the styleguide records it. Follow the recorded decision over the literal frame.
 
 # Conventions not written elsewhere
 

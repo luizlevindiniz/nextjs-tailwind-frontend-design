@@ -6,14 +6,14 @@ Accepted
 
 ## Context
 
-One developer builds the project with an AI coding agent, across many sessions whose context is cleared in between. Work is split into small tasks in a local, gitignored roadmap (`tmp/roadmap.md`), and progress is tracked in `tmp/state.md`; both are working notes, not deliverables. The developer chose not to use per-task branches or pull requests.
+One developer builds the project with an AI coding agent, across many sessions whose context is cleared in between. Work is split into small tasks in a local roadmap, and progress is tracked in a local state file; both are working notes kept out of the repository, not deliverables. The developer chose not to use per-task branches or pull requests.
 
 ## Decision
 
 - Work lands on `main` in small Conventional Commits (enforced by commitlint and Husky).
-- A task is done only when lint, typecheck, format check, tests and `pnpm build` pass, and `/review-that-runs` has reviewed the task's commit range by running the app, with its findings fixed or recorded in `tmp/state.md`.
+- A task is done only when lint, typecheck, format check, tests and `pnpm build` pass, and `/review-that-runs` has reviewed the task's commit range by running the app, with its findings fixed or recorded in the local state file.
 - `/grilling` may be used at the start of a task whose behaviour or layout is unclear.
-- `tmp/state.md` and `tmp/roadmap.md` are updated at the end of every task, so the next session can resume from them.
+- The local state file and roadmap are updated at the end of every task, so the next session can resume from them.
 
 ## Consequences
 

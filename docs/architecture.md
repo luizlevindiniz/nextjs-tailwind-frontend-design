@@ -19,26 +19,26 @@ Luma is a single, statically rendered landing page. There is no backend, databas
 
 ```text
 src/
-├── app/                 # App Router: layout, page, error and not-found boundaries,
-│   │                    # metadata files (favicon, icon, apple-icon, opengraph-image, sitemap, robots)
-│   └── __tests__/       # tests for the route and its metadata
-├── assets/icons/        # Figma SVGs (SVGR components), typed and exported from index.ts
-├── assets/images/       # JPEG masters for next/image (hero, course, people/, avatars/)
-├── assets/fonts/        # static TTFs read only by the generated share image
-├── components/layout/   # SiteShell: skip link, header, main, footer
-├── components/header/   # Header, MobileMenu (the client leaf), shared nav link classes
-├── components/footer/   # Footer
-├── components/hero/     # Hero (the page's h1 and LCP image)
+├── app/                   # App Router: layout, page, error and not-found boundaries,
+│   │                      # metadata files (favicon, icon, apple-icon, opengraph-image, sitemap, robots)
+│   └── __tests__/         # tests for the route and its metadata
+├── assets/icons/          # Figma SVGs (SVGR components), typed and exported from index.ts
+├── assets/images/         # JPEG masters for next/image (hero, course, people/, avatars/)
+├── assets/fonts/          # static TTFs read only by the generated share image
+├── components/layout/     # SiteShell: skip link, header, main, footer
+├── components/header/     # Header, MobileMenu (the client leaf), shared nav link classes
+├── components/footer/     # Footer
+├── components/hero/       # Hero (the page's h1 and LCP image)
 ├── components/categories/ # Categories (course category cards)
-├── components/ui/       # primitives: Container, Button, ButtonLink, ArrowLink, SectionHeader
-├── data/                # typed content modules (navigation.ts, categories.ts)
-├── lib/site.ts          # site name, title, description and URL (see below)
-├── lib/theme.ts         # reads color tokens from globals.css for generated images
-├── lib/utils.ts         # cn(): clsx + tailwind-merge that knows the type tokens
-├── styles/globals.css   # Tailwind entry + @theme design tokens
-└── __mocks__/svg.tsx    # Jest stand-in for SVGR imports
-docs/                    # this folder; ADRs in docs/adr/
-scripts/adr.sh           # ADR check (pnpm adr:check)
+├── components/ui/         # primitives: Container, Button, ButtonLink, ArrowLink, SectionHeader
+├── data/                  # typed content modules (navigation.ts, categories.ts)
+├── lib/site.ts            # site name, title, description and URL (see below)
+├── lib/theme.ts           # reads color tokens from globals.css for generated images
+├── lib/utils.ts           # cn(): clsx + tailwind-merge that knows the type tokens
+├── styles/globals.css     # Tailwind entry + @theme design tokens
+└── __mocks__/svg.tsx      # Jest stand-in for SVGR imports
+docs/                      # this folder; ADRs in docs/adr/
+scripts/adr.sh             # ADR check (pnpm adr:check)
 ```
 
 _Planned_ (added by the tasks that need them):

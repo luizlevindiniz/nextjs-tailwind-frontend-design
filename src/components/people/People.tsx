@@ -110,7 +110,8 @@ export function People() {
                   key={src.src}
                   src={src}
                   alt=''
-                  sizes={`auto, ${widths[width].sizes}`}
+                  // Not `auto`: narrow screens shrink the box below the drawn width.
+                  sizes={widths[width].sizes}
                   className={cn(
                     'rounded-sm object-cover shadow-dark-m',
                     widths[width].className,

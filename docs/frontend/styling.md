@@ -81,7 +81,8 @@ import heroLearner from '@/assets/images/hero-learner.jpg';
 ```
 
 - **`sizes` is mandatory on every responsive image** and must match its CSS width at each breakpoint. Without it the browser assumes `100vw` and fetches a viewport-wide file.
-- Below the first paint, keep the default `loading="lazy"` and start `sizes` with `auto, ` (`sizes='auto, (min-width: 1280px) 138px, 94px'`). Browsers that support it use the element's laid-out width, and the others use the fallback.
+- Below the first paint, keep the default `loading="lazy"` and start `sizes` with `auto, ` (the course photo: `sizes='auto, (min-width: 1024px) min(530px, calc(50vw - 110px)), (min-width: 768px) calc(50vw - 40px), calc(100vw - 40px)'`). Browsers that support it use the element's laid-out width, and the others use the fallback.
+  - Exception: the People collage photos leave `auto` out. Below about 370 px their columns shrink the box narrower than the photo is drawn (`object-cover`, fixed height), so `auto` would under-fetch. Their `sizes` gives each frame's width (`(min-width: 1280px) 138px, 94px`).
 - Only the LCP image (the hero photo) loads early, with `loading='eager'` and `fetchPriority='high'`. Don't use `preload`: it adds a head preload but no fetch priority, and the image is already in the server HTML. `priority` is deprecated in Next 16.
 - Fixed-size images (avatars) pass `width` and `height` and no `sizes`. `next/image` then generates 1x and 2x.
 - A master is the Figma source, resized only when it's bigger than needed: max(desktop drawn width × 2, mobile drawn width × 3). Fixed-size images stop at 2×. Resized masters are re-encoded with sharp at JPEG quality 90.

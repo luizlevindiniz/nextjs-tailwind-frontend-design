@@ -37,4 +37,14 @@ describe('People', () => {
       expect(photo.closest('[aria-hidden="true"]')).not.toBeNull();
     });
   });
+
+  it('sizes each photo from its frame width, not its laid-out box', () => {
+    const { container } = render(<People />);
+
+    container.querySelectorAll('img').forEach((photo) => {
+      expect(photo.getAttribute('sizes')).toMatch(
+        /^\(min-width: 1280px\) \d+px, \d+px$/,
+      );
+    });
+  });
 });

@@ -1,4 +1,5 @@
 import { Categories } from '@/components/categories/Categories';
+import { Contact } from '@/components/contact/Contact';
 import { FeaturedCourse } from '@/components/featured-course/FeaturedCourse';
 import { Hero } from '@/components/hero/Hero';
 import { HowItWorks } from '@/components/how-it-works/HowItWorks';
@@ -14,6 +15,7 @@ export default function HomePage() {
       <HowItWorks />
       <Testimonial />
       <People />
+      <Contact />
     </>
   );
 }

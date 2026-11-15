@@ -41,6 +41,7 @@ Not tested in Jest: static markup with no logic (no snapshot tests), visual fide
 
 - Query the way a user perceives the page, in this order: `getByRole` (with `name`), `getByLabelText`, `getByText`. Use `getByTestId` only as a last resort.
 - Drive interactions with `@testing-library/user-event` rather than `fireEvent`.
+- For timed behaviour (the contact form's simulated request), use Jest's fake timers with `userEvent.setup({ advanceTimers: jest.advanceTimersByTime })`, and run the pending timers inside `act()`.
 - Assert on outcomes (text, roles, `aria-expanded`, focus), not implementation details (state, class names).
 - Keep each test focused on one behaviour, with a name that reads as a sentence.
 

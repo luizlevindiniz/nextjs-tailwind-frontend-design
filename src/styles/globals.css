@@ -28,6 +28,8 @@
   --color-line-1: #dbdfeb;
   /* line-1 darkened to 3:1 against the card and the field (WCAG 1.4.11). */
   --color-line-input: #7c8ab6;
+  /* No error color in the palette; 5.5:1 on white, 5.2:1 on the field. */
+  --color-error: #c0362c;
 
   --text-*: initial;
 

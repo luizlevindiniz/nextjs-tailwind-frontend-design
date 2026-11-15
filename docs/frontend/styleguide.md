@@ -26,10 +26,11 @@ Token names follow the Figma variable names, with typos fixed (`backgrounnd-*` b
 | `text-white-tertiary`     | `#9e9faa` | Footer muted text                                                       |
 | `line-1`                  | `#dbdfeb` | Borders, dividers                                                       |
 | `line-input`              | `#7c8ab6` | Form field borders (not a Figma variable, see accessibility deviations) |
+| `error`                   | `#c0362c` | Form error text and invalid field borders (not a Figma variable)        |
 
 Utilities take the token name after the property: `bg-primary-blue`, `text-text-secondary`, `border-line-1`. The doubled `text-text-*` is the price of keeping Figma's names.
 
-Two tokens aren't Figma variables. `accent-yellow-dark` is a color the design uses without a variable. `line-input` is an accessibility deviation (see below). Each is named for its role instead of written as a raw hex value.
+Three tokens aren't Figma variables. `accent-yellow-dark` is a color the design uses without a variable. `line-input` is an accessibility deviation (see below). `error` covers a state the design doesn't draw: the palette has no error color, and `primary-orange` is 2.6:1 on white, so `error` is a red at 5.5:1 on white and 5.2:1 on the field. Each is named for its role instead of written as a raw hex value.
 
 ## Typography
 
@@ -104,7 +105,7 @@ Breakpoints are Tailwind's defaults. The layout is fluid up to `md` (768 px) and
 
 These are the values to build the primitives and sections from.
 
-- **Section header:** overline in `primary-blue`, then the title (H3) 16 px below, then the lead 16 px below in `text-secondary` subtitle 1. The People header groups the overline with the title instead: the title 8 px below, the lead 24 px below (32 px from `lg`). On `primary-blue` (FeaturedCourse) every line is `text-white-primary` and the lead is subtitle 2, 20 px below.
+- **Section header:** overline in `primary-blue`, then the title (H3) 16 px below, then the lead 16 px below in `text-secondary` subtitle 1. Contact sets its lead in body 1 on mobile (`leadSize="compact"`). The People header groups the overline with the title instead: the title 8 px below, the lead 24 px below (32 px from `lg`). On `primary-blue` (FeaturedCourse) every line is `text-white-primary` and the lead is subtitle 2, 20 px below.
 - **Button:** `px-7 py-3.5 rounded-lg`, body 1 bold, centered.
   - **Primary:** `bg-primary-blue` with white text.
   - **Secondary:** `bg-background-white`, `inset-ring inset-ring-line-1`, `text-text-primary`. Figma draws the stroke inside the box, so an inset ring (not a border) keeps it the same 52 px height as the other buttons.
@@ -120,11 +121,12 @@ These are the values to build the primitives and sections from.
 - **Form field:**
   - Label: body 1 bold.
   - Gap between label and control: 8 px.
-  - Control: `bg-background-light-yellow border border-line-input rounded-lg px-4 py-3`.
+  - Control: `bg-background-light-yellow inset-ring inset-ring-line-input rounded-lg px-4 py-3`, 48 px tall. Figma strokes inside the box, so an inset ring (as on the secondary button) keeps that height.
   - Placeholder: `placeholder:text-text-secondary` (5.30:1 on the field background).
-  - Focus: a ring in `primary-blue`.
-  - Textarea height: 120 px.
-- **Form container:** `bg-background-white border border-line-1 rounded-2xl shadow-card`, padding 40 px on desktop and 24 px vertical / 20 px horizontal on mobile.
+  - Focus: a 2 px `primary-blue` outline 2 px out.
+  - Textarea height: 100 px on mobile, 120 px from `lg`.
+  - Invalid (not in Figma): the ring turns `error` and the message sits 8 px under the control in body 1 `error`.
+- **Form container:** `bg-background-white inset-ring inset-ring-line-1 rounded-2xl shadow-card`, padding 40 px on desktop and 24 px vertical / 20 px horizontal on mobile.
 
 ## Primitives
 
@@ -211,6 +213,15 @@ Icons are listed in [styling.md](styling.md#icons).
   - **Desktop size (`xl` and up):** 500 px circle; photos 103 px wide (138 and 128), 13 px apart, 16 px between columns. Sizes are Figma's rounded to whole pixels.
 - **Layout:** stacked below `lg` (copy, then the collage 32 px below, centered). From `lg` the copy and the collage sit side by side, 60 px apart, vertically centered. The desktop collage is about 520 px wide and doesn't fit the 1024 px column, so it keeps its mobile size until `xl` (1280 px).
 
+### Contact
+
+`src/components/contact/Contact.tsx`, white background, `py-15 lg:py-25`, `id="contact"`. The form is the client leaf `ContactForm.tsx`. The mobile frame's form copy is Portuguese; the build uses the desktop's English copy at every width.
+
+- **Info column (480 px max):** `SectionHeader` (overline "Contact", "Get in touch", lead in body 1 on mobile and subtitle 1 from `lg`), then a `<dl>` of two cards 32 px below (40 px from `lg`), 16 px apart: `bg-background-light-yellow rounded-xl`, padding 16 px (20 px from `lg`), a 40 px `primary-blue-light` tile (`rounded-lg`) holding the message icon (24 px) or the clock (20 px) in `primary-blue`, then the term in `text-primary` and the value 2 px below (4 px from `lg`). The email is a `mailto:` link in `primary-blue`; the response time is `text-secondary` (Figma's `text-tertiary` is 4.45:1 on the card).
+- **Form (540 px max):** the form container, holding the `h3` "Contact us" (H5 at both sizes) and its line in body 1 `text-secondary` 8 px below, then the three fields 24 px below (20 px apart), then the full-width primary button 24 px below. The form is named by its `h3`.
+- **States (not in Figma):** no errors until the first submit; then every invalid field is flagged and the first one focused, and each field re-validates as it changes. While sending, the button reads "Sending…" and is `aria-disabled`. Success shows a `role="status"` message on `primary-blue-light` above the button and clears the form; failure shows a `role="alert"` message in `error` with an `error` border and keeps the values.
+- **Layout:** stacked below `lg` (info, then the form 40 px below). From `lg` the two columns sit side by side, vertically centered, at least 40 px apart; both shrink below 1280.
+
 ## Accessibility deviations
 
 Where a Figma pairing misses WCAG AA, the build deviates from the frame and the pattern above says so.
@@ -220,4 +231,5 @@ Where a Figma pairing misses WCAG AA, the build deviates from the frame and the 
 | Text on `primary-blue` | `text-white-secondary` (4.46:1) | `text-white-primary` (5.49:1)                                    | SC 1.4.3 needs 4.5:1 for 14 px text (FeaturedCourse link and chips)                                                    |
 | Step labels            | `text-tertiary` (4.45:1)        | `text-secondary` (5.30:1)                                        | SC 1.4.3 needs 4.5:1 for 12 px text (HowItWorks "Step 0n" on `background-light-yellow`)                                |
 | Form field placeholder | `text-tertiary` (4.45:1)        | `text-secondary` (5.30:1)                                        | SC 1.4.3 covers placeholder text                                                                                       |
+| Contact response time  | `text-tertiary` (4.45:1)        | `text-secondary` (5.30:1)                                        | SC 1.4.3 needs 4.5:1 for 14 px text on `background-light-yellow`                                                       |
 | Form field border      | `line-1` (1.33:1 on the card)   | `line-input` `#7c8ab6` (3.40:1 on the card, 3.20:1 on the field) | SC 1.4.11: the border is what shows the input, so it needs 3:1. The field background alone is 1.06:1 against the card. |

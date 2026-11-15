@@ -10,6 +10,7 @@ interface SectionHeaderProps {
   align?: 'start' | 'center';
   tone?: 'light' | 'onBlue';
   spacing?: 'even' | 'grouped';
+  leadSize?: 'default' | 'compact';
   className?: string;
 }
 export function SectionHeader({
@@ -20,6 +21,7 @@ export function SectionHeader({
   align = 'start',
   tone = 'light',
   spacing = 'even',
+  leadSize = 'default',
   className,
 }: SectionHeaderProps) {
   const onBlue = tone === 'onBlue';
@@ -58,6 +60,7 @@ export function SectionHeader({
               ? 'mt-5 text-mobile-subtitle-2 text-text-white-primary lg:text-desktop-subtitle-2'
               : 'mt-4 text-mobile-subtitle-1 text-text-secondary lg:text-desktop-subtitle-1',
             grouped && 'mt-6 lg:mt-8',
+            leadSize === 'compact' && 'text-mobile-body-1',
           )}
         >
           {lead}

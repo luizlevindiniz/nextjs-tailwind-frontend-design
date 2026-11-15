@@ -84,6 +84,23 @@ describe('SectionHeader', () => {
     expect(screen.getByText('Learn together.')).toHaveClass('mt-6', 'lg:mt-8');
   });
 
+  it('sets a compact lead in body 1 on mobile when asked', () => {
+    render(
+      <SectionHeader
+        id='t'
+        overline='Contact'
+        title='Get in touch'
+        lead='Have a question?'
+        leadSize='compact'
+      />,
+    );
+
+    expect(screen.getByText('Have a question?')).toHaveClass(
+      'text-mobile-body-1',
+      'lg:text-desktop-subtitle-1',
+    );
+  });
+
   it('switches every line to white on blue', () => {
     render(
       <SectionHeader

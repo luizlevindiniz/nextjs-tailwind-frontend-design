@@ -164,6 +164,16 @@ Icons are listed in [styling.md](styling.md#icons).
 - **Mobile (below `lg`):** the image block comes first visually (`flex-col-reverse`, so the DOM and reading order still start with the heading). The image block, the buttons and the trust row keep the mobile frame's 362 px width at every width up to `lg` (the photo is 346 × 380), so the composition doesn't stretch on tablets. Buttons stack full width; the trust row is centered.
 - **Desktop (`lg` and up):** two columns, 60 px apart, top-aligned. The copy column keeps at least 448 px (`min-w-md`); the image takes 500 px and the 500:520 shape at 1280, and shrinks with the viewport below that (about 356 px at 1024), with the decorations and badges anchored to its edges. The decorations and the rating badge reach up to 58 px past the image into the 80 px gutter.
 
+### Categories
+
+`src/components/categories/Categories.tsx`, `background-white`, `py-15 lg:py-25`, `id="categories"` (the header's "Courses" link). Content comes from `src/data/categories.ts`.
+
+- **Header:** `SectionHeader`, 560 px max (`max-w-140`). The cards start 48 px below it on mobile and 40 px below on desktop.
+- **Card:** the card pattern, as a list item (`<ul>`): `p-6` and 200 px minimum height on mobile, `p-7` and 260 px on desktop. Inside: the number badge (`01`–`04`, `aria-hidden`: the order means nothing), the title as an `h3` in H5 20 px below, the description in `text-tertiary` body 1 12 px below, and "Explore" with a 20 px arrow (body 1 bold, 8 px gap) 24 px below. "Explore" sits at the bottom of every card (`justify-between`), so it lines up across a row whatever the description length.
+- **Link:** each card has one link, "Explore", whose `::after` covers the whole card, so a click anywhere follows it. Its accessible name is "Explore <category>" (the title is `sr-only` after the visible word). The focus ring is drawn on the card (`has-focus-visible:`), not the word. No category pages exist, so each points to `#`.
+- **Hover** (not in Figma): the border darkens from `line-1` to `text-tertiary` and "Explore" underlines; the color animates only under `motion-safe:`.
+- **Grid:** one column with 16 px gaps; 2 × 2 from `md`; 4 in a row with 20 px gaps from `lg`. At 1024 px the cards are about 200 px wide and "Product Design" wraps to two lines; "Explore" still lines up.
+
 ## Accessibility deviations
 
 Where a Figma pairing misses WCAG AA, the build deviates from the frame and the pattern above says so.

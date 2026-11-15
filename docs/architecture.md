@@ -35,6 +35,7 @@ src/
 ├── components/testimonial/     # Testimonial (learner quote and stats)
 ├── components/people/          # People (community copy and photo collage)
 ├── components/contact/         # Contact (details and form), ContactForm (the client leaf)
+├── components/final-cta/       # FinalCta (closing call to action)
 ├── components/ui/              # primitives: Container, Button, ButtonLink, ArrowLink, SectionHeader
 ├── data/                       # typed content modules (navigation.ts, categories.ts, steps.ts, stats.ts)
 ├── lib/contact.ts              # contact form validation and the simulated submit
@@ -71,7 +72,7 @@ See the [mock data ADR](adr/202611131621-serve-content-from-typed-local-mock-dat
 | Featured course (title, instructor, lessons, duration, level)     | Static copy in `FeaturedCourse.tsx`                                                        | The catalogue's "most popular this month" course from its API        |
 | Testimonial (quote, learner, role)                                | Static copy in `Testimonial.tsx`                                                           | Reviews from the platform's API                                      |
 | People collage (10 learner and teacher photos)                    | Static images in `src/assets/images/people/`, laid out in `People.tsx`                     | Member photos from the community's API                               |
-| Auth ("Log in", "Start learning")                                 | Links only                                                                                 | An auth provider; out of scope                                       |
+| Auth ("Log in", "Start learning", "Join Luma")                    | Links only                                                                                 | An auth provider; out of scope                                       |
 | Navigation, category card and course link targets                 | In-page anchors where a section exists, `#` otherwise                                      | Real routes                                                          |
 
 ## Quality gates

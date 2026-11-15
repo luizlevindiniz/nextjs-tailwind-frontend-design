@@ -1,6 +1,7 @@
 import { Categories } from '@/components/categories/Categories';
 import { Contact } from '@/components/contact/Contact';
 import { FeaturedCourse } from '@/components/featured-course/FeaturedCourse';
+import { FinalCta } from '@/components/final-cta/FinalCta';
 import { Hero } from '@/components/hero/Hero';
 import { HowItWorks } from '@/components/how-it-works/HowItWorks';
 import { People } from '@/components/people/People';
@@ -16,6 +17,7 @@ export default function HomePage() {
       <Testimonial />
       <People />
       <Contact />
+      <FinalCta />
     </>
   );
 }

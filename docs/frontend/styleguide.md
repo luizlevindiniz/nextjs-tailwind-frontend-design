@@ -222,6 +222,14 @@ Icons are listed in [styling.md](styling.md#icons).
 - **States (not in Figma):** no errors until the first submit; then every invalid field is flagged and the first one focused, and each field re-validates as it changes. While sending, the button reads "Sending…" and is `aria-disabled`, and the fields are read-only so nothing typed is lost when the form clears. Success shows a message on `primary-blue-light` above the button, inside an always-rendered `role="status"` region (a live region must be in the accessibility tree before its content changes), and clears the form; failure shows a `role="alert"` message in `error` with an `error` border and keeps the values.
 - **Layout:** stacked below `lg` (info, then the form 40 px below). From `lg` the two columns sit side by side, vertically centered, at least 40 px apart; both shrink below 1280.
 
+### FinalCTA
+
+`src/components/final-cta/FinalCta.tsx`, `background-yellow`, `py-15 lg:py-25`, `id="get-started"`, named by its `h2`. No overline, so it doesn't use `SectionHeader`.
+
+- **Copy (656 px max, centered):** four overlapping 40 px learner avatars (`-space-x-2`, 2 px `secondary-yellow` border, `primary-blue-light` behind, `alt=""`: decorative), the title "What will you learn next?" 32 px below (H2 at both sizes, the only H2-styled title on the page), the lead in subtitle 1 `text-secondary` 16 px below, then the actions 40 px below: "Explore all courses" (primary, `#categories`) and "Join Luma" (secondary, `#`: no sign-up page exists).
+- **Actions:** stacked full width below `md`; a centered row of natural-width buttons, 12 px apart, from `md` (no tablet frame; a full-width stack would reach 720 px).
+- **Decorations:** desktop only, and only from `xl` (1280 px): eight CSS shapes (rings, discs and 12°-rotated tiles) and five icons (`DecoLetterBIcon` rotated 15°, `DecoChatIcon`, `DecoDropIcon`, `DecoCubeIcon`, `DecoPanelsIcon`), all `background-orange`, placed at Figma's coordinates on a 1280 px box centered in the section (`aria-hidden`, clipped by the section's `overflow-hidden`). On wider screens they stay around the copy instead of drifting to the edges. Below 1280 the inner shapes would crowd the copy, and the mobile frame has none.
+
 ## Accessibility deviations
 
 Where a Figma pairing misses WCAG AA, the build deviates from the frame and the pattern above says so.

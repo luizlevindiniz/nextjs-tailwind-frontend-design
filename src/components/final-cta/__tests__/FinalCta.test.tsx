@@ -15,7 +15,7 @@ describe('FinalCta', () => {
     ).toContainElement(heading);
   });
 
-  it('links "Explore all courses" to the categories', () => {
+  it('links its calls to action', () => {
     render(<FinalCta />);
 
     expect(

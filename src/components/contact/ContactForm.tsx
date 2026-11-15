@@ -49,7 +49,7 @@ const fields: readonly FieldConfig[] = [
 const emptyValues: ContactValues = { name: '', email: '', question: '' };
 
 const controlClasses =
-  'w-full rounded-lg bg-background-light-yellow inset-ring inset-ring-line-input px-4 text-mobile-body-1 text-text-primary outline-primary-blue placeholder:text-text-secondary focus-visible:outline-2 focus-visible:outline-offset-2 aria-invalid:inset-ring-error lg:text-desktop-body-1';
+  'w-full rounded-lg bg-background-light-yellow inset-ring inset-ring-line-input px-4 text-mobile-subtitle-1 text-text-primary outline-primary-blue placeholder:text-text-secondary focus-visible:outline-2 focus-visible:outline-offset-2 aria-invalid:inset-ring-error lg:text-desktop-body-1';
 
 export function ContactForm() {
   const id = useId();
@@ -124,6 +124,7 @@ export function ContactForm() {
             placeholder: field.placeholder,
             autoComplete: field.autoComplete,
             required: true,
+            readOnly: sending,
             'aria-invalid': error ? true : undefined,
             'aria-describedby': error
               ? `${fieldId(field.name)}-error`
@@ -148,7 +149,7 @@ export function ContactForm() {
                 <input
                   {...controlProps}
                   type={field.type ?? 'text'}
-                  className={cn(controlClasses, 'py-3')}
+                  className={cn(controlClasses, 'py-2.75 lg:py-3')}
                 />
               )}
               {error && (

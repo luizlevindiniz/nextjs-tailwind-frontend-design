@@ -162,6 +162,21 @@ describe('Contact', () => {
       expect(submitContact).toHaveBeenCalledTimes(1);
     });
 
+    it('locks the fields while sending, so nothing typed is lost on reset', async () => {
+      const { user, field, submit, finishRequest } = renderContact();
+
+      await fillValid(user, field);
+      await user.click(submit());
+      await user.type(field('Your question'), ' And more.');
+
+      expect(field('Your question')).toHaveAttribute('readonly');
+      expect(field('Your question')).toHaveValue('Do you have team plans?');
+
+      finishRequest();
+      await screen.findByText(/your message is on its way/i);
+      expect(field('Your question')).not.toHaveAttribute('readonly');
+    });
+
     it('reports a failure and keeps the values for a retry', async () => {
       const { user, field, submit, finishRequest } = renderContact();
 

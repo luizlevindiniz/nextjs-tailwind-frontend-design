@@ -121,7 +121,7 @@ These are the values to build the primitives and sections from.
 - **Form field:**
   - Label: body 1 bold.
   - Gap between label and control: 8 px.
-  - Control: `bg-background-light-yellow inset-ring inset-ring-line-input rounded-lg px-4 py-3`, 48 px tall. Figma strokes inside the box, so an inset ring (as on the secondary button) keeps that height.
+  - Control: `bg-background-light-yellow inset-ring inset-ring-line-input rounded-lg px-4 py-3`, 48 px tall. Typed text is body 1 from `lg` and subtitle 1 (16 px) below it, with `py-2.75` to keep 48 px: iOS Safari zooms the page into any field under 16 px. Figma strokes inside the box, so an inset ring (as on the secondary button) keeps that height.
   - Placeholder: `placeholder:text-text-secondary` (5.30:1 on the field background).
   - Focus: a 2 px `primary-blue` outline 2 px out.
   - Textarea height: 100 px on mobile, 120 px from `lg`.
@@ -219,7 +219,7 @@ Icons are listed in [styling.md](styling.md#icons).
 
 - **Info column (480 px max):** `SectionHeader` (overline "Contact", "Get in touch", lead in body 1 on mobile and subtitle 1 from `lg`), then a list (`<ul>`) of two cards 32 px below (40 px from `lg`), 16 px apart: `bg-background-light-yellow rounded-xl`, padding 16 px (20 px from `lg`), a 40 px `primary-blue-light` tile (`rounded-lg`) holding the message icon (24 px) or the clock (20 px) in `primary-blue`, then the label in `text-primary` and the value 2 px below (4 px from `lg`). The email is a `mailto:` link in `primary-blue`; the response time is `text-secondary` (Figma's `text-tertiary` is 4.45:1 on the card).
 - **Form (540 px max):** the form container, holding the `h3` "Contact us" (H5 at both sizes) and its line in body 1 `text-secondary` 8 px below, then the three fields 24 px below (20 px apart), then the full-width primary button 24 px below. The form is named by its `h3`.
-- **States (not in Figma):** no errors until the first submit; then every invalid field is flagged and the first one focused, and each field re-validates as it changes. While sending, the button reads "Sending…" and is `aria-disabled`. Success shows a message on `primary-blue-light` above the button, inside an always-rendered `role="status"` region (a live region must be in the accessibility tree before its content changes), and clears the form; failure shows a `role="alert"` message in `error` with an `error` border and keeps the values.
+- **States (not in Figma):** no errors until the first submit; then every invalid field is flagged and the first one focused, and each field re-validates as it changes. While sending, the button reads "Sending…" and is `aria-disabled`, and the fields are read-only so nothing typed is lost when the form clears. Success shows a message on `primary-blue-light` above the button, inside an always-rendered `role="status"` region (a live region must be in the accessibility tree before its content changes), and clears the form; failure shows a `role="alert"` message in `error` with an `error` border and keeps the values.
 - **Layout:** stacked below `lg` (info, then the form 40 px below). From `lg` the two columns sit side by side, vertically centered, at least 40 px apart; both shrink below 1280.
 
 ## Accessibility deviations
@@ -232,4 +232,5 @@ Where a Figma pairing misses WCAG AA, the build deviates from the frame and the 
 | Step labels            | `text-tertiary` (4.45:1)        | `text-secondary` (5.30:1)                                        | SC 1.4.3 needs 4.5:1 for 12 px text (HowItWorks "Step 0n" on `background-light-yellow`)                                |
 | Form field placeholder | `text-tertiary` (4.45:1)        | `text-secondary` (5.30:1)                                        | SC 1.4.3 covers placeholder text                                                                                       |
 | Contact response time  | `text-tertiary` (4.45:1)        | `text-secondary` (5.30:1)                                        | SC 1.4.3 needs 4.5:1 for 14 px text on `background-light-yellow`                                                       |
+| Form field text size   | body 1 (14 px) at every width   | subtitle 1 (16 px) below `lg`                                    | iOS Safari zooms the page when a field under 16 px gets focus                                                          |
 | Form field border      | `line-1` (1.33:1 on the card)   | `line-input` `#7c8ab6` (3.40:1 on the card, 3.20:1 on the field) | SC 1.4.11: the border is what shows the input, so it needs 3:1. The field background alone is 1.06:1 against the card. |

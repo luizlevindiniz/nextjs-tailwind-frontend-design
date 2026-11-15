@@ -20,9 +20,12 @@ const renderHeader = () => {
 
 describe('Header', () => {
   it('links the main navigation to page sections or placeholders', () => {
-    renderHeader();
+    const { toggle } = renderHeader();
 
-    const nav = screen.getByRole('navigation', { name: 'Main' });
+    // jsdom applies no CSS, so the desktop nav and the mobile one both exist.
+    const nav = screen
+      .getAllByRole('navigation', { name: 'Main' })
+      .find((landmark) => !landmark.contains(toggle))!;
     const href = (name: string) =>
       within(nav).getByRole('link', { name }).getAttribute('href');
     expect(href('Courses')).toBe('#categories');
@@ -41,6 +44,14 @@ describe('Header', () => {
 
       expect(toggle).toHaveAttribute('aria-expanded', 'false');
       expect(panel()).not.toBeVisible();
+    });
+
+    it('keeps the toggle inside the main navigation landmark while closed', () => {
+      const { toggle } = renderHeader();
+
+      const landmark = toggle.closest('nav');
+      expect(landmark).toHaveAccessibleName('Main');
+      expect(landmark).toBeVisible();
     });
 
     it('opens with the nav links and account actions, and closes again', async () => {

@@ -15,7 +15,7 @@ import { navLinkClasses } from './navLinkStyles';
 
 export function MobileMenu({ className }: { className?: string }) {
   const [open, setOpen] = useState(false);
-  const rootRef = useRef<HTMLDivElement>(null);
+  const rootRef = useRef<HTMLElement>(null);
   const toggleRef = useRef<HTMLButtonElement>(null);
   const panelId = useId();
 
@@ -42,7 +42,7 @@ export function MobileMenu({ className }: { className?: string }) {
   const close = () => setOpen(false);
 
   // relatedTarget is null for clicks on non-focusable content; pointerdown handles those.
-  const onBlur = (event: FocusEvent<HTMLDivElement>) => {
+  const onBlur = (event: FocusEvent<HTMLElement>) => {
     const next = event.relatedTarget;
     if (next && !event.currentTarget.contains(next)) close();
   };
@@ -50,7 +50,7 @@ export function MobileMenu({ className }: { className?: string }) {
   const Icon = open ? CloseIcon : MenuIcon;
 
   return (
-    <div ref={rootRef} onBlur={onBlur} className={className}>
+    <nav ref={rootRef} aria-label='Main' onBlur={onBlur} className={className}>
       <button
         ref={toggleRef}
         type='button'
@@ -68,21 +68,19 @@ export function MobileMenu({ className }: { className?: string }) {
         className='absolute inset-x-0 top-full z-40 mt-px border-b border-line-1 bg-background-light-yellow shadow-floating motion-safe:transition motion-safe:starting:-translate-y-2 motion-safe:starting:opacity-0'
       >
         <Container className='pt-2 pb-6'>
-          <nav aria-label='Main'>
-            <ul>
-              {mainNav.map(({ label, href }) => (
-                <li key={label}>
-                  <a
-                    href={href}
-                    onClick={close}
-                    className={cn(navLinkClasses, 'block py-2.5')}
-                  >
-                    {label}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </nav>
+          <ul>
+            {mainNav.map(({ label, href }) => (
+              <li key={label}>
+                <a
+                  href={href}
+                  onClick={close}
+                  className={cn(navLinkClasses, 'block py-2.5')}
+                >
+                  {label}
+                </a>
+              </li>
+            ))}
+          </ul>
           <div className='mt-4 flex flex-col gap-3 border-t border-line-1 pt-6'>
             <ButtonLink
               href={logInLink.href}
@@ -97,6 +95,6 @@ export function MobileMenu({ className }: { className?: string }) {
           </div>
         </Container>
       </div>
-    </div>
+    </nav>
   );
 }

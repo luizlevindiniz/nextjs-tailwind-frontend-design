@@ -104,7 +104,7 @@ Breakpoints are Tailwind's defaults. The layout is fluid up to `md` (768 px) and
 
 These are the values to build the primitives and sections from.
 
-- **Section header:** overline in `primary-blue`, then the title (H3) 16 px below, then the lead 16 px below in `text-secondary` subtitle 1. On `primary-blue` (FeaturedCourse) every line is `text-white-primary` and the lead is subtitle 2, 20 px below.
+- **Section header:** overline in `primary-blue`, then the title (H3) 16 px below, then the lead 16 px below in `text-secondary` subtitle 1. The People header groups the overline with the title instead: the title 8 px below, the lead 24 px below (32 px from `lg`). On `primary-blue` (FeaturedCourse) every line is `text-white-primary` and the lead is subtitle 2, 20 px below.
 - **Button:** `px-7 py-3.5 rounded-lg`, body 1 bold, centered.
   - **Primary:** `bg-primary-blue` with white text.
   - **Secondary:** `bg-background-white`, `inset-ring inset-ring-line-1`, `text-text-primary`. Figma draws the stroke inside the box, so an inset ring (not a border) keeps it the same 52 px height as the other buttons.
@@ -130,13 +130,13 @@ These are the values to build the primitives and sections from.
 
 The patterns above are built once in `src/components/ui/`. Sections compose them instead of repeating the classes.
 
-| Component       | Renders                   | Props (besides the native element's)                                                                                             |
-| --------------- | ------------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
-| `Container`     | `<div>`                   | — (1120 px column with 20 / 80 px gutters, outside the 1120 px)                                                                  |
-| `Button`        | `<button type='button'>`  | `variant`: `primary` (default), `secondary`, `onBlue`                                                                            |
-| `ButtonLink`    | `<a>`                     | `href`, `variant` (same as `Button`)                                                                                             |
-| `ArrowLink`     | `<a>` + hidden arrow icon | `href`, `tone`: `light` (default), `onBlue`                                                                                      |
-| `SectionHeader` | overline, `<h2>`, lead    | `id` (for the section's `aria-labelledby`), `overline`, `title`, `lead`, `align`: `start` / `center`, `tone`: `light` / `onBlue` |
+| Component       | Renders                   | Props (besides the native element's)                                                                                                                            |
+| --------------- | ------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `Container`     | `<div>`                   | — (1120 px column with 20 / 80 px gutters, outside the 1120 px)                                                                                                 |
+| `Button`        | `<button type='button'>`  | `variant`: `primary` (default), `secondary`, `onBlue`                                                                                                           |
+| `ButtonLink`    | `<a>`                     | `href`, `variant` (same as `Button`)                                                                                                                            |
+| `ArrowLink`     | `<a>` + hidden arrow icon | `href`, `tone`: `light` (default), `onBlue`                                                                                                                     |
+| `SectionHeader` | overline, `<h2>`, lead    | `id` (for the section's `aria-labelledby`), `overline`, `title`, `lead`, `align`: `start` / `center`, `tone`: `light` / `onBlue`, `spacing`: `even` / `grouped` |
 
 Every primitive takes a `className`, merged last with `cn()`, for section-specific spacing or width. The Hero builds its own `<h1>` block: its type and layout differ from a section header.
 
@@ -200,6 +200,16 @@ Icons are listed in [styling.md](styling.md#icons).
 - **Stats:** a `<ul>`; each item is the value (H1, `primary-blue`) over its label (body 1 `text-tertiary`) 4 px below.
 - **Mobile (below `lg`):** the quote, then the stats 60 px below as three equal columns (120.7 px each at 402). Each stat keeps at least its longest word plus a 16 px right padding (`min-w-min pr-4`) and the row wraps, so below about 370 px the third stat moves to its own line instead of the values overlapping.
 - **Desktop (`lg` and up):** the quote on the left, vertically centered against the stats column on the right: 401 px wide with a `line-1` left border, 48 px left padding and 20 px between stats. Figma clips each label into a 25 px box, so its column is about 325 px tall; the built one is 334.
+
+### People
+
+`src/components/people/People.tsx`, `background-light-yellow`, `py-15 lg:py-25`, `id="people"` (the header's "Community" link). Figma's body copy is lorem ipsum; the built copy is written in the page's tone at about the same length.
+
+- **Copy column (560 px max):** `SectionHeader` with `spacing="grouped"` (overline, the title 8 px below, the lead in `text-secondary` 24 px below, 32 px from `lg`), then the secondary button "Explore teachers and students" (`#`) 24 px below (32 px from `lg`). The mobile frame sets the lead in `text-primary`; the build uses the desktop's `text-secondary` at every width. Figma's button is 54 px tall (a 1 px border outside the 52 px button); the build uses the 52 px secondary button.
+- **Collage:** decorative, so the whole block is `aria-hidden` and every photo has `alt=""`. A `primary-blue-light` circle centered behind four columns of photos (`rounded-sm`, `object-cover`, `shadow-dark-m`, lazy, `sizes='auto, (min-width: 1280px) <desktop width>px, <mobile width>px'`). The first column is right-aligned and pushed down, the second pushed down on desktop only, and the columns are vertically centered against each other. The mobile frame rounds the photos 5 px and the desktop 4 px; the build uses 4 px at both.
+  - **Mobile size (below `xl`):** 330 px circle, capped to the collage width below 370 px; photos 72 px wide (94 and 88 for the two larger ones), 8 px apart, columns spread across 362 px (`justify-between`).
+  - **Desktop size (`xl` and up):** 500 px circle; photos 103 px wide (138 and 128), 13 px apart, 16 px between columns. Sizes are Figma's rounded to whole pixels.
+- **Layout:** stacked below `lg` (copy, then the collage 32 px below, centered). From `lg` the copy and the collage sit side by side, 60 px apart, vertically centered. The desktop collage is about 520 px wide and doesn't fit the 1024 px column, so it keeps its mobile size until `xl` (1280 px).
 
 ## Accessibility deviations
 

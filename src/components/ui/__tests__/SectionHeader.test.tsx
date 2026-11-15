@@ -69,6 +69,21 @@ describe('SectionHeader', () => {
     );
   });
 
+  it('groups the overline with the title and sets the lead apart when asked', () => {
+    render(
+      <SectionHeader
+        id='t'
+        overline='The people'
+        title='Meet the community'
+        lead='Learn together.'
+        spacing='grouped'
+      />,
+    );
+
+    expect(screen.getByRole('heading', { level: 2 })).toHaveClass('mt-2');
+    expect(screen.getByText('Learn together.')).toHaveClass('mt-6', 'lg:mt-8');
+  });
+
   it('switches every line to white on blue', () => {
     render(
       <SectionHeader

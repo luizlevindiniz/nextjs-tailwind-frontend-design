@@ -33,6 +33,7 @@ src/
 ├── components/featured-course/ # FeaturedCourse (the highlighted course)
 ├── components/how-it-works/    # HowItWorks (the three numbered steps)
 ├── components/testimonial/     # Testimonial (learner quote and stats)
+├── components/people/          # People (community copy and photo collage)
 ├── components/ui/              # primitives: Container, Button, ButtonLink, ArrowLink, SectionHeader
 ├── data/                       # typed content modules (navigation.ts, categories.ts, steps.ts, stats.ts)
 ├── lib/site.ts                 # site name, title, description and URL (see below)
@@ -67,6 +68,7 @@ See the [mock data ADR](adr/202611131621-serve-content-from-typed-local-mock-dat
 | Hero figures (24,000+ learners, 120+ courses, 4.9 rating)     | Static copy in `Hero.tsx`                                                                          | Counts and the average rating from the course catalogue's API        |
 | Featured course (title, instructor, lessons, duration, level) | Static copy in `FeaturedCourse.tsx`                                                                | The catalogue's "most popular this month" course from its API        |
 | Testimonial (quote, learner, role)                            | Static copy in `Testimonial.tsx`                                                                   | Reviews from the platform's API                                      |
+| People collage (10 learner and teacher photos)                | Static images in `src/assets/images/people/`, laid out in `People.tsx`                             | Member photos from the community's API                               |
 | Auth ("Log in", "Start learning")                             | Links only                                                                                         | An auth provider; out of scope                                       |
 | Navigation, category card and course link targets             | In-page anchors where a section exists, `#` otherwise                                              | Real routes                                                          |
 

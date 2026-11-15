@@ -9,6 +9,7 @@ interface SectionHeaderProps {
   lead?: ReactNode;
   align?: 'start' | 'center';
   tone?: 'light' | 'onBlue';
+  spacing?: 'even' | 'grouped';
   className?: string;
 }
 export function SectionHeader({
@@ -18,9 +19,11 @@ export function SectionHeader({
   lead,
   align = 'start',
   tone = 'light',
+  spacing = 'even',
   className,
 }: SectionHeaderProps) {
   const onBlue = tone === 'onBlue';
+  const grouped = spacing === 'grouped';
 
   return (
     <div
@@ -41,7 +44,8 @@ export function SectionHeader({
       <h2
         id={id}
         className={cn(
-          'mt-4 font-heading text-mobile-h3 lg:text-desktop-h3',
+          'font-heading text-mobile-h3 lg:text-desktop-h3',
+          grouped ? 'mt-2' : 'mt-4',
           onBlue ? 'text-text-white-primary' : 'text-text-primary',
         )}
       >
@@ -53,6 +57,7 @@ export function SectionHeader({
             onBlue
               ? 'mt-5 text-mobile-subtitle-2 text-text-white-primary lg:text-desktop-subtitle-2'
               : 'mt-4 text-mobile-subtitle-1 text-text-secondary lg:text-desktop-subtitle-1',
+            grouped && 'mt-6 lg:mt-8',
           )}
         >
           {lead}

@@ -1,9 +1,9 @@
-export type StepIcon = 'focus' | 'experience' | 'practice';
+export type StepIconName = 'focus' | 'experience' | 'practice';
 
 export interface Step {
   title: string;
   description: string;
-  icon: StepIcon;
+  icon: StepIconName;
 }
 
 export const steps: readonly Step[] = [

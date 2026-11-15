@@ -1,4 +1,4 @@
-import { type StepIcon as StepIconName, steps } from '@/data/steps';
+import { type StepIconName, steps } from '@/data/steps';
 
 import { Container } from '@/components/ui/Container';
 import { SectionHeader } from '@/components/ui/SectionHeader';

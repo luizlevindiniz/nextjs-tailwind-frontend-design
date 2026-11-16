@@ -47,7 +47,7 @@ export function HowItWorks() {
           title='Less browsing. More learning.'
           align='center'
         />
-        <ol className='mt-10 lg:mt-20 lg:grid lg:grid-cols-3 lg:gap-20 lg:py-7'>
+        <ol className='mt-10 md:mx-auto md:max-w-xl lg:mt-20 lg:grid lg:max-w-none lg:grid-cols-3 lg:gap-20 lg:py-7'>
           {steps.map(({ title, description, icon }, i) => (
             <li
               key={title}

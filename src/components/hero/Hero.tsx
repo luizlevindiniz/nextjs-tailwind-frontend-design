@@ -64,7 +64,7 @@ export function Hero() {
           </div>
         </div>
 
-        <div className='relative h-95 w-full max-w-90.5 lg:aspect-25/26 lg:h-auto lg:w-125 lg:max-w-none'>
+        <div className='relative h-95 w-full max-w-90.5 md:mx-auto lg:mx-0 lg:aspect-25/26 lg:h-auto lg:w-125 lg:max-w-none'>
           <div className='absolute top-6 -right-2.5 bottom-3.5 left-25 rounded-2xl bg-background-orange lg:-right-9.75 lg:bottom-7 lg:left-auto lg:w-22.25' />
           <div className='absolute bottom-3 -left-2.5 size-16 rounded-full bg-primary-blue-light lg:bottom-2.75 lg:-left-11.25 lg:size-26.5' />
           <div className='absolute inset-x-2 inset-y-0 overflow-hidden rounded-2xl bg-primary-blue-light lg:inset-x-0 lg:rounded-3xl'>

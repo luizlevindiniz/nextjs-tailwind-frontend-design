@@ -21,7 +21,7 @@ export function Contact() {
             lead='Have a question? We’re here to help. Whether you’re looking for the right course, learning with your team or interested in teaching with Luma, we’d love to hear from you.'
             leadSize='compact'
           />
-          <ul className='flex flex-col gap-4'>
+          <ul className='flex flex-col gap-4 md:grid md:grid-cols-2 lg:flex'>
             <li className='flex items-center gap-4 rounded-xl bg-background-light-yellow p-4 lg:p-5'>
               <span className='flex size-10 shrink-0 items-center justify-center rounded-lg bg-primary-blue-light text-primary-blue'>
                 <MessageIcon aria-hidden='true' className='size-6' />

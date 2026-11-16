@@ -18,7 +18,11 @@ import { navLinkClasses } from './navLinkStyles';
 // Tailwind's `lg` breakpoint.
 const DESKTOP_QUERY = '(min-width: 64rem)';
 
-export function MobileMenu({ className }: { className?: string }) {
+interface MobileMenuProps {
+  className?: string;
+}
+
+export function MobileMenu({ className }: MobileMenuProps) {
   const [open, setOpen] = useState(false);
   const rootRef = useRef<HTMLElement>(null);
   const toggleRef = useRef<HTMLButtonElement>(null);

@@ -2,14 +2,13 @@
 
 import { useEffect } from 'react';
 
-export default function Error({
-  error,
-  retry,
-}: {
+interface ErrorProps {
   // A Client Component can throw any value, not only an Error.
   error: unknown;
   retry: () => void;
-}) {
+}
+
+export default function Error({ error, retry }: ErrorProps) {
   useEffect(() => {
     // eslint-disable-next-line no-console
     console.error(error);

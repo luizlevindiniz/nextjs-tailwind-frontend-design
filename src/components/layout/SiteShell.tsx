@@ -6,7 +6,11 @@ import { buttonClasses } from '@/components/ui/buttonStyles';
 
 const MAIN_ID = 'main';
 
-export function SiteShell({ children }: { children: ReactNode }) {
+interface SiteShellProps {
+  children: ReactNode;
+}
+
+export function SiteShell({ children }: SiteShellProps) {
   return (
     <>
       <a

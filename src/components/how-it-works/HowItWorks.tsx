@@ -3,7 +3,11 @@ import { type StepIconName, steps } from '@/data/steps';
 import { Container } from '@/components/ui/Container';
 import { SectionHeader } from '@/components/ui/SectionHeader';
 
-function StepIcon({ icon }: { icon: StepIconName }) {
+interface StepIconProps {
+  icon: StepIconName;
+}
+
+function StepIcon({ icon }: StepIconProps) {
   switch (icon) {
     case 'focus':
       return (

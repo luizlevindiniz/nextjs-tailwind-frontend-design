@@ -67,9 +67,14 @@ Other results:
 
 Full page of the production build at the two design widths: desktop at 1280 px, mobile at 402 px.
 
+<details>
+<summary>Show the full-page screenshots</summary>
+
 | Desktop                                                                                           | Mobile                                                                                          |
 | ------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
 | <img src="docs/screenshots/desktop.webp" alt="The full landing page at 1280 px wide" width="560"> | <img src="docs/screenshots/mobile.webp" alt="The full landing page at 402 px wide" width="200"> |
+
+</details>
 
 ## Key decisions
 

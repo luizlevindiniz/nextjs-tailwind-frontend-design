@@ -13,6 +13,9 @@ import { CloseIcon, MenuIcon } from '@/assets/icons';
 
 import { navLinkClasses } from './navLinkStyles';
 
+// Tailwind's `lg` breakpoint.
+const DESKTOP_QUERY = '(min-width: 64rem)';
+
 export function MobileMenu({ className }: { className?: string }) {
   const [open, setOpen] = useState(false);
   const rootRef = useRef<HTMLElement>(null);
@@ -31,11 +34,19 @@ export function MobileMenu({ className }: { className?: string }) {
       if (!rootRef.current?.contains(event.target as Node)) setOpen(false);
     };
 
+    // The menu is hidden from `lg` up; close it there so it doesn't reopen on the way back.
+    const desktop = window.matchMedia(DESKTOP_QUERY);
+    const onDesktop = (event: MediaQueryListEvent) => {
+      if (event.matches) setOpen(false);
+    };
+
     document.addEventListener('keydown', onKeyDown);
     document.addEventListener('pointerdown', onPointerDown);
+    desktop.addEventListener('change', onDesktop);
     return () => {
       document.removeEventListener('keydown', onKeyDown);
       document.removeEventListener('pointerdown', onPointerDown);
+      desktop.removeEventListener('change', onDesktop);
     };
   }, [open]);
 

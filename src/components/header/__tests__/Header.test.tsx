@@ -1,7 +1,27 @@
-import { render, screen, within } from '@testing-library/react';
+import { act, render, screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import { Header } from '@/components/header/Header';
+
+let widenToDesktop: () => void;
+
+beforeEach(() => {
+  const listeners = new Set<(event: { matches: boolean }) => void>();
+  widenToDesktop = () =>
+    act(() => listeners.forEach((listener) => listener({ matches: true })));
+  window.matchMedia = jest.fn().mockImplementation((query: string) => ({
+    matches: false,
+    media: query,
+    addEventListener: (
+      _: string,
+      listener: (e: { matches: boolean }) => void,
+    ) => listeners.add(listener),
+    removeEventListener: (
+      _: string,
+      listener: (e: { matches: boolean }) => void,
+    ) => listeners.delete(listener),
+  }));
+});
 
 const renderHeader = () => {
   const user = userEvent.setup();
@@ -111,6 +131,15 @@ describe('Header', () => {
       await user.click(panel());
 
       expect(toggle).toHaveAttribute('aria-expanded', 'true');
+    });
+
+    it('closes when the window widens to the desktop layout', async () => {
+      const { user, toggle } = renderHeader();
+      await user.click(toggle);
+
+      widenToDesktop();
+
+      expect(toggle).toHaveAttribute('aria-expanded', 'false');
     });
 
     it('closes when a link is followed', async () => {

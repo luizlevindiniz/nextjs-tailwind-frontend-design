@@ -45,12 +45,16 @@ One page with ten parts: header with a mobile menu, hero, categories, featured c
   - integration tests for the menu and the contact form;
   - source guards for motion and forced colors.
 
-Last audit (production build, Lighthouse 12.8):
+Last audit (production build, Lighthouse 13.6):
 
 |         | Performance | Accessibility | Best practices | SEO |
 | ------- | ----------- | ------------- | -------------- | --- |
 | Mobile  | 95          | 100           | 100            | 100 |
 | Desktop | 100         | 100           | 100            | 100 |
+
+![Lighthouse scores on mobile: performance 95, accessibility 100, best practices 100, SEO 100](docs/screenshots/lighthouse-mobile.webp)
+
+![Lighthouse scores on desktop: 100 in performance, accessibility, best practices and SEO](docs/screenshots/lighthouse-desktop.webp)
 
 Other results:
 
@@ -58,6 +62,14 @@ Other results:
 - **Mobile LCP:** 1.8 s in a Chrome trace on Slow 4G with a 4× CPU slowdown.
 - **Page weight:** about 300–380 KB transferred, including every lazy image.
 - **axe-core** (WCAG 2.2 AA): 0 violations, including with the menu open and the form in its error and success states.
+
+## Screenshots
+
+Full page of the production build at the two design widths: desktop at 1280 px, mobile at 402 px.
+
+| Desktop                                                                                           | Mobile                                                                                          |
+| ------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
+| <img src="docs/screenshots/desktop.webp" alt="The full landing page at 1280 px wide" width="560"> | <img src="docs/screenshots/mobile.webp" alt="The full landing page at 402 px wide" width="200"> |
 
 ## Key decisions
 

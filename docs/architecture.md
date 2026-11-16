@@ -26,7 +26,7 @@ src/
 ├── assets/images/              # JPEG masters for next/image (hero, course, people/, avatars/)
 ├── assets/fonts/               # static TTFs read only by the generated share image
 ├── components/layout/          # SiteShell: skip link, header, main, footer
-├── components/header/          # Header, MobileMenu (the client leaf), shared nav link classes
+├── components/header/          # Header, MobileMenu (the client leaf), nav link classes
 ├── components/footer/          # Footer (brand, link columns, copyright)
 ├── components/hero/            # Hero (the page's h1 and LCP image)
 ├── components/categories/      # Categories (course category cards)
@@ -36,7 +36,7 @@ src/
 ├── components/people/          # People (community copy and photo collage)
 ├── components/contact/         # Contact (details and form), ContactForm (the client leaf)
 ├── components/final-cta/       # FinalCta (closing call to action)
-├── components/ui/              # primitives: Container, Button, ButtonLink, ArrowLink, SectionHeader
+├── components/ui/              # primitives: Container, Button, ButtonLink, ArrowLink, AvatarStack, SectionHeader, link classes
 ├── data/                       # typed content modules (navigation.ts, categories.ts, steps.ts, stats.ts, footer.ts)
 ├── lib/contact.ts              # contact form validation and the simulated submit
 ├── lib/site.ts                 # site name, title, description and URL (see below)

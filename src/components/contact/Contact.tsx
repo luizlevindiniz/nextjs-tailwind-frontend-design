@@ -1,9 +1,33 @@
+import type { ReactNode } from 'react';
+
 import { Container } from '@/components/ui/Container';
+import { linkClasses } from '@/components/ui/linkStyles';
 import { SectionHeader } from '@/components/ui/SectionHeader';
 
 import { ClockIcon, MessageIcon } from '@/assets/icons';
 
 import { ContactForm } from './ContactForm';
+
+interface InfoCardProps {
+  icon: ReactNode;
+  label: string;
+  valueClassName?: string;
+  children: ReactNode;
+}
+
+function InfoCard({ icon, label, valueClassName, children }: InfoCardProps) {
+  return (
+    <li className='flex items-center gap-4 rounded-xl bg-background-light-yellow p-4 lg:p-5'>
+      <span className='flex size-10 shrink-0 items-center justify-center rounded-lg bg-primary-blue-light text-primary-blue'>
+        {icon}
+      </span>
+      <div className='flex flex-col gap-0.5 text-mobile-body-1 lg:gap-1 lg:text-desktop-body-1'>
+        <p className='text-text-primary'>{label}</p>
+        <p className={valueClassName}>{children}</p>
+      </div>
+    </li>
+  );
+}
 
 export function Contact() {
   return (
@@ -22,33 +46,24 @@ export function Contact() {
             leadSize='compact'
           />
           <ul className='flex flex-col gap-4 md:grid md:grid-cols-2 lg:flex'>
-            <li className='flex items-center gap-4 rounded-xl bg-background-light-yellow p-4 lg:p-5'>
-              <span className='flex size-10 shrink-0 items-center justify-center rounded-lg bg-primary-blue-light text-primary-blue'>
-                <MessageIcon aria-hidden='true' className='size-6' />
-              </span>
-              <div className='flex flex-col gap-0.5 text-mobile-body-1 lg:gap-1 lg:text-desktop-body-1'>
-                <p className='text-text-primary'>Email</p>
-                <p>
-                  <a
-                    href='mailto:contact@luma.com'
-                    className='text-primary-blue underline-offset-4 outline-primary-blue hover:underline focus-visible:outline-2 focus-visible:outline-offset-2'
-                  >
-                    contact@luma.com
-                  </a>
-                </p>
-              </div>
-            </li>
-            <li className='flex items-center gap-4 rounded-xl bg-background-light-yellow p-4 lg:p-5'>
-              <span className='flex size-10 shrink-0 items-center justify-center rounded-lg bg-primary-blue-light text-primary-blue'>
-                <ClockIcon aria-hidden='true' className='size-5' />
-              </span>
-              <div className='flex flex-col gap-0.5 text-mobile-body-1 lg:gap-1 lg:text-desktop-body-1'>
-                <p className='text-text-primary'>Response Time</p>
-                <p className='text-text-secondary'>
-                  Up to 24 hours on business days
-                </p>
-              </div>
-            </li>
+            <InfoCard
+              icon={<MessageIcon aria-hidden='true' className='size-6' />}
+              label='Email'
+            >
+              <a
+                href='mailto:contact@luma.com'
+                className={linkClasses('light', 'text-primary-blue')}
+              >
+                contact@luma.com
+              </a>
+            </InfoCard>
+            <InfoCard
+              icon={<ClockIcon aria-hidden='true' className='size-5' />}
+              label='Response Time'
+              valueClassName='text-text-secondary'
+            >
+              Up to 24 hours on business days
+            </InfoCard>
           </ul>
         </div>
 

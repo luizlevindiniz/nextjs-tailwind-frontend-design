@@ -1,7 +1,6 @@
-import Image from 'next/image';
-
 import { cn } from '@/lib/utils';
 
+import { AvatarStack } from '@/components/ui/AvatarStack';
 import { ButtonLink } from '@/components/ui/ButtonLink';
 import { Container } from '@/components/ui/Container';
 
@@ -55,18 +54,11 @@ export function FinalCta() {
 
       <Container className='relative'>
         <div className='mx-auto flex max-w-164 flex-col items-center text-center'>
-          <div className='flex -space-x-2'>
-            {avatars.map((avatar) => (
-              <Image
-                key={avatar.src}
-                src={avatar}
-                alt=''
-                width={40}
-                height={40}
-                className='size-10 rounded-full border-2 border-secondary-yellow bg-primary-blue-light object-cover'
-              />
-            ))}
-          </div>
+          <AvatarStack
+            avatars={avatars}
+            size={40}
+            borderClassName='border-secondary-yellow'
+          />
           <h2
             id='get-started-title'
             className='mt-8 font-heading text-mobile-h2 lg:text-desktop-h2'

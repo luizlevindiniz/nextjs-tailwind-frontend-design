@@ -1,6 +1,7 @@
 import { footerNav } from '@/data/footer';
 
 import { Container } from '@/components/ui/Container';
+import { linkClasses } from '@/components/ui/linkStyles';
 
 import { LogoIcon } from '@/assets/icons';
 
@@ -41,7 +42,10 @@ export function Footer() {
                       <li key={label}>
                         <a
                           href={href}
-                          className='block w-fit rounded-sm text-mobile-body-1 text-text-white-tertiary underline-offset-4 outline-text-white-primary hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 lg:text-desktop-body-1'
+                          className={linkClasses(
+                            'dark',
+                            'block w-fit rounded-sm text-mobile-body-1 text-text-white-tertiary lg:text-desktop-body-1',
+                          )}
                         >
                           {label}
                         </a>

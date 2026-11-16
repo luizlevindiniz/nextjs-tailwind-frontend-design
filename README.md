@@ -40,7 +40,7 @@ One page with ten parts: header with a mobile menu, hero, categories, featured c
 - **Fonts and metadata.** Fonts come through `next/font`. Metadata uses the App Router API: an Open Graph image generated at build time, a favicon, a sitemap and robots.txt.
 - **Accessibility.** The page has landmarks, a skip link, one `h1`, ordered headings and a keyboard-operable menu (Esc closes it and focus returns to the toggle). Focus rings are visible, and decorative images and SVGs are hidden from assistive tech. Buttons and fields stay visible in Windows high-contrast mode.
 - **Motion.** The three transitions on the page run only under `motion-safe:`. A test fails if motion is added without that guard.
-- **Tests.** 243 tests, written test-first where there's behaviour:
+- **Tests.** 248 tests, written test-first where there's behaviour:
   - unit tests for the components;
   - integration tests for the menu and the contact form;
   - source guards for motion and forced colors.

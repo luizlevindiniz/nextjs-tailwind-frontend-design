@@ -2,6 +2,7 @@ import Image from 'next/image';
 
 import { cn } from '@/lib/utils';
 
+import { AvatarStack } from '@/components/ui/AvatarStack';
 import { ButtonLink } from '@/components/ui/ButtonLink';
 import { Container } from '@/components/ui/Container';
 
@@ -45,18 +46,11 @@ export function Hero() {
             </ButtonLink>
           </div>
           <div className='mt-8 flex max-w-90.5 items-center justify-center gap-3 md:max-w-none md:justify-start'>
-            <div className='flex -space-x-2'>
-              {avatars.map((avatar) => (
-                <Image
-                  key={avatar.src}
-                  src={avatar}
-                  alt=''
-                  width={32}
-                  height={32}
-                  className='size-8 rounded-full border-2 border-background-light-yellow bg-primary-blue-light object-cover'
-                />
-              ))}
-            </div>
+            <AvatarStack
+              avatars={avatars}
+              size={32}
+              borderClassName='border-background-light-yellow'
+            />
             <p className='text-mobile-body-1 lg:text-desktop-body-1'>
               <strong className='font-bold'>Trusted by 24,000+</strong>{' '}
               <span className='text-text-secondary'>learners</span>

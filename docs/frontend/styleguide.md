@@ -132,15 +132,16 @@ These are the values to build the primitives and sections from.
 
 The patterns above are built once in `src/components/ui/`. Sections compose them instead of repeating the classes.
 
-| Component       | Renders                   | Props (besides the native element's)                                                                                                                                                               |
-| --------------- | ------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `Container`     | `<div>`                   | — (1120 px column with 20 / 80 px gutters, outside the 1120 px)                                                                                                                                    |
-| `Button`        | `<button type='button'>`  | `variant`: `primary` (default), `secondary`, `onBlue`                                                                                                                                              |
-| `ButtonLink`    | `<a>`                     | `href`, `variant` (same as `Button`)                                                                                                                                                               |
-| `ArrowLink`     | `<a>` + hidden arrow icon | `href`, `tone`: `light` (default), `onBlue`                                                                                                                                                        |
-| `SectionHeader` | overline, `<h2>`, lead    | `id` (for the section's `aria-labelledby`), `overline`, `title`, `lead`, `align`: `start` / `center`, `tone`: `light` / `onBlue`, `spacing`: `even` / `grouped`, `leadSize`: `default` / `compact` |
+| Component       | Renders                                   | Props (besides the native element's)                                                                                                                                                               |
+| --------------- | ----------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `Container`     | `<div>`                                   | — (1120 px column with 20 / 80 px gutters, outside the 1120 px)                                                                                                                                    |
+| `Button`        | `<button type='button'>`                  | `variant`: `primary` (default), `secondary`, `onBlue`                                                                                                                                              |
+| `ButtonLink`    | `<a>`                                     | `href`, `variant` (same as `Button`)                                                                                                                                                               |
+| `ArrowLink`     | `<a>` + hidden arrow icon                 | `href`, `tone`: `light` (default), `onBlue`                                                                                                                                                        |
+| `AvatarStack`   | overlapping decorative avatars (`alt=""`) | not a native element: `avatars`, `size`: `32` / `40`, `borderClassName` (the color of the background behind it)                                                                                    |
+| `SectionHeader` | overline, `<h2>`, lead                    | `id` (for the section's `aria-labelledby`), `overline`, `title`, `lead`, `align`: `start` / `center`, `tone`: `light` / `onBlue`, `spacing`: `even` / `grouped`, `leadSize`: `default` / `compact` |
 
-Every primitive takes a `className`, merged last with `cn()`, for section-specific spacing or width. The Hero builds its own `<h1>` block: its type and layout differ from a section header.
+Every primitive except `AvatarStack` takes a `className`, merged last with `cn()`, for section-specific spacing or width. Text links share `linkClasses(tone, className)` (`linkStyles.ts`): underline on hover and a 2 px focus outline, `primary-blue` on light backgrounds and white on dark ones. The header nav, `ArrowLink`, the contact email and the footer links use it. The Hero builds its own `<h1>` block: its type and layout differ from a section header.
 
 Icons are listed in [styling.md](styling.md#icons).
 

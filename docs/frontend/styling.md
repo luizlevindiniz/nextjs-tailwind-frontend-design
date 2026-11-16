@@ -85,8 +85,8 @@ import heroLearner from '@/assets/images/hero-learner.jpg';
   - Exception: the People collage photos leave `auto` out. Below about 370 px their columns shrink the box narrower than the photo is drawn (`object-cover`, fixed height), so `auto` would under-fetch. Their `sizes` gives each frame's width (`(min-width: 1280px) 138px, 94px`).
 - Only the LCP image (the hero photo) loads early, with `loading='eager'` and `fetchPriority='high'`. Don't use `preload`: it adds a head preload but no fetch priority, and the image is already in the server HTML. `priority` is deprecated in Next 16.
 - Fixed-size images (avatars) pass `width` and `height` and no `sizes`. `next/image` then generates 1x and 2x.
-- A master is the Figma source, resized only when it's bigger than needed: max(desktop drawn width × 2, mobile drawn width × 3). Fixed-size images stop at 2×. Resized masters are re-encoded with sharp at JPEG quality 90.
-- **`sizes` counts the frame, not the drawn photo.** With `object-cover`, a photo wider than its frame is drawn wider than the frame, and the browser under-fetches. So the collage masters are pre-cropped, centered, to the shape their frames show: the source's aspect ratio clamped between the narrowest and widest of its frames (desktop and mobile). If the width `next/image` serves for a frame would still fall short of the frame's target density, crop to the narrowest frame instead (`student-campus`). The course photo is cropped the same way, to the 13:10 of its frames. Re-crop a master when its frame's shape changes.
+- A master is the Figma source, resized only when it's bigger than needed: max(desktop drawn width × 2, mobile drawn width × 3). For the cropped collage photos the drawn width can be up to 12.5% wider than the frame, so their masters are sized from it (up to 302 w). Fixed-size images stop at 2×. Resized masters are re-encoded with sharp at JPEG quality 90.
+- **`sizes` counts the frame, not the drawn photo.** With `object-cover`, a photo wider than its frame is drawn wider than the frame, and the browser under-fetches. So the collage masters are pre-cropped, centered, to the shape their frames show: the source's aspect ratio clamped between the narrowest and widest of its frames (desktop and mobile). If the width `next/image` serves for a frame would still fall short of the frame's target density, crop to the narrowest frame instead (`student-campus`). The course photo is cropped the same way, to the 13:10 of its frames (decided after the images ADR, which still calls it uncropped). No image uses a blur placeholder. Re-crop a master when its frame's shape changes.
 
 | Master                       | Size                        | Where                      | Rendered (desktop / mobile) |
 | ---------------------------- | --------------------------- | -------------------------- | --------------------------- |
@@ -104,7 +104,7 @@ Plus Jakarta Sans (headings) and Inter (body) load through `next/font/google` in
 
 - Both are variable fonts, so `fonts.ts` passes no `weight` and each family loads its full weight range from one file per subset. The design uses Jakarta 600/700/800 and Inter 400/600/700 (the type tokens set them). Check a new weight against the styleguide before using it.
 - Only the Latin files are preloaded (about 48 KB Inter and 27 KB Jakarta). The other subsets load only if a page uses their characters.
-- The font tokens are declared with `@theme inline`, so they resolve on the element, and the stack falls back to `ui-sans-serif` before the fonts load.
+- The font tokens are declared with `@theme inline`, so they resolve on the element. Before a font loads, next/font's size-adjusted fallback face is used; `ui-sans-serif` applies only where the font variable isn't set.
 - Body text gets Inter from the `body` base style. Headings, quotes and stats need `font-heading`.
 
 ## Motion

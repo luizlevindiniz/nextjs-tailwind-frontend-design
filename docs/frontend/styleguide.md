@@ -30,7 +30,7 @@ Token names follow the Figma variable names, with typos fixed (`backgrounnd-*` b
 
 Utilities take the token name after the property: `bg-primary-blue`, `text-text-secondary`, `border-line-1`. The doubled `text-text-*` is the price of keeping Figma's names.
 
-Three tokens aren't Figma variables. `accent-yellow-dark` is a color the design uses without a variable. `line-input` is an accessibility deviation (see below). `error` covers a state the design doesn't draw: the palette has no error color, and `primary-orange` is 2.6:1 on white, so `error` is a red at 5.5:1 on white and 5.2:1 on the field. Each is named for its role instead of written as a raw hex value.
+Three tokens aren't Figma variables. `accent-yellow-dark` is a color the design uses without a variable. `line-input` is an accessibility deviation (see below). `error` covers a state the design doesn't draw: the palette has no error color, and `primary-orange` is 2.7:1 on white, so `error` is a red at 5.5:1 on white and 5.2:1 on the field. Each is named for its role instead of written as a raw hex value.
 
 ## Typography
 
@@ -72,14 +72,15 @@ Bold variants (button labels, form labels, names) aren't separate Figma styles: 
 
 Tailwind's default radius scale matches the design:
 
-| Utility        | Value | Used for                                               |
-| -------------- | ----- | ------------------------------------------------------ |
-| `rounded-md`   | 6 px  | Number badges, "Featured course" tag, step icon        |
-| `rounded-lg`   | 8 px  | Buttons, inputs, meta chips, icon tiles                |
-| `rounded-xl`   | 12 px | Floating badges, icon tiles                            |
-| `rounded-2xl`  | 16 px | Cards, form container, course image, mobile hero image |
-| `rounded-3xl`  | 24 px | Desktop hero image                                     |
-| `rounded-full` | —     | Avatars, circles                                       |
+| Utility        | Value | Used for                                                              |
+| -------------- | ----- | --------------------------------------------------------------------- |
+| `rounded-sm`   | 4 px  | People collage photos; focus shape of nav links, logo and menu toggle |
+| `rounded-md`   | 6 px  | Number badges, "Featured course" tag, step icon                       |
+| `rounded-lg`   | 8 px  | Buttons, inputs, meta chips, icon tiles                               |
+| `rounded-xl`   | 12 px | Floating badges, icon tiles                                           |
+| `rounded-2xl`  | 16 px | Cards, form container, course image, mobile hero image                |
+| `rounded-3xl`  | 24 px | Desktop hero image                                                    |
+| `rounded-full` | —     | Avatars, circles                                                      |
 
 ## Shadows
 
@@ -168,7 +169,7 @@ Icons are listed in [styling.md](styling.md#icons).
 - **Copy column:** overline (`primary-blue`), H1 16 px below, subtitle 1 lead in `text-secondary` 24 px below (480 px max), the two buttons 32 px below ("Explore courses" → `#categories`, "See how it works" → `#how-it-works`), then 32 px below the trust row: three overlapping 32 px learner avatars (`-space-x-2`, 2 px `background-light-yellow` border, `alt=""`) and "**Trusted by 24,000+** learners" in body 1.
 - **Image block:** the photo (`rounded-2xl`, `rounded-3xl` on desktop, `object-cover`) sits on a `background-orange` block offset to the right and a `primary-blue-light` circle at the bottom left. Two floating badges overlap it: "120+ expert-led courses" (top left, the number in a `primary-blue-light` chip) and "4.9 avg rating" (bottom right, five `secondary-yellow` stars, `aria-hidden` because the text carries the rating).
 - **Mobile (below `lg`):** the image block comes first visually (`flex-col-reverse`, so the DOM and reading order still start with the heading). The image block keeps the mobile frame's 362 px width at every width up to `lg` (the photo is 346 × 380), so the composition doesn't stretch on tablets. Below `md` the buttons stack full width and the trust row is centered, both within 362 px. From `md` the image block is centered horizontally while the copy column stays left-aligned, so the top of the section isn't half empty on tablets; the buttons sit in a row at their natural width and the trust row aligns left, as on desktop.
-- **Desktop (`lg` and up):** two columns, 60 px apart, top-aligned. The copy column keeps at least 448 px (`min-w-md`); the image takes 500 px and the 500:520 shape at 1280, and shrinks with the viewport below that (about 356 px at 1024), with the decorations and badges anchored to its edges. The decorations and the rating badge reach up to 58 px past the image into the 80 px gutter.
+- **Desktop (`lg` and up):** two columns, 60 px apart, top-aligned. The copy column keeps at least 448 px (`min-w-md`); the image takes 500 px and the 500:520 shape at 1280, and shrinks with the viewport below that (about 356 px at 1024), with the decorations and badges anchored to its edges. The decorations and the rating badge reach up to 57 px past the image into the 80 px gutter.
 
 ### Categories
 
@@ -221,8 +222,8 @@ Icons are listed in [styling.md](styling.md#icons).
 
 `src/components/contact/Contact.tsx`, white background, `py-15 lg:py-25`, `id="contact"`. The form is the client leaf `ContactForm.tsx`. The mobile frame's form copy is Portuguese; the build uses the desktop's English copy at every width.
 
-- **Info column (480 px max):** `SectionHeader` (overline "Contact", "Get in touch", lead in body 1 on mobile and subtitle 1 from `lg`), then a list (`<ul>`) of two cards 32 px below (40 px from `lg`), 16 px apart: `bg-background-light-yellow rounded-xl`, padding 16 px (20 px from `lg`), a 40 px `primary-blue-light` tile (`rounded-lg`) holding the message icon (24 px) or the clock (20 px) in `primary-blue`, then the label in `text-primary` and the value 2 px below (4 px from `lg`). The email is a `mailto:` link in `primary-blue`; the response time is `text-secondary` (Figma's `text-tertiary` is 4.45:1 on the card).
-- **Form (540 px max):** the form container, holding the `h3` "Contact us" (H5 at both sizes) and its line in body 1 `text-secondary` 8 px below, then the three fields 24 px below (20 px apart), then the full-width primary button 24 px below. The form is named by its `h3`.
+- **Info column (480 px max from `lg`):** `SectionHeader` (overline "Contact", "Get in touch", lead in body 1 on mobile and subtitle 1 from `lg`), then a list (`<ul>`) of two cards 32 px below (40 px from `lg`), 16 px apart: `bg-background-light-yellow rounded-xl`, padding 16 px (20 px from `lg`), a 40 px `primary-blue-light` tile (`rounded-lg`) holding the message icon (24 px) or the clock (20 px) in `primary-blue`, then the label in `text-primary` and the value 2 px below (4 px from `lg`). The email is a `mailto:` link in `primary-blue`; the response time is `text-secondary` (Figma's `text-tertiary` is 4.45:1 on the card).
+- **Form (540 px max from `lg`):** the form container, holding the `h3` "Contact us" (H5 at both sizes) and its line in body 1 `text-secondary` 8 px below, then the three fields 24 px below (20 px apart), then the full-width primary button 24 px below. The form is named by its `h3`.
 - **States (not in Figma):** no errors until the first submit; then every invalid field is flagged and the first one focused, and each field re-validates as it changes. While sending, the button reads "Sending…" and is `aria-disabled`, and the fields are read-only so nothing typed is lost when the form clears. Success shows a message on `primary-blue-light` above the button, inside an always-rendered `role="status"` region (a live region must be in the accessibility tree before its content changes), and clears the form; failure shows a `role="alert"` message in `error` with an `error` border and keeps the values.
 - **Layout:** stacked below `lg` (info, then the form 40 px below); from `md` the two info cards sit side by side in two equal columns. From `lg` the two columns sit side by side, vertically centered, at least 40 px apart; both shrink below 1280.
 

@@ -56,10 +56,15 @@ Tests live in a `__tests__/` folder next to the code they test, named `<subject>
 import { render, screen } from '@testing-library/react';
 
 import HomePage from '@/app/page';
+import { SiteShell } from '@/components/layout/SiteShell';
 
 describe('HomePage', () => {
   it('renders a main landmark with a level-1 heading', () => {
-    render(<HomePage />);
+    render(
+      <SiteShell>
+        <HomePage />
+      </SiteShell>,
+    );
 
     expect(screen.getByRole('main')).toBeInTheDocument();
     expect(screen.getByRole('heading', { level: 1 })).toBeInTheDocument();

@@ -53,7 +53,7 @@ scripts/adr.sh                  # ADR check (pnpm adr:check)
 ## Rendering model
 
 - The only route, `/`, is prerendered at build time (`○ Static` in `next build`). Nothing uses request-time data.
-- Sections are Server Components and send no JavaScript. Only interactive leaves (the mobile menu toggle, the contact form) are Client Components, marked with `'use client'` at the smallest boundary possible.
+- Sections are Server Components and send no JavaScript. Only interactive leaves (the mobile menu, the contact form) and the route error boundary, which Next requires to be one, are Client Components, marked with `'use client'` at the smallest boundary possible.
 - Metadata comes from the root layout's `metadata` export (title template, description, canonical, Open Graph, Twitter card). The sitemap, robots, icons and Open Graph image are App Router metadata files, all prerendered ([ADR](adr/202611131621-generate-sitemap-and-robots-with-app-router-metadata-files.md)). Next.js reuses the Open Graph image for `twitter:image`.
 - The site URL is one constant, `siteConfig.url` in `src/lib/site.ts`: `NEXT_PUBLIC_SITE_URL` if set, else `https://` + Vercel's `VERCEL_PROJECT_PRODUCTION_URL`, else `http://localhost:3000`. See `.env.example`.
 

@@ -40,7 +40,7 @@ One page with ten parts: header with a mobile menu, hero, categories, featured c
 - **Fonts and metadata.** Fonts come through `next/font`. Metadata uses the App Router API: an Open Graph image generated at build time, a favicon, a sitemap and robots.txt.
 - **Accessibility.** The page has landmarks, a skip link, one `h1`, ordered headings and a keyboard-operable menu (Esc closes it and focus returns to the toggle). Focus rings are visible, and decorative images and SVGs are hidden from assistive tech. Buttons and fields stay visible in Windows high-contrast mode.
 - **Motion.** The three transitions on the page run only under `motion-safe:`. A test fails if motion is added without that guard.
-- **Tests.** 264 tests, written test-first where there's behaviour:
+- **Tests.** 275 tests, written test-first where there's behaviour:
   - unit tests for the components;
   - integration tests for the menu and the contact form;
   - source guards for motion and forced colors.
@@ -97,7 +97,7 @@ The design leaves some things open and gets some things wrong, so I made a call 
 
 - **Placeholder links.** Links with no matching section go to `#`. Log in, Start learning and Join Luma have no auth behind them.
 - **Simulated contact form.** It sends nothing. The data is mocked, and [architecture.md](docs/architecture.md#what-is-mocked) lists what each mock would become.
-- **Image resolution.** The hero and featured course source images are under 2× their desktop size, so they're slightly soft on high-density desktop screens. Fixed-size images (avatars, the collage) get at most 2× on 3× phones, which is a `next/image` limit.
+- **Image resolution.** The hero and featured course source images are under 2× their desktop size, so they're slightly soft on high-density desktop screens. Fixed-size images (the avatars) get at most 2× on 3× phones, which is a `next/image` limit.
 - **Unused JavaScript.** Lighthouse flags about 50 KB of unused JS and 13 KB of polyfills inside Next.js's own framework chunks. Neither can be configured from the app.
 - **Not checked on real devices.** Testing used Chrome on desktop with mobile emulation, plus Lighthouse and axe. There was no real iOS, Safari or screen-reader pass.
 - **Small offsets from Figma.** Some sections are 1–12 px off in height: Figma's own text overflows its frames, and some mobile/desktop differences were evened out. The styleguide lists each case.

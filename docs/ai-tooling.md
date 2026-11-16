@@ -12,6 +12,7 @@ This project is built with [Claude Code](https://claude.com/claude-code) as a pa
 | ------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
 | Figma MCP           | Reads the design: frame structure, design variables (colors, type styles), section screenshots and code-oriented design context |
 | Chrome DevTools MCP | Runs the page in Chrome: responsive checks, console and network, accessibility tree, Lighthouse and performance traces          |
+| Playwright MCP      | Fallback browser driver when Chrome DevTools can't start: measurements, network and screenshots in real Chrome                  |
 | Claude in Chrome    | Drives the user's browser to click through interactions (menu, form) as a user would                                            |
 | context7            | Fetches current Next.js and Tailwind CSS v4 documentation on demand, so APIs aren't recalled from memory                        |
 

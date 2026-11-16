@@ -1,8 +1,9 @@
 import clsx, { ClassValue } from 'clsx';
 import { extendTailwindMerge } from 'tailwind-merge';
 
-// Without this list, tailwind-merge reads `text-mobile-h3` as a text color and
-// drops it when `text-text-primary` follows.
+// Without these lists, tailwind-merge reads custom tokens as colors:
+// `text-mobile-h3` is dropped when `text-text-primary` follows, and
+// `shadow-card` when `shadow-primary-blue` follows.
 const typeStyles = [
   'h1',
   'h2',
@@ -24,6 +25,8 @@ const twMerge = extendTailwindMerge({
         ),
         'caption',
       ],
+      shadow: ['floating', 'card', 'dark-m'],
+      container: ['content'],
     },
   },
 });

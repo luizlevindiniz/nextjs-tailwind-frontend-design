@@ -43,7 +43,7 @@ The design has a 402 px mobile frame and a 1280 px desktop frame, with no tablet
 
 Class order is not a style choice: `prettier-plugin-tailwindcss` sorts classes on format.
 
-`cn()` uses a tailwind-merge instance that knows the type tokens. Out of the box, tailwind-merge reads `text-mobile-h3` as a text color and drops it when a color such as `text-text-primary` follows. A new `--text-*` token must be added to the list in `src/lib/utils.ts`; `src/lib/__tests__/utils.test.ts` reads `globals.css` and fails if one is missing.
+`cn()` uses a tailwind-merge instance that knows the type, shadow and container tokens. Out of the box, tailwind-merge reads them as colors: it drops `text-mobile-h3` when a color such as `text-text-primary` follows, and `shadow-card` when `shadow-primary-blue` follows. A new `--text-*`, `--shadow-*` or `--container-*` token must be added to the lists in `src/lib/utils.ts`; `src/lib/__tests__/utils.test.ts` reads `globals.css` and fails if one is missing.
 
 ## Icons
 

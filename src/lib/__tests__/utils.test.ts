@@ -28,6 +28,29 @@ describe('cn', () => {
     },
   );
 
+  it.each(tokens('shadow'))(
+    'keeps the shadow token shadow-%s next to a shadow color',
+    (name) => {
+      expect(cn(`shadow-${name}`, 'shadow-primary-blue')).toBe(
+        `shadow-${name} shadow-primary-blue`,
+      );
+    },
+  );
+
+  it.each(tokens('shadow'))(
+    'lets shadow-none replace the shadow token shadow-%s',
+    (name) => {
+      expect(cn(`shadow-${name}`, 'shadow-none')).toBe('shadow-none');
+    },
+  );
+
+  it.each(tokens('container'))(
+    'lets max-w-none replace the width token max-w-%s',
+    (name) => {
+      expect(cn(`max-w-${name}`, 'max-w-none')).toBe('max-w-none');
+    },
+  );
+
   it('lets a later type token replace an earlier one', () => {
     expect(cn('text-mobile-h1', 'text-mobile-h3')).toBe('text-mobile-h3');
   });

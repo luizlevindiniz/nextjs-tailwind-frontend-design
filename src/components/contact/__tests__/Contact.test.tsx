@@ -37,7 +37,7 @@ afterEach(() => {
 });
 
 describe('Contact', () => {
-  it('is a section named by its heading, with the contact details', () => {
+  it('is a section named by its heading, with a mailto link', () => {
     render(<Contact />);
 
     const heading = screen.getByRole('heading', {
@@ -50,9 +50,6 @@ describe('Contact', () => {
     expect(
       screen.getByRole('link', { name: 'contact@luma.com' }),
     ).toHaveAttribute('href', 'mailto:contact@luma.com');
-    expect(
-      screen.getByText('Up to 24 hours on business days'),
-    ).toBeInTheDocument();
   });
 
   it('lists the contact details', () => {
@@ -111,6 +108,17 @@ describe('Contact', () => {
         'Tell us how we can help.',
       );
       expect(field('Full name')).toHaveFocus();
+    });
+
+    it('focuses the first invalid field in form order', async () => {
+      const { user, field, submit } = renderContact();
+
+      await user.type(field('Full name'), 'Ada Lovelace');
+      await user.type(field('Email'), 'ada');
+      await user.click(submit());
+
+      expect(field('Full name')).not.toHaveAttribute('aria-invalid', 'true');
+      expect(field('Email')).toHaveFocus();
     });
 
     it('after a failed submit, re-validates each field as it changes', async () => {
@@ -189,6 +197,39 @@ describe('Contact', () => {
       );
       expect(field('Email')).toHaveValue(FAILING_EMAIL);
       expect(field('Full name')).toHaveValue('Ada Lovelace');
+      expect(screen.getByRole('status')).toBeEmptyDOMElement();
+    });
+
+    it('sends on a retry after a failure and drops the error', async () => {
+      const { user, field, submit, finishRequest } = renderContact();
+
+      await fillValid(user, field, FAILING_EMAIL);
+      await user.click(submit());
+      finishRequest();
+      await screen.findByRole('alert');
+
+      await user.clear(field('Email'));
+      await user.type(field('Email'), 'ada@example.com');
+      expect(screen.queryByRole('alert')).not.toBeInTheDocument();
+      await user.click(submit());
+      finishRequest();
+
+      expect(
+        await screen.findByText(/your message is on its way/i),
+      ).toBeInTheDocument();
+      expect(screen.queryByRole('alert')).not.toBeInTheDocument();
+    });
+
+    it('clears the confirmation once the user types again', async () => {
+      const { user, field, submit, finishRequest } = renderContact();
+
+      await fillValid(user, field);
+      await user.click(submit());
+      finishRequest();
+      await screen.findByText(/your message is on its way/i);
+
+      await user.type(field('Full name'), 'G');
+
       expect(screen.getByRole('status')).toBeEmptyDOMElement();
     });
   });

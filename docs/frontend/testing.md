@@ -29,12 +29,12 @@ Use `pnpm test:watch` while working.
 
 The scope is deliberately small:
 
-| Test             | When                                                         | Example                                                                                                                                                                          |
-| ---------------- | ------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Unit**         | Reusable components with variants or behaviour               | ButtonLink renders an `<a>` with the right variant classes; SectionHeader renders the right heading level                                                                        |
-| **Integration**  | Crucial interactive flows, rendered with their real children | Mobile menu opens and closes, Esc closes it and focus returns; contact form shows errors, then a success state                                                                   |
-| **Route smoke**  | The page renders its landmarks and single `<h1>`             | `src/app/__tests__/page.test.tsx`                                                                                                                                                |
-| **Source guard** | A rule jsdom can't observe, checked by reading the source    | `src/styles/__tests__/motion.test.ts` (motion only under `motion-safe:`), `forced-colors.test.ts` (ring edges keep a border in forced colors), `src/lib/__tests__/utils.test.ts` |
+| Test             | When                                                                                                  | Example                                                                                                                                                                          |
+| ---------------- | ----------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Unit**         | Reusable components with variants or behaviour                                                        | ButtonLink renders an `<a>` with the right variant classes; SectionHeader renders the right heading level                                                                        |
+| **Integration**  | Crucial interactive flows, rendered with their real children                                          | Mobile menu opens and closes, Esc closes it and focus returns; contact form shows errors, then a success state                                                                   |
+| **Page**         | The whole page in its shell: one `<h1>`, no skipped heading level, every in-page link reaches an `id` | `src/app/__tests__/page.test.tsx`                                                                                                                                                |
+| **Source guard** | A rule jsdom can't observe, checked by reading the source                                             | `src/styles/__tests__/motion.test.ts` (motion only under `motion-safe:`), `forced-colors.test.ts` (ring edges keep a border in forced colors), `src/lib/__tests__/utils.test.ts` |
 
 Not tested in Jest: static markup with no logic (no snapshot tests), visual fidelity, responsiveness and performance. jsdom has no layout engine, so those are checked in a real browser (Chrome DevTools, Lighthouse) against the Figma design.
 

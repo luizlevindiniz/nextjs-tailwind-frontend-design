@@ -93,6 +93,26 @@ describe('Header', () => {
       expect(toggle).toHaveFocus();
     });
 
+    it('leaves focus alone on Escape while closed', async () => {
+      const { user, toggle } = renderHeader();
+      const after = screen.getByRole('link', { name: 'After the header' });
+      after.focus();
+
+      await user.keyboard('{Escape}');
+
+      expect(after).toHaveFocus();
+      expect(toggle).toHaveAttribute('aria-expanded', 'false');
+    });
+
+    it('stays open on a click inside the panel', async () => {
+      const { user, toggle, panel } = renderHeader();
+      await user.click(toggle);
+
+      await user.click(panel());
+
+      expect(toggle).toHaveAttribute('aria-expanded', 'true');
+    });
+
     it('closes when a link is followed', async () => {
       const { user, toggle, panel } = renderHeader();
       await user.click(toggle);

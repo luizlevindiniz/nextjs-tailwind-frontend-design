@@ -11,7 +11,7 @@ concurrency:
 
 jobs:
   lint:
-    name: Lint, typecheck, format, test and build
+    name: Lint, typecheck, format, ADR check, test and build
     runs-on: ubuntu-latest
     steps:
       - name: ⬇️ Checkout repo

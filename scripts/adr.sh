@@ -2,8 +2,7 @@
 # Checks this repository's Architecture Decision Records: each record's name,
 # heading, sections and status, the index in its folder's README, the relative
 # links in every file agents read, and every place code or docs cite a record.
-# Installed by the adr-setup skill, whose tests cover every rule here. Needs
-# bash, git and a POSIX awk; runs on bash 3.2 (macOS) and mawk (Ubuntu) too.
+# Needs bash, git and a POSIX awk; runs on bash 3.2 (macOS) and mawk (Ubuntu) too.
 #
 #   scripts/adr.sh                  check
 #   scripts/adr.sh --base <commit>  also check merged records against <commit>

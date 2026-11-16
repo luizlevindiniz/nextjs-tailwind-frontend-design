@@ -37,7 +37,7 @@ src/
 ├── components/contact/         # Contact (details and form), ContactForm (the client leaf)
 ├── components/final-cta/       # FinalCta (closing call to action)
 ├── components/ui/              # primitives: Container, Button, ButtonLink, ArrowLink, AvatarStack, SectionHeader, link classes
-├── hooks/                      # custom Hooks that wrap Effects (useMediaQuery, useDismiss)
+├── hooks/                      # custom Hooks for browser APIs (useMediaQuery, useDismiss)
 ├── data/                       # typed content modules (navigation.ts, categories.ts, steps.ts, stats.ts, footer.ts)
 ├── lib/contact.ts              # contact form validation and the simulated submit
 ├── lib/site.ts                 # site name, title, description and URL (see below)

@@ -11,7 +11,7 @@
 
 - Don't store what you can compute. If a value follows from props or state (the contact form's errors follow from its values once it has been submitted), compute it during render.
 - Handle user actions in event handlers. An Effect is only for staying in sync with something outside React (a document listener, a media query).
-- Every Effect lives in a custom Hook in `src/hooks/`, named for what it does: `useMediaQuery(query)` reads a media query through `useSyncExternalStore`; `useDismiss(ref, { enabled, onDismiss })` closes a popup on Esc or a pointer down outside it. A callback passed to a Hook is wrapped in `useEffectEvent`, so passing a new function doesn't resubscribe.
+- An Effect in a component lives in a custom Hook in `src/hooks/`, named for what it does (the route error boundary's `console.error` stays a plain Effect, as Next documents it): `useMediaQuery(query)` reads a media query through `useSyncExternalStore`; `useDismiss(ref, { enabled, onDismiss })` closes a popup on Esc or a pointer down outside it. A callback passed to a Hook is wrapped in `useEffectEvent`, so passing a new function doesn't resubscribe.
 - To reset state when an external value changes, set it during render behind a condition (the mobile menu: `if (isDesktop && open) setOpen(false)`), not in an Effect.
 
 ## Data-driven sections

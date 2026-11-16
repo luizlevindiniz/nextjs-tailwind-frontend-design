@@ -46,8 +46,7 @@ export default defineConfig([
             ['^.+\\.s?css$'],
             ['^@/lib', '^@/hooks'],
             ['^@/data'],
-            ['^@/components', '^@/container'],
-            ['^@/store'],
+            ['^@/components'],
             ['^@/'],
             [
               '^\\./?$',
@@ -59,7 +58,6 @@ export default defineConfig([
               '^\\.\\./\\.\\./\\.\\./?$',
               '^\\.\\./\\.\\./\\.\\.(?!/?$)',
             ],
-            ['^@/types'],
             ['^'],
           ],
         },

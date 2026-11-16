@@ -29,6 +29,17 @@ describe('Button', () => {
     );
   });
 
+  it.each(['primary', 'secondary', 'onBlue'] as const)(
+    'keeps the %s shape in forced colors',
+    (variant) => {
+      render(<Button variant={variant}>Save</Button>);
+
+      expect(screen.getByRole('button', { name: 'Save' })).toHaveClass(
+        'forced-colors:border',
+      );
+    },
+  );
+
   it('passes native attributes through', () => {
     render(<Button disabled>Save</Button>);
 

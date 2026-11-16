@@ -124,3 +124,5 @@ Any transition or animation must respect reduced motion. Use the `motion-safe:` 
 ## Focus and states
 
 Every interactive element needs a visible `focus-visible:` style (an outline or ring with enough contrast on its background). Hover styles never replace focus styles.
+
+Forced colors (Windows High Contrast) drop backgrounds and box shadows, so a filled button or a box edged with a `ring`/`inset-ring` loses its shape there. Add `forced-colors:border` to the same class string: the system draws the border in its own colors, and normal mode is unchanged. Every button variant, form field and the contact form card do this. `src/styles/__tests__/forced-colors.test.ts` fails on a class string with an unprefixed `ring` or `inset-ring` and no `forced-colors:border`.

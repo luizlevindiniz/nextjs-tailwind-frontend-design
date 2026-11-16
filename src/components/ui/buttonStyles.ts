@@ -4,12 +4,12 @@ export type ButtonVariant = 'primary' | 'secondary' | 'onBlue';
 
 const variants: Record<ButtonVariant, string> = {
   primary:
-    'bg-primary-blue text-text-white-primary outline-primary-blue hover:bg-primary-blue/90',
+    'bg-primary-blue text-text-white-primary outline-primary-blue hover:bg-primary-blue/90 forced-colors:border',
   // A ring, unlike a border, adds no height.
   secondary:
-    'bg-background-white text-text-primary outline-primary-blue inset-ring inset-ring-line-1 hover:inset-ring-text-tertiary',
+    'bg-background-white text-text-primary outline-primary-blue inset-ring inset-ring-line-1 hover:inset-ring-text-tertiary forced-colors:border',
   onBlue:
-    'bg-secondary-yellow text-text-primary outline-text-white-primary hover:bg-secondary-yellow/90',
+    'bg-secondary-yellow text-text-primary outline-text-white-primary hover:bg-secondary-yellow/90 forced-colors:border',
 };
 
 export function buttonClasses(variant: ButtonVariant, className?: string) {

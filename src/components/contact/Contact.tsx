@@ -52,7 +52,7 @@ export function Contact() {
           </ul>
         </div>
 
-        <div className='rounded-2xl bg-background-white px-5 py-6 shadow-card inset-ring inset-ring-line-1 lg:max-w-135 lg:flex-1 lg:p-10'>
+        <div className='rounded-2xl bg-background-white px-5 py-6 shadow-card inset-ring inset-ring-line-1 lg:max-w-135 lg:flex-1 lg:p-10 forced-colors:border'>
           <ContactForm />
         </div>
       </Container>

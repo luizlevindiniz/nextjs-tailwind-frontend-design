@@ -49,7 +49,7 @@ const fields: readonly FieldConfig[] = [
 const emptyValues: ContactValues = { name: '', email: '', question: '' };
 
 const controlClasses =
-  'w-full rounded-lg bg-background-light-yellow inset-ring inset-ring-line-input px-4 text-mobile-subtitle-1 text-text-primary outline-primary-blue placeholder:text-text-secondary focus-visible:outline-2 focus-visible:outline-offset-2 aria-invalid:inset-ring-error lg:text-desktop-body-1';
+  'w-full rounded-lg bg-background-light-yellow inset-ring inset-ring-line-input forced-colors:border px-4 text-mobile-subtitle-1 text-text-primary outline-primary-blue placeholder:text-text-secondary focus-visible:outline-2 focus-visible:outline-offset-2 aria-invalid:inset-ring-error lg:text-desktop-body-1';
 
 export function ContactForm() {
   const id = useId();

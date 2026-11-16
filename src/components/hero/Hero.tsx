@@ -38,13 +38,13 @@ export function Hero() {
             design, technology, business and more — one focused lesson at a
             time.
           </p>
-          <div className='mt-8 flex max-w-90.5 flex-col gap-3 lg:max-w-none lg:flex-row'>
+          <div className='mt-8 flex max-w-90.5 flex-col gap-3 md:max-w-none md:flex-row'>
             <ButtonLink href='#categories'>Explore courses</ButtonLink>
             <ButtonLink href='#how-it-works' variant='secondary'>
               See how it works
             </ButtonLink>
           </div>
-          <div className='mt-8 flex max-w-90.5 items-center justify-center gap-3 lg:max-w-none lg:justify-start'>
+          <div className='mt-8 flex max-w-90.5 items-center justify-center gap-3 md:max-w-none md:justify-start'>
             <div className='flex -space-x-2'>
               {avatars.map((avatar) => (
                 <Image

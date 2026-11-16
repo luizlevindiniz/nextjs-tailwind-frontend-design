@@ -19,6 +19,7 @@ export function Header() {
         <div className='lg:flex-1'>
           <Link
             href='/'
+            prefetch={false}
             aria-label='Luma home'
             className='block rounded-sm text-text-primary outline-primary-blue focus-visible:outline-2 focus-visible:outline-offset-4'
           >

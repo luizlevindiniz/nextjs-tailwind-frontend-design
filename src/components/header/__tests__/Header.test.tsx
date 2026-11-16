@@ -141,13 +141,18 @@ describe('Header', () => {
       expect(panel()).not.toBeVisible();
     });
 
-    it('closes when a link is followed', async () => {
+    it.each([
+      'Courses',
+      'For Teams',
+      'Community',
+      'About',
+      'Log in',
+      'Start learning',
+    ])('closes when the %s link is followed', async (name) => {
       const { user, toggle, panel } = renderHeader();
       await user.click(toggle);
 
-      await user.click(
-        within(panel()).getByRole('link', { name: 'Community' }),
-      );
+      await user.click(within(panel()).getByRole('link', { name }));
 
       expect(toggle).toHaveAttribute('aria-expanded', 'false');
     });

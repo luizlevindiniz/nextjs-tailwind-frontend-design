@@ -12,3 +12,4 @@ Find the question, read the document. Each one describes what exists **today**; 
 | How do I write a component? Props, server/client, a11y, imports, commits | [frontend/coding-conventions.md](frontend/coding-conventions.md) |
 | How do I test? What to test, where tests live                            | [frontend/testing.md](frontend/testing.md)                       |
 | Which AI tools are used, and how is their output checked?                | [ai-tooling.md](ai-tooling.md)                                   |
+| How do I check a release by hand?                                        | [qa.md](qa.md)                                                   |

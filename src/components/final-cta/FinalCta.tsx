@@ -73,10 +73,10 @@ export function FinalCta() {
           >
             What will you learn next?
           </h2>
-          <p className='mt-4 text-mobile-subtitle-1 text-text-secondary lg:text-desktop-subtitle-1'>
+          <p className='mt-4 text-mobile-subtitle-1 text-text-secondary lg:mt-3.5 lg:text-desktop-subtitle-1'>
             Start with one course. Build from there.
           </p>
-          <div className='mt-10 flex w-full flex-col gap-3 md:w-auto md:flex-row'>
+          <div className='mt-9.5 flex w-full flex-col gap-3 md:w-auto md:flex-row'>
             <ButtonLink href='#categories'>Explore all courses</ButtonLink>
             <ButtonLink href='#' variant='secondary'>
               Join Luma

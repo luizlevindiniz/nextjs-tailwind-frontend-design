@@ -201,10 +201,10 @@ Icons are listed in [styling.md](styling.md#icons).
 
 `src/components/testimonial/Testimonial.tsx`, `background-white`, `py-15 lg:py-25`, `id="testimonial"`. Figma gives the section no heading, so it's named by an `sr-only` `h2`, "What learners say", which keeps it in the heading outline. Stats come from `src/data/stats.ts`.
 
-- **Quote:** a `<figure>`, 600 px max: the quote mark (`QuoteIcon`, 24 × 22, `primary-blue`, `aria-hidden`), the quote in a `<blockquote>` 16 px below (quotes, `text-primary`), then the `<figcaption>` 32 px below: a 48 px round avatar (`primary-blue-light` behind it, `alt=""` because the caption names the person), 16 px gap, the name (Inter bold: subtitle 1 on mobile, subtitle 2 on desktop) over the role (body 1 `text-secondary`).
+- **Quote:** a `<figure>`, 600 px max: the quote mark (`QuoteIcon`, 24 × 22, `primary-blue`, `aria-hidden`), the quote in a `<blockquote>` 16 px below (quotes, `text-primary`), then the `<figcaption>` 32 px below (30 px from `lg`): a 48 px round avatar (`primary-blue-light` behind it, `alt=""` because the caption names the person), 16 px gap, the name (Inter bold: subtitle 1 on mobile, subtitle 2 on desktop) over the role (body 1 `text-secondary`).
 - **Stats:** a `<ul>`; each item is the value (H1, `primary-blue`) over its label (body 1 `text-tertiary`) 4 px below.
 - **Mobile (below `lg`):** the quote, then the stats 60 px below as three equal columns (120.7 px each at 402). Each stat keeps at least its longest word plus a 16 px right padding (`min-w-min pr-4`) and the row wraps, so below about 370 px the third stat moves to its own line instead of the values overlapping.
-- **Desktop (`lg` and up):** the quote on the left, vertically centered against the stats column on the right: 401 px wide with a `line-1` left border, 48 px left padding and 20 px between stats. Figma clips each label into a 25 px box, so its column is about 325 px tall; the built one is 334.
+- **Desktop (`lg` and up):** the quote on the left, vertically centered against the stats column on the right: 401 px wide with a `line-1` left border, 48 px left padding and 17 px between stats. Figma draws each label 3 px past its 25 px box with 20 px between boxes, so the build keeps the label 4 px below the value and closes the gap to 17 px: every line lands on Figma's position, and the column is 328 px tall to Figma's 325.
 
 ### People
 
@@ -229,7 +229,7 @@ Icons are listed in [styling.md](styling.md#icons).
 
 `src/components/final-cta/FinalCta.tsx`, `background-yellow`, `py-15 lg:py-25`, `id="get-started"`, named by its `h2`. No overline, so it doesn't use `SectionHeader`.
 
-- **Copy (656 px max, centered):** four overlapping 40 px learner avatars (`-space-x-2`, 2 px `secondary-yellow` border, `primary-blue-light` behind, `alt=""`: decorative), the title "What will you learn next?" 32 px below (H2 at both sizes, the only H2-styled title on the page), the lead in subtitle 1 `text-secondary` 16 px below, then the actions 40 px below: "Explore all courses" (primary, `#categories`) and "Join Luma" (secondary, `#`: no sign-up page exists).
+- **Copy (656 px max, centered):** four overlapping 40 px learner avatars (`-space-x-2`, 2 px `secondary-yellow` border, `primary-blue-light` behind, `alt=""`: decorative), the title "What will you learn next?" 32 px below (H2 at both sizes, the only H2-styled title on the page), the lead in subtitle 1 `text-secondary` 16 px below (14 px from `lg`), then the actions 38 px below: "Explore all courses" (primary, `#categories`) and "Join Luma" (secondary, `#`: no sign-up page exists).
 - **Actions:** stacked full width below `md`; a centered row of natural-width buttons, 12 px apart, from `md` (no tablet frame; a full-width stack would reach 720 px).
 - **Decorations:** desktop only, and only from `xl` (1280 px): eight CSS shapes (rings, discs and 12°-rotated tiles) and five icons (`DecoLetterBIcon` rotated 15°, `DecoChatIcon`, `DecoDropIcon`, `DecoCubeIcon`, `DecoPanelsIcon`), all `background-orange`, placed at Figma's coordinates on a 1280 px box centered in the section (`aria-hidden`, clipped by the section's `overflow-hidden`). On wider screens they stay around the copy instead of drifting to the edges. Below 1280 the inner shapes would crowd the copy, and the mobile frame has none.
 

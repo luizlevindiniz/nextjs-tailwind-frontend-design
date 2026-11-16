@@ -26,7 +26,7 @@ export function Testimonial() {
               enough that I actually leave with something I can use.
             </p>
           </blockquote>
-          <figcaption className='mt-8 flex items-center gap-4'>
+          <figcaption className='mt-8 flex items-center gap-4 lg:mt-7.5'>
             <Image
               src={alexMorgan}
               alt=''
@@ -45,7 +45,7 @@ export function Testimonial() {
           </figcaption>
         </figure>
 
-        <ul className='flex flex-wrap gap-y-6 lg:w-100.25 lg:flex-col lg:gap-5 lg:border-l lg:border-line-1 lg:pl-12'>
+        <ul className='flex flex-wrap gap-y-6 lg:w-100.25 lg:flex-col lg:gap-4.25 lg:border-l lg:border-line-1 lg:pl-12'>
           {stats.map(({ value, label }) => (
             <li key={label} className='min-w-min flex-1 pr-4 lg:pr-0'>
               <p className='font-heading text-mobile-h1 text-primary-blue lg:text-desktop-h1'>

@@ -115,7 +115,11 @@ Any transition or animation must respect reduced motion. Use the `motion-safe:` 
 <div className='motion-safe:transition-transform motion-safe:hover:-translate-y-1' />
 ```
 
-`src/styles/__tests__/motion.test.ts` scans every source file and fails on an unguarded motion utility (`transition*`, `animate-*`, `duration-*`, `delay-*`, `ease-*`, `scroll-smooth`, `starting:`), unless the same class string turns it off with `motion-reduce:transition-none` or `motion-reduce:animate-none`. In CSS it fails on any `transition`, `animation`, `@keyframes` or `scroll-behavior: smooth`, so write motion as utilities.
+`src/styles/__tests__/motion.test.ts` scans every source file and fails on:
+
+- a motion utility without `motion-safe:` or `motion-reduce:` (`transition*`, `duration-*`, `delay-*`, `ease-*`, `starting:`, `animate-*`, `scroll-smooth`, arbitrary values and `!` included), unless the same class string turns that kind off (`motion-reduce:transition-none` for the transition utilities, `motion-reduce:animate-none` for `animate-*`);
+- an inline `transition*` or `animation*` style, `behavior: 'smooth'` scrolling or a Web Animations `.animate()` call;
+- in CSS, a `transition`, `animation`, `@keyframes` or `scroll-behavior: smooth` outside `@theme` (custom `--animate-*` keyframes and theme defaults) and outside `@media (prefers-reduced-motion: no-preference)`.
 
 ## Focus and states
 

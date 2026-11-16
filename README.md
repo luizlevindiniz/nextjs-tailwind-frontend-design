@@ -34,7 +34,7 @@ It's optional: without it the URL is Vercel's production URL on Vercel, and `htt
 
 One page with ten parts: header with a mobile menu, hero, categories, featured course, how it works, testimonial and stats, people, contact (info and form), final call to action and footer.
 
-- **Server Components by default.** The only client components are the mobile menu and the contact form.
+- **Server Components by default.** The page's only client components are the mobile menu and the contact form (plus the error boundary, which Next requires to be one).
 - **Design tokens only.** Tailwind's default palette, type scale and shadows are removed. `@theme` holds only the Figma tokens, so a class outside the design (`text-red-500`) generates no CSS. See the [styleguide](docs/frontend/styleguide.md).
 - **Images.** Each master image is sized to its rendered size times the screen density. `next/image` serves the masters as AVIF/WebP with the right `sizes`, and the hero photo loads eagerly at high priority.
 - **Fonts and metadata.** Fonts come through `next/font`. Metadata uses the App Router API: an Open Graph image generated at build time, a favicon, a sitemap and robots.txt.

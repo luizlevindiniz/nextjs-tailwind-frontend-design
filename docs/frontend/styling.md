@@ -115,6 +115,8 @@ Any transition or animation must respect reduced motion. Use the `motion-safe:` 
 <div className='motion-safe:transition-transform motion-safe:hover:-translate-y-1' />
 ```
 
+`src/styles/__tests__/motion.test.ts` scans every source file and fails on an unguarded motion utility (`transition*`, `animate-*`, `duration-*`, `delay-*`, `ease-*`, `scroll-smooth`, `starting:`), unless the same class string turns it off with `motion-reduce:transition-none` or `motion-reduce:animate-none`. In CSS it fails on any `transition`, `animation`, `@keyframes` or `scroll-behavior: smooth`, so write motion as utilities.
+
 ## Focus and states
 
 Every interactive element needs a visible `focus-visible:` style (an outline or ring with enough contrast on its background). Hover styles never replace focus styles.

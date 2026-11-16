@@ -29,11 +29,12 @@ Use `pnpm test:watch` while working.
 
 The scope is deliberately small:
 
-| Test            | When                                                         | Example                                                                                                        |
-| --------------- | ------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------- |
-| **Unit**        | Reusable components with variants or behaviour               | Button renders an `<a>` with the right variant classes; SectionHeader renders the right heading level          |
-| **Integration** | Crucial interactive flows, rendered with their real children | Mobile menu opens and closes, Esc closes it and focus returns; contact form shows errors, then a success state |
-| **Route smoke** | The page renders its landmarks and single `<h1>`             | `src/app/__tests__/page.test.tsx`                                                                              |
+| Test             | When                                                         | Example                                                                                                        |
+| ---------------- | ------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------- |
+| **Unit**         | Reusable components with variants or behaviour               | Button renders an `<a>` with the right variant classes; SectionHeader renders the right heading level          |
+| **Integration**  | Crucial interactive flows, rendered with their real children | Mobile menu opens and closes, Esc closes it and focus returns; contact form shows errors, then a success state |
+| **Route smoke**  | The page renders its landmarks and single `<h1>`             | `src/app/__tests__/page.test.tsx`                                                                              |
+| **Source guard** | A rule jsdom can't observe, checked by reading the source    | `src/styles/__tests__/motion.test.ts` (motion only under `motion-safe:`), `src/lib/__tests__/utils.test.ts`    |
 
 Not tested in Jest: static markup with no logic (no snapshot tests), visual fidelity, responsiveness and performance. jsdom has no layout engine, so those are checked in a real browser (Chrome DevTools, Lighthouse) against the Figma design.
 
@@ -42,7 +43,7 @@ Not tested in Jest: static markup with no logic (no snapshot tests), visual fide
 - Query the way a user perceives the page, in this order: `getByRole` (with `name`), `getByLabelText`, `getByText`. Use `getByTestId` only as a last resort.
 - Drive interactions with `@testing-library/user-event` rather than `fireEvent`.
 - For timed behaviour (the contact form's simulated request), use Jest's fake timers with `userEvent.setup({ advanceTimers: jest.advanceTimersByTime })`, and run the pending timers inside `act()`.
-- Assert on outcomes (text, roles, `aria-expanded`, focus), not implementation details (state, class names).
+- Assert on outcomes (text, roles, `aria-expanded`, focus), not implementation details (state, class names). Source guards are the exception: they check the source because the outcome is invisible to jsdom.
 - Keep each test focused on one behaviour, with a name that reads as a sentence.
 
 ## Location

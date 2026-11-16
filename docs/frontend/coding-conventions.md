@@ -7,6 +7,13 @@
 - Primitives (buttons, containers, headings) take a `className` prop merged with `cn()`, and extend the native element's props where that makes sense (`ComponentPropsWithoutRef<'a'>`).
 - Links that look like buttons are `<a>` (`next/link` for routes, a plain `<a>` for in-page anchors). A `next/link` to the page it sits on gets `prefetch={false}`, or it prefetches that page after load. Actions are `<button type='button'>`. Never put an `onClick` on a `div`.
 
+## State and Effects
+
+- Don't store what you can compute. If a value follows from props or state (the contact form's errors follow from its values once it has been submitted), compute it during render.
+- Handle user actions in event handlers. An Effect is only for staying in sync with something outside React (a document listener, a media query).
+- Every Effect lives in a custom Hook in `src/hooks/`, named for what it does: `useMediaQuery(query)` reads a media query through `useSyncExternalStore`; `useDismiss(ref, { enabled, onDismiss })` closes a popup on Esc or a pointer down outside it. A callback passed to a Hook is wrapped in `useEffectEvent`, so passing a new function doesn't resubscribe.
+- To reset state when an external value changes, set it during render behind a condition (the mobile menu: `if (isDesktop && open) setOpen(false)`), not in an Effect.
+
 ## Data-driven sections
 
 Repeated content (navigation, cards, steps, stats, footer columns) is a typed array in `src/data/`, rendered with `map` and a stable `key`. Copy that appears once stays inline in its component. See the [mock data ADR](../adr/202611131621-serve-content-from-typed-local-mock-data.md).

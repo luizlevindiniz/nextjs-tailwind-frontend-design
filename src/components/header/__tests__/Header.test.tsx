@@ -1,26 +1,14 @@
-import { act, render, screen, within } from '@testing-library/react';
+import { render, screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import { Header } from '@/components/header/Header';
 
-let widenToDesktop: () => void;
+import { mockMatchMedia } from '@/__mocks__/matchMedia';
+
+let media: ReturnType<typeof mockMatchMedia>;
 
 beforeEach(() => {
-  const listeners = new Set<(event: { matches: boolean }) => void>();
-  widenToDesktop = () =>
-    act(() => listeners.forEach((listener) => listener({ matches: true })));
-  window.matchMedia = jest.fn().mockImplementation((query: string) => ({
-    matches: false,
-    media: query,
-    addEventListener: (
-      _: string,
-      listener: (e: { matches: boolean }) => void,
-    ) => listeners.add(listener),
-    removeEventListener: (
-      _: string,
-      listener: (e: { matches: boolean }) => void,
-    ) => listeners.delete(listener),
-  }));
+  media = mockMatchMedia(false);
 });
 
 const renderHeader = () => {
@@ -137,9 +125,20 @@ describe('Header', () => {
       const { user, toggle } = renderHeader();
       await user.click(toggle);
 
-      widenToDesktop();
+      media.setMatches(true);
 
       expect(toggle).toHaveAttribute('aria-expanded', 'false');
+    });
+
+    it('stays closed when the window narrows back to the mobile layout', async () => {
+      const { user, toggle, panel } = renderHeader();
+      await user.click(toggle);
+      media.setMatches(true);
+
+      media.setMatches(false);
+
+      expect(toggle).toHaveAttribute('aria-expanded', 'false');
+      expect(panel()).not.toBeVisible();
     });
 
     it('closes when a link is followed', async () => {

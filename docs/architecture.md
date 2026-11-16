@@ -37,13 +37,15 @@ src/
 ├── components/contact/         # Contact (details and form), ContactForm (the client leaf)
 ├── components/final-cta/       # FinalCta (closing call to action)
 ├── components/ui/              # primitives: Container, Button, ButtonLink, ArrowLink, AvatarStack, SectionHeader, link classes
+├── hooks/                      # custom Hooks that wrap Effects (useMediaQuery, useDismiss)
 ├── data/                       # typed content modules (navigation.ts, categories.ts, steps.ts, stats.ts, footer.ts)
 ├── lib/contact.ts              # contact form validation and the simulated submit
 ├── lib/site.ts                 # site name, title, description and URL (see below)
 ├── lib/theme.ts                # reads color tokens from globals.css for generated images
 ├── lib/utils.ts                # cn(): clsx + tailwind-merge that knows the type tokens
 ├── styles/globals.css          # Tailwind entry + @theme design tokens
-└── __mocks__/svg.tsx           # Jest stand-in for SVGR imports
+├── __mocks__/svg.tsx           # Jest stand-in for SVGR imports
+└── __mocks__/matchMedia.ts     # Jest stand-in for window.matchMedia
 docs/                           # this folder; ADRs in docs/adr/
 scripts/adr.sh                  # ADR check (pnpm adr:check)
 ```

@@ -10,7 +10,7 @@
 | [`@testing-library/jest-dom`](https://github.com/testing-library/jest-dom)             | DOM matchers (`toBeInTheDocument`, `toHaveAttribute`…), loaded in `jest.setup.js` |
 | [`@testing-library/user-event`](https://testing-library.com/docs/user-event/intro)     | Keyboard and pointer interactions, as a user performs them                        |
 
-SVG imports resolve to `src/__mocks__/svg.tsx` (a plain `<svg>`) in tests. See the [testing ADR](../adr/202611131621-use-jest-and-testing-library-for-tdd.md).
+SVG imports resolve to `src/__mocks__/svg.tsx` (a plain `<svg>`) in tests. jsdom has no `matchMedia`, so `jest.setup.js` installs `src/__mocks__/matchMedia.ts` (nothing matches) before each test; a test that changes the viewport calls `mockMatchMedia()` itself and flips it with `setMatches`. See the [testing ADR](../adr/202611131621-use-jest-and-testing-library-for-tdd.md).
 
 ## TDD workflow
 
@@ -31,7 +31,7 @@ The scope is deliberately small:
 
 | Test             | When                                                                                                  | Example                                                                                                                                                                          |
 | ---------------- | ----------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Unit**         | Reusable components with variants or behaviour                                                        | ButtonLink renders an `<a>` with the right variant classes; SectionHeader renders the right heading level                                                                        |
+| **Unit**         | Reusable components and Hooks with variants or behaviour                                              | ButtonLink renders an `<a>` with the right variant classes; SectionHeader renders the right heading level; `useDismiss` calls the latest handler without resubscribing           |
 | **Integration**  | Crucial interactive flows, rendered with their real children                                          | Mobile menu opens and closes, Esc closes it and focus returns; contact form shows errors, then a success state                                                                   |
 | **Page**         | The whole page in its shell: one `<h1>`, no skipped heading level, every in-page link reaches an `id` | `src/app/__tests__/page.test.tsx`                                                                                                                                                |
 | **Source guard** | A rule jsdom can't observe, checked by reading the source                                             | `src/styles/__tests__/motion.test.ts` (motion only under `motion-safe:`), `forced-colors.test.ts` (ring edges keep a border in forced colors), `src/lib/__tests__/utils.test.ts` |

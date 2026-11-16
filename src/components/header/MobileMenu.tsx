@@ -1,8 +1,10 @@
 'use client';
 
-import { type FocusEvent, useEffect, useId, useRef, useState } from 'react';
+import { type FocusEvent, useId, useRef, useState } from 'react';
 
 import { cn } from '@/lib/utils';
+import { type DismissReason, useDismiss } from '@/hooks/useDismiss';
+import { useMediaQuery } from '@/hooks/useMediaQuery';
 
 import { logInLink, mainNav, startLearningLink } from '@/data/navigation';
 
@@ -22,33 +24,17 @@ export function MobileMenu({ className }: { className?: string }) {
   const toggleRef = useRef<HTMLButtonElement>(null);
   const panelId = useId();
 
-  useEffect(() => {
-    if (!open) return;
+  // The panel is hidden from `lg` up; close it there so it doesn't reopen on the way back.
+  const isDesktop = useMediaQuery(DESKTOP_QUERY);
+  if (isDesktop && open) setOpen(false);
 
-    const onKeyDown = (event: KeyboardEvent) => {
-      if (event.key !== 'Escape') return;
+  useDismiss(rootRef, {
+    enabled: open,
+    onDismiss: (reason: DismissReason) => {
       setOpen(false);
-      toggleRef.current?.focus();
-    };
-    const onPointerDown = (event: PointerEvent) => {
-      if (!rootRef.current?.contains(event.target as Node)) setOpen(false);
-    };
-
-    // The menu is hidden from `lg` up; close it there so it doesn't reopen on the way back.
-    const desktop = window.matchMedia(DESKTOP_QUERY);
-    const onDesktop = (event: MediaQueryListEvent) => {
-      if (event.matches) setOpen(false);
-    };
-
-    document.addEventListener('keydown', onKeyDown);
-    document.addEventListener('pointerdown', onPointerDown);
-    desktop.addEventListener('change', onDesktop);
-    return () => {
-      document.removeEventListener('keydown', onKeyDown);
-      document.removeEventListener('pointerdown', onPointerDown);
-      desktop.removeEventListener('change', onDesktop);
-    };
-  }, [open]);
+      if (reason === 'escape') toggleRef.current?.focus();
+    },
+  });
 
   const close = () => setOpen(false);
 

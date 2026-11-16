@@ -3,7 +3,6 @@
 import { type ChangeEvent, type SubmitEvent, useId, useState } from 'react';
 
 import {
-  type ContactErrors,
   type ContactValues,
   submitContact,
   validateContact,
@@ -54,19 +53,17 @@ const controlClasses =
 export function ContactForm() {
   const id = useId();
   const [values, setValues] = useState(emptyValues);
-  const [errors, setErrors] = useState<ContactErrors>({});
-  const [validateLive, setValidateLive] = useState(false);
+  const [showErrors, setShowErrors] = useState(false);
   const [status, setStatus] = useState<Status>('idle');
   const sending = status === 'sending';
+  const errors = showErrors ? validateContact(values) : {};
 
   const fieldId = (name: keyof ContactValues) => `${id}-${name}`;
 
   const handleChange = (
     event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
-    const next = { ...values, [event.target.name]: event.target.value };
-    setValues(next);
-    if (validateLive) setErrors(validateContact(next));
+    setValues({ ...values, [event.target.name]: event.target.value });
     if (!sending) setStatus('idle');
   };
 
@@ -75,12 +72,12 @@ export function ContactForm() {
     if (sending) return;
 
     const found = validateContact(values);
-    setErrors(found);
-    setValidateLive(true);
+    setShowErrors(true);
     const firstInvalid = fields.find((field) => found[field.name]);
     if (firstInvalid) {
       setStatus('idle');
-      document.getElementById(fieldId(firstInvalid.name))?.focus();
+      const control = event.currentTarget.elements.namedItem(firstInvalid.name);
+      if (control instanceof HTMLElement) control.focus();
       return;
     }
 
@@ -88,7 +85,7 @@ export function ContactForm() {
     try {
       await submitContact(values);
       setValues(emptyValues);
-      setValidateLive(false);
+      setShowErrors(false);
       setStatus('sent');
     } catch {
       setStatus('failed');

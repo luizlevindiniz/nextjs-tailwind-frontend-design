@@ -24,8 +24,6 @@ A one-page responsive landing page ("luma.") built from Figma with Next.js App R
 
 # Gotchas
 
-- Keep committed files project-agnostic: never mention where the requirements came from, or the starter template the repo was created from.
-- Deleting files with `rm` is denied by the permission settings; move them out of the repo instead.
 - Figma isn't always right: where the build deviates from a frame (copy language, step numbering, contrast, interaction states), the styleguide records it. Follow the recorded decision over the literal frame.
 
 # Conventions not written elsewhere

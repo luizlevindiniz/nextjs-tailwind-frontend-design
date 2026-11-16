@@ -31,7 +31,7 @@ The scope is deliberately small:
 
 | Test             | When                                                         | Example                                                                                                                                                                          |
 | ---------------- | ------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Unit**         | Reusable components with variants or behaviour               | Button renders an `<a>` with the right variant classes; SectionHeader renders the right heading level                                                                            |
+| **Unit**         | Reusable components with variants or behaviour               | ButtonLink renders an `<a>` with the right variant classes; SectionHeader renders the right heading level                                                                        |
 | **Integration**  | Crucial interactive flows, rendered with their real children | Mobile menu opens and closes, Esc closes it and focus returns; contact form shows errors, then a success state                                                                   |
 | **Route smoke**  | The page renders its landmarks and single `<h1>`             | `src/app/__tests__/page.test.tsx`                                                                                                                                                |
 | **Source guard** | A rule jsdom can't observe, checked by reading the source    | `src/styles/__tests__/motion.test.ts` (motion only under `motion-safe:`), `forced-colors.test.ts` (ring edges keep a border in forced colors), `src/lib/__tests__/utils.test.ts` |
@@ -48,7 +48,7 @@ Not tested in Jest: static markup with no logic (no snapshot tests), visual fide
 
 ## Location
 
-Tests live in a `__tests__/` folder next to the code they test, named `<subject>.test.tsx`.
+Tests live in a `__tests__/` folder next to the code they test, named `<subject>.test.tsx` (`.test.ts` when there is no JSX).
 
 ## Example
 

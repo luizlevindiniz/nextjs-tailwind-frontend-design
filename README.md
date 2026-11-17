@@ -2,6 +2,8 @@
 
 A responsive landing page for "luma.", a fictional platform of practical online courses. Built from a Figma design (a 1280 px desktop frame and a 402 px mobile frame) with Next.js (App Router), TypeScript and Tailwind CSS v4. There's no backend: content is typed local data.
 
+**Live:** <https://nextjs-tailwind-frontend-design.vercel.app> (deployed on Vercel)
+
 ## Install, run and build
 
 Requires Node 24.15 and pnpm 12.18 (pinned in `.tool-versions`).
